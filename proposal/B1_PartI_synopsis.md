@@ -123,15 +123,17 @@ task-dependent micro-movements of the sensor, outperform parameter- and energy-m
 baselines on small-target detection in clutter and on ego-motion estimation, and achieve closed-loop
 hovering and pursuit on an indoor quadrotor at a fraction of the energy.
 
-*The computer-vision question behind H4.* Three predictions are specific enough to fail. (i) A
-sensor-movement policy tuned to the task improves small-target detection at the same event rate: the
-male-type policy wins on pursuit, the stabilising policy on ego-motion, and a fixed rotation [54]
-wins on neither. (ii) Linear electrical pooling of motion signals, as in the LPTC–motor-neuron
-coupling, cuts the latency from first event to motor command without loss of accuracy, because it
-needs no synaptic integration time. (iii) Opponent push-pull coding with contrast normalisation makes
-velocity estimates robust to contrast and clutter, the property that makes the fly-derived CNN robust
-in natural scenes [38]. Success is measured as accuracy per joule and as latency, against baselines
-matched in parameters and synaptic operations, under protocols registered before the data exist.
+*The computer-vision question behind H4.* Five predictions are specific enough to fail (H4a–f in
+B2). (i) A sensor-movement policy tuned to the task improves small-target detection at the same event
+rate: the male-type policy wins on pursuit, the stabilising policy on ego-motion, and a fixed rotation
+[54] wins on neither. (ii) Feeding the motor command back into the motion units through the fly's
+coupling motif, the efference copy of [14], removes self-generated events from the flow estimate
+better than software compensation. (iii) Linear electrical pooling cuts the latency from first event
+to motor command without loss of accuracy. (iv) Opponent push-pull coding with contrast normalisation
+makes velocity estimates robust to contrast and clutter [38]. (v) Under one energy budget, two
+task-specialised circuits with a shared front end, the dimorphic solution, beat one generalist.
+Success is measured as accuracy per joule and as latency, against baselines matched in parameters
+and synaptic operations, under protocols registered before the data exist.
 
 **O5. Validate at scale and open everything.** Every model runs on low-cost spiking robots in IU
 computer-vision courses and in a distributed public experiment; students and citizens produce
@@ -200,7 +202,8 @@ natural target statistics that define the WP3 tasks. WP5 builds on my open citiz
 *Feasibility.* The pieces exist. MESH runs and has produced validated electrical synapses [14,41]. A
 Hodgkin–Huxley model of the right-eye gaze circuit with electrical and chemical coupling already
 reproduces motor-neuron spiking and the direction of optogenetically evoked eye movements. The
-differentiable detector bank already returns stimuli that separate competing male-circuit models.
+Tier-1 model, extended by the MIO, already returns a stimulus on which two hypotheses about the MIO's
+pull direction predict retinal shifts 36° apart (B2, Fig. B1).
 The tomography atlas of male and female hoverflies is in hand [2], hoverflies can be reared
 year-round with a published protocol [19], and the hoverfly genome is public [44]. I have shipped TinyML pipelines
 on classroom robots and teach computer vision to the cohorts that will run WP5. Hypothesis-critical
@@ -232,11 +235,10 @@ with my own team. It is not a continuation of my postdoctoral projects, nor of t
 visual circuit differs between the sexes, in a different species, with models and machines as the
 instruments.
 
-*Why here.* IU is Germany's largest university and largely a distance-learning institution. A
-computer-vision professorship there supplies the students, the courses and the engineering setting
-in which WP4 and WP5 are core activities rather than add-ons, and a route to thousands of remote
-learners with kits at home. The two partner laboratories supply what IU cannot: the only hoverfly
-retinal-muscle physiology set-ups, and genomic infrastructure for a non-model insect.
+*Why here.* IU is Germany's largest, largely distance-learning university. A computer-vision
+professorship there makes WP4 and WP5 core activities, with students, courses and a route to
+thousands of remote learners with kits at home. The partner laboratories supply what IU cannot: the
+only hoverfly retinal-muscle physiology set-ups and genomics for a non-model insect.
 
 ## 7. Expected outcomes and impact
 

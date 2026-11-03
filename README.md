@@ -49,7 +49,7 @@ principles that engineered spiking vision can use**. It will:
 | [`proposal/B2_PartII.md`](proposal/B2_PartII.md) | **B2 Part II of the Scientific Proposal** + Funding ID, with Figs. B1–B3 | **7 pp** |
 | [`proposal/abstract.md`](proposal/abstract.md) | Part A abstract and keywords | 2000 chars |
 | [`proposal/PartA_budget_resources.md`](proposal/PartA_budget_resources.md) | Part A budget table + Resources text | 8000 chars |
-| [`proposal/figures/`](proposal/figures/) | Fig. A overview, Fig. B2 work plan, Fig. B3 Gantt (SVG sources + rendered PNG/PDF); Fig. B1 (preliminary data) still to be assembled from your DFG material | — |
+| [`proposal/figures/`](proposal/figures/) | Fig. A overview, Fig. B1 preliminary results (assembled from the DFG material + the new MIO controversial-stimulus panel), Fig. B2 work plan, Fig. B3 Gantt (SVG/PNG/PDF; sources in `figures/src/`) | — |
 | [`proposal/gantt.md`](proposal/gantt.md), [`proposal/references.md`](proposal/references.md) | Timeline; bibliography (108 entries, [verify] marks where a source could not be checked) | — |
 | [`admin/host_support_letter.md`](admin/host_support_letter.md) | Mandatory host letter (official 2027 wording, IU filled in) | annex |
 | [`admin/ethics_security_self_assessment.md`](admin/ethics_security_self_assessment.md) | Ethics and security tables, drafted | Part A |
@@ -60,8 +60,8 @@ principles that engineered spiking vision can use**. It will:
 | [`docs/dfg_backup_strategy.md`](docs/dfg_backup_strategy.md) | Sequential DFG backup, timing | — |
 | [`docs/positioning_from_DFG.md`](docs/positioning_from_DFG.md) | What changes from the DFG *Eristalis* proposal | — |
 | [`teaching/`](teaching/), [`outreach/`](outreach/) | Course integration; citizen-science design | B2 WP5 |
-| [`code/`](code/), [`prior_work/`](prior_work/) | `hover` package (EMD, gap-junction SNN with the male MIO, controversial stimuli); ALIstim notebook | preliminary results |
-| [`tools/`](tools/) | `check_limits.py` (abstract, word counts, Resources, budget cap) · `render_pdf.py` (ERC-format PDFs with **real page counts**) · `render_figures.py`, `make_gantt_svg.py` · `export_docx.sh` | — |
+| [`code/`](code/), [`prior_work/`](prior_work/) | `hover` package: EMD front end, Tier-2 gap-junction SNN, **Tier-1 HH model ported from MESH** (`tier1_hh.py`), **MIO controversial-stimulus search** (`mio_search.py`, Fig. B1g); ALIstim notebook | preliminary results |
+| [`tools/`](tools/) | `check_limits.py` (abstract, word counts, Resources, budget cap) · `render_pdf.py` (ERC-format PDFs with **real page counts**) · `render_figures.py`, `make_gantt_svg.py`, `make_fig_B1.py` · `export_docx.sh` | — |
 
 ## Quick start
 
@@ -90,10 +90,10 @@ bash tools/export_docx.sh                # .docx for pasting into the official E
 ## Open items
 
 Science (this draft):
-1. Assemble **Fig. B1** (preliminary results) from the DFG material: MESH contact map + EM cut-outs,
-   electrical wiring diagram and RMN tuning prediction (Falt *et al.* Fig. 4), Tier-1 traces, micro-CT
-   of the male MIO, one controversial stimulus.
-2. Post the Kviatko *et al.* manuscript on bioRxiv before 12 Jan (or remove it from the CV outputs).
+1. Fig. B1 is assembled; replace panel (d) with a cleaner export of the Tier-1 traces from MESH if
+   you have one, and re-run `python -m hover.mio_search` once WP2-style receptive fields or
+   conductances are updated (the panel and `mio_search_result.json` regenerate).
+2. Post the Kviatko *et al.* manuscript on bioRxiv before 12 Jan and add the DOI to references [2].
 3. Fill the `[fill]` / `[verify]` marks in the CV (defence date, roles in co-authored papers, grants).
 4. Ask three readers to test Part I (an ERC grantee, a non-fly neuroscientist, a computer-vision
    colleague); see `docs/submission_plan.md`.
