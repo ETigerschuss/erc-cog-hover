@@ -45,7 +45,7 @@ G_LPTC_MN, C_LPTC_MN = 0.1, 0.8    # LPTC <-> motor neuron gap junctions (tau = 
 
 def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params: str = "MOT",
                   g_lptc_mn: float = G_LPTC_MN, lptc_leak_scale: float = 1.0, w_vs_mos: float = 1.0,
-                  w_mio: float = 1.0):
+                  w_mio: float = 1.0, gj_tau_ms: float | None = None):
     """Return the right-eye circuit as arrays.
 
     species: 'drosophila' (VS1-4, HSN, HSE, HSS, MOT, MOS) or 'eristalis_male' (adds HSNE and the
@@ -61,6 +61,10 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
     w_vs_mos: relative conductance of the VS1-4 -> MOS junctions (per cell) versus HS -> MOS; Falt et
     al. assumed equal weights per cell; the model's fit to the MOS/MOT divergence predicts the ratio,
     to be tested against the junction areas measured in WP1.
+    gj_tau_ms: time constant of the low-pass filter of the LPTC<->motor-neuron junctions (C = G·τ). The
+    MESH preset (C = 0.8) gives ~1.6 ms at G = 0.5, which lets the motor-neuron spikes through as 10 mV
+    spikelets in the LPTCs; 15 ms represents the cable distance between the junction site and the
+    spike-initiation zone and leaves the rate-coded modulation unchanged.
     w_mio: conductance of the LPTC -> MIO junctions relative to the LPTC -> MOT/MOS junctions. With one
     coupled cell (HSN, hypothesis H2) and w_mio = 1 the MIO would be modulated a quarter as much as
     MOT (four HS cells); w_mio = 3 gives the three motor neurons comparable visual modulation (free
@@ -91,15 +95,18 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
     if "HSNE" in idx:
         gj.append((idx["HSN"], idx["HSNE"], G_CHAIN, C_CHAIN))
     hs = [nm for nm in names if nm.startswith("HS")]
+    c_of = (lambda g: g * gj_tau_ms) if gj_tau_ms else (lambda g: C_LPTC_MN * g / max(g_lptc_mn, 1e-9))
     for v in ("VS1", "VS2", "VS3", "VS4"):
-        gj.append((idx[v], idx["MOS"], g_lptc_mn * w_vs_mos, C_LPTC_MN * w_vs_mos))
+        g = g_lptc_mn * w_vs_mos
+        gj.append((idx[v], idx["MOS"], g, c_of(g)))
     for h in hs:
-        gj.append((idx[h], idx["MOS"], g_lptc_mn, C_LPTC_MN))
-        gj.append((idx[h], idx["MOT"], g_lptc_mn, C_LPTC_MN))
+        gj.append((idx[h], idx["MOS"], g_lptc_mn, c_of(g_lptc_mn)))
+        gj.append((idx[h], idx["MOT"], g_lptc_mn, c_of(g_lptc_mn)))
     if "MIO" in idx:
         src = {"HSN": ["HSN"], "HSNE": ["HSNE"], "HS": hs, "VS": ["VS1", "VS2", "VS3", "VS4"]}[mio_from]
         for s in src:
-            gj.append((idx[s], idx["MIO"], g_lptc_mn * w_mio / len(src) ** 0.5, C_LPTC_MN * w_mio))
+            g = g_lptc_mn * w_mio / len(src) ** 0.5
+            gj.append((idx[s], idx["MIO"], g, c_of(g)))
     GJ = np.array(gj, dtype=np.float64).reshape(-1, 4)
     return names, ctype, P, GJ
 
