@@ -119,9 +119,14 @@ the junction conductances, so the motor neurons would clamp the LPTCs; the real 
 low-impedance, and the scaling makes them stiff graded voltage sources whose coupling onto the RMNs is
 set by `g_lptc_mn` (= 0.5) alone; (iii) bias calibration: each RMN's bias current is set so that its
 tonic rate at rest is 100 Hz, compensating the tonic junction current (Falt: RMNs operate at an
-intermediate activation regime with a bidirectional range). With these settings a preferred-direction
-grating modulates MOT by +26/−26 Hz (HS cells) and MOS by +33/−14 Hz (VS cells); stronger coupling
-drives the HH neurons into depolarisation block.
+intermediate activation regime with a bidirectional range); (iv) the LPTC↔RMN junctions carry a
+15 ms low-pass filter (C = G·τ) representing the cable distance between junction site and
+spike-initiation zone: with the MESH preset (≈ 1.6 ms) the RMN spikes appear as 10 mV spikelets in
+the LPTCs, with 15 ms they are 1.5–2 mV and the rate-coded modulation is unchanged. With these
+settings a preferred-direction grating modulates MOT by +22/−15 Hz (HS cells) and MOS by +31 Hz
+(VS cells); stronger coupling drives the HH neurons into depolarisation block. The male's MIO
+receives its single HSN input with a junction three times the HS→MOT conductance (`w_mio` = 3), so
+that the three motor neurons have comparable visual modulation; this is a free parameter (§4).
 
 ### Stage 5: frames and the oculomotor model (`hover/oculomotor.py`)
 
@@ -159,17 +164,17 @@ Twelve grating directions (λ 30°, 30°/s, 1 s of motion), the circuit above, o
 rotation β and one fitted wiring ratio `w_vs_mos` (VS1–4 → MOS junction conductance relative to
 HS → MOS, per cell):
 
-| Quantity | Falt *et al.* 2026 | model (w_vs_mos = 1) | model (w_vs_mos = 2) |
-|---|---|---|---|
-| MOT PD | 141° | 159° | 149° |
-| MOS PD | 212° | 204° | 210° |
-| MOS − MOT divergence | ≈ 72° | 45° | 61° |
-| MOT − HS | 8° | 4° | 2° |
-| MOS − linear sum (4/7 VS + 3/7 HS) | 6° | 2° | 13° |
-| VS1–4 PD (prediction) | – | 243° | 233° |
-| OKR mean error (inverted shift vs stimulus) | 7.1° | 23° | 20° |
-| fitted β | – | −25.5° | −34.5° |
-| tonic rates MOT / MOS | – | 113 / 124 Hz | 110 / 141 Hz |
+| Quantity | Falt *et al.* 2026 | model, w_vs_mos = 1 | model, w_vs_mos = 2 | final (w_vs_mos = 2, junction filter 15 ms) |
+|---|---|---|---|---|
+| MOT PD | 141° | 159° | 149° | 146° |
+| MOS PD | 212° | 204° | 210° | 212° |
+| MOS − MOT divergence | ≈ 72° | 45° | 61° | 66° |
+| MOT − HS | 8° | 4° | 2° | 0° |
+| MOS − linear sum (4/7 VS + 3/7 HS) | 6° | 2° | 13° | 16° |
+| VS1–4 PD (prediction) | – | 243° | 233° | 233° |
+| OKR mean error (inverted shift vs stimulus) | 7.1° | 23° | 20° | 17° |
+| fitted β | – | −25.5° | −34.5° | −35° |
+| tonic rates MOT / MOS | – | 113 / 124 Hz | 110 / 141 Hz | 109 / 111 Hz |
 
 What the model reproduces without tuning: the MOT PD follows the HS cells; the MOS PD is the
 electrical linear sum of VS1–4 and HS; the two RMNs diverge; the inverted vector sum of the pulls
@@ -184,8 +189,8 @@ constrain both. The direction-dependent OKR error is largest where both RMNs res
 why the system needs the VS input to MOS, and the hoverfly's third muscle is the obvious candidate
 for completing the basis in the male.
 
-Figure: `scratchpad/val_w2.0.png` (eye map with local axes; LPTC tuning; RMN tuning in the holder
-frame with Falt's PDs; OKR plot) — to be copied into `proposal/figures/` once the parameters are final.
+Figure: `proposal/figures/fig_model_validation.png` (eye map with local axes; LPTC tuning; RMN tuning
+in the holder frame with Falt's PDs; OKR plot), produced by `python -m hover.validate_falt --wvs 2`.
 
 ## 4. Free parameters and hypotheses of the hoverfly models
 
@@ -195,7 +200,7 @@ frame with Falt's PDs; OKR plot) — to be copied into `proposal/figures/` once 
 | MIO drive | HSN (H2), HSNE, pooled HS, VS | neurobiotin fills, stimuli optimised on MIO activity |
 | HSN ♂ receptive field | Nordström 2008 contours (Gaussian fits above) | WP2 recordings |
 | HSNE local PD | +h with an upward component | WP2 recordings |
-| LPTC↔RMN conductances | g_lptc_mn 0.5, VS→MOS ×2 (Falt fit) | WP1 apposition areas, WP2 fills |
+| LPTC↔RMN conductances | g_lptc_mn 0.5, VS→MOS ×2 (Falt fit), HSN→MIO ×3, junction filter 15 ms | WP1 apposition areas, WP2 fills, EMG |
 | Bright-zone sampling | Straw 2006; v0 ellipse | optics, CT |
 | Hoverfly MOS/MOT pull directions | same as *Drosophila* | CT |
 | yaw_fraction (eye-lattice tilt) | 0.4 | Zhao-type eye map of *Eristalis* (WP2 CT) |
