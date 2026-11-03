@@ -7,3 +7,4 @@ build/*
 !build/B1_full.pdf
 !build/B2_full.pdf
 tools/_render_svg.js
+code/hover/_bias_cache.json
