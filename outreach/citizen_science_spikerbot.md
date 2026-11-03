@@ -30,7 +30,12 @@ contributors who generate data and co-own results, not only an audience.
 - SpikerBot (Backyard Brains) is the reference platform because it natively runs
   spiking-neuron circuits with a camera at classroom cost.
 - All firmware and circuit files are open (MIT) and portable to ESP32/RPi robots, so the
-  project does not depend on one vendor. **Declare any affiliation with Backyard Brains.**
+  project does not depend on one vendor. The PI's Backyard Brains affiliation is declared and managed:
+  see `docs/coi_backyard_brains.md`.
+
+## Ethics
+- School pupils are minors: parental consent, no personal data in robot logs (pseudonymous device IDs),
+  IU ethics approval before launch. Strip GPS/EXIF from uploaded videos. See `admin/ethics_security_self_assessment.md`.
 
 ## Metrics (for the ERC "impact" narrative, and for reporting)
 Participants, trials uploaded, labels contributed, schools reached, student theses,

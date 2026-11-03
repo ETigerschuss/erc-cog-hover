@@ -1,8 +1,8 @@
 # From the DFG *Eristalis* proposal to the HOVER ERC CoG
 
-Source: `ETigerschuss/dfg-eristalis` → `proposal.md` (as submitted, Oct 2026).
+Source: `ETigerschuss/dfg-eristalis` → `proposal.md` (as-submitted version, 2026; planned start 1 Oct 2026).
 
-| Dimension | DFG (36 mo, MPI-BI, with L. Fenk) | HOVER ERC CoG (60 mo, IU, PI alone) |
+| Dimension | DFG (36 mo, MPI-BI, with L. Fenk) | HOVER ERC CoG (60 mo, IU, single PI with own team) |
 |---|---|---|
 | Core question | What does the male third retinal muscle do? | **What makes a visual system task-specific, and do those motifs generalise to engineered spiking vision?** The *Eristalis* dimorphism is the natural experiment. |
 | Level | Circuit → muscle → retinal displacement | Connectome → SNN theory → active-vision CV systems → robots / people |
@@ -10,7 +10,7 @@ Source: `ETigerschuss/dfg-eristalis` → `proposal.md` (as submitted, Oct 2026).
 | Experiments | EMG, patch clamp, free flight, micro-CT done in-house | Focused, hypothesis-critical experiments through **partners** (Fenk lab: *Drosophila* EMG/imaging; an *Eristalis* electrophysiology lab), plus a small HOVER rig for eye tracking and controversial stimuli |
 | Computer vision | Braitenberg-vehicle outreach day | A full work package: event cameras, SNNs with active micro-movements, small-target detection in clutter, ego-motion; benchmarks against CNNs (Drews et al. 2020 `deepfly`) |
 | Outreach | One day, ~200 visitors | Continuous: SpikerBot inside IU CV courses every semester, a distributed "robot zoo" citizen-science experiment, and community proofreading of gap junctions in MESH |
-| Connectomics | FlyWire (FAFB) via MESH | FlyWire + newer connectomes on the Codex/CoDa platform (optic-lobe and male/female datasets; **verify dataset availability**), MESH gap-junction proofreading pipeline, transfer of the Drosophila wiring to Eristalis |
+| Connectomics | FlyWire (FAFB) via MESH | FlyWire via Codex, plus newer datasets on platforms such as coda.science (**verify what it provides and how to cite it**), MESH gap-junction proofreading pipeline, transfer of the Drosophila wiring to Eristalis |
 
 ## Material reused directly
 
@@ -25,11 +25,19 @@ Source: `ETigerschuss/dfg-eristalis` → `proposal.md` (as submitted, Oct 2026).
 - *Musca* / *Calliphora* comparisons → cite as literature only.
 - Muscle biomechanics (Hill model, micro-CT dynamics) → a reduced module in WP1, collaborator-supported.
 
+## Rules that make the distinction essential
+
+- The ERC wants "truly novel ideas, not just continuations of ongoing work or existing collaboration" (IfA p. 7).
+  HOVER must read as *your* new programme, not the Fenk-lab project in a bigger form.
+- If the 2026 DFG proposal is still in review or gets funded, it goes into the **Funding ID** (B2) with an explicit
+  overlap statement. Keep the two scopes cleanly separated (see `dfg_backup_strategy.md`).
+- B2 now has only **7 pages**, so the background, objectives and the "why" must be complete in B1 Part I.
+
 ## Keys to the ERC narrative
 
 1. **Ground-breaking**: the first connectome-constrained SNN that explains a *sexual
    dimorphism* in vision as a task-optimal solution, *and* shows that the solution transfers to machines.
 2. **Ambition**: closes the loop from synapse (gap junction in EM) to behaviour (eye
-   movement) to engineering (event-camera pursuit) to society (thousands of students and citizens running fly circuits).
+   movement) to engineering (event-camera target tracking) to society (thousands of students and citizens running fly circuits).
 3. **Feasibility**: MESH (49 validated MN–LPTC contacts, 2,895 EM images), the Tier-1 model,
    ALIstim differentiable detectors, the CT atlas, and a PI who has done EM, physiology, modelling and outreach.

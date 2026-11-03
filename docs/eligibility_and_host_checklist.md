@@ -1,75 +1,89 @@
-# Blockers and decisions to clear before writing further
+# Eligibility, host and open items
 
-These items decide whether the proposal can be submitted and to which panel. Clear them first.
+Status after your answers on 3 Nov 2026. ✅ settled · ⏳ action needed · ❓ your decision.
+Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
 
-## 1. Host institution: which "IU"?  ⛔ blocker
+## Settled ✅
 
-- **IU Internationale Hochschule (Erfurt, DE)**: eligible as an ERC host (legal entity
-  in an EU Member State). However, ERC panels check **whether the host provides the
-  conditions for frontier research**. A private university of applied sciences
-  oriented toward teaching will be questioned on: lab space for fly work, GPU/HPC,
-  PhD supervision rights (does IU award doctorates? If not, plan co-supervision with
-  LMU / MPI-BI / a TU), and protected research time. Get this in writing in the host
-  support letter (`admin/host_support_letter_template.md`).
-- **Indiana University (Bloomington, US)**: **not an eligible host.** Options would be a
-  European host, or a different funder (NSF CAREER, NIH BRAIN Initiative).
-
-→ Decision: ________
-
-## 2. Years since PhD  ⛔ blocker
-
-CoG window: 7 to 12 years since PhD on 1 January of the call year (plus documented extensions).
-
-| Call | Reference date | PhD must be between |
+| Item | Result | Basis |
 |---|---|---|
-| ERC-2027-CoG | 1 Jan 2027 | 1 Jan 2015 – 31 Dec 2019 |
-| ERC-2028-CoG | 1 Jan 2028 | 1 Jan 2016 – 31 Dec 2020 |
+| Host | **IU Internationale Hochschule (Germany)**: a legal entity in an EU Member State, so eligible as a host | IfA p. 9–10 |
+| PhD window | PhD 2016 falls inside the CoG-2027 window (defence 1 Jan 2012 – 31 Dec 2021). StG-2027 is *not* possible (its window starts 2017), so the CoG is the right scheme. | IfA p. 11 |
+| Backyard Brains | Affiliation confirmed. Handled openly → [`coi_backyard_brains.md`](coi_backyard_brains.md) | — |
+| DFG | Sequential: ERC-2027-CoG first; DFG Sachbeihilfe only if the ERC fails → [`dfg_backup_strategy.md`](dfg_backup_strategy.md) | — |
 
-PhD date (date of award on the certificate): ________ → Call: ________
-If it falls before the window: consider Advanced Grant (AdG) later, or claim eligible extensions.
+## With IU's research / grants office ⏳ (start this week)
 
-## 3. Conflict of interest with Backyard Brains / SpikerBot  ⚠️ must be declared
+1. **Legal name, PIC and LEAR.** Exact legal entity (e.g. "IU Internationale Hochschule GmbH"; confirm),
+   its PIC in the F&T Participant Register, and who the LEAR is. The correct PIC is needed when you
+   create the draft proposal.
+2. **Gender Equality Plan.** As a *private higher-education establishment*, IU needs a GEP or
+   equivalent meeting four requirements: published and signed by top management; dedicated
+   resources; sex/gender-disaggregated staff and student data with reporting at least every two
+   years; training. It must be in place at grant signature (IfA p. 10, 25). Ask whether IU's current
+   equality or diversity documents meet these, or whether IU must adopt one.
+3. **Host Institution Support Letter.** Mandatory ERC wording on IU letterhead, signed by IU's legal
+   representative. The text is ready in [`../admin/host_support_letter.md`](../admin/host_support_letter.md).
+   Target: signed by **18 Dec 2026**.
+4. **Budget inputs.** IU personnel cost rates (PhD, postdoc, engineer); whether the PI's salary is
+   charged to the grant; depreciation rules for equipment. Also confirm whether IU has handled
+   Horizon Europe grants before (financial capacity is checked at granting).
+5. **Conditions the panel will judge from B2 and Resources** (the letter does not cover them):
+   - lab space for fly rearing and an eye-tracking/EMG rig;
+   - GPU/HPC access;
+   - a teaching reduction that makes ≥ 40 % on HOVER real;
+   - **a doctoral route**: does IU have doctoral rights? If not, a co-supervision agreement with a
+     doctorate-granting university (e.g. LMU or TUM) for the three PhD students;
+   - EU-grant administration.
 
-The proposal uses SpikerBot and SpikeStation (Backyard Brains). If the PI is employed
-by, owns shares in, or is paid by Backyard Brains, then:
+   Put these in an internal agreement with IU.
 
-- declare it in Part A and in the host letter;
-- **do not** budget SpikerBot purchases as a sole-source supplier without a market justification
-  (EU procurement rules, best value for money);
-- make all HOVER software, models and teaching material **open and
-  hardware-agnostic** (MIT/CC-BY), runnable on any Arduino/ESP32/RPi robot. SpikerBot is
-  then the reference platform, not a dependency;
-- keep the interview answer ready: "Why this robot?" → low cost, already deployed in
-  schools, native spiking-neuron programming, camera + motors, existing user community.
+## PI actions ⏳
 
-## 4. Panel choice: LS5 or PE6?
+1. **PhD document.** The certificate must show the **defence date** (*Tag der mündlichen Prüfung*).
+   If it only shows the award date, ask your awarding university to complete the Annex 4.9 template
+   (IfA p. 68). Request it now, before the Christmas closure.
+2. **Written consent** from every researcher you name (L. Fenk; any *Eristalis* lab; neuromorphic
+   platform hosts; advisory board) **before 12 Jan 2027**. Keep the e-mails as proof (IfA p. 26).
+   ERC support letters are *not* submitted and would be disregarded (IfA p. 33).
+3. **Time commitment.** ≥ 40 % on HOVER and ≥ 50 % of *all* working time in the EU/AC, counting the
+   Backyard Brains role (IfA p. 11). Write down your split: IU %, BYB %, HOVER %.
+4. **Independence.** This is the CoG benchmark (IfA p. 9) and the weakest point of the current CV.
+   Your key preprints have a former mentor as last author.
+   - Evidence you have now: MESH (sole developer, `CITATION.cff`); the 2023 open-citizen-science
+     paper; outreach programmes; the professorship; supervised students.
+   - Before January, if possible: post a preprint with you as senior/corresponding author (e.g.
+     ALIstim / controversial stimuli, or the HOVER SNN preliminary results), and collect a list of
+     students and theses you supervised and any funds you raised as PI.
+   - Do not list former supervisors as team members. Present them as collaborators with a defined,
+     limited role.
+5. **Excluded reviewers.** You may name up to 3, with name, institution, town, country and web page
+   (IfA p. 26).
+6. **Pending DFG proposal.** Clarify its status; see [`dfg_backup_strategy.md`](dfg_backup_strategy.md) §1.
+
+## Decisions ❓
+
+1. **Panel.** Recommended: LS5 primary, PE6 secondary (reasoning below).
+2. **Where the experiments happen** (affects feasibility at Step 2):
+   - (a) a small HOVER insect lab at IU (rearing, tethered retinal tracking, EMG). Needs space,
+     possibly additional funding.
+   - (b) the experimental team member (PhD 2) hosted by a partner institution as an **additional
+     beneficiary**. This is allowed when it adds scientific value (IfA p. 24, fn 48), e.g. MPI-BI.
+   - (c) collaboration only, with no HOVER money to the partner.
+
+   Recommendation: (b), or (a) + (b). Option (c) alone makes WP2 depend on someone else's priorities.
+3. **Start date.** Grant preparation follows the 17 Dec 2027 results. Plan a start around
+   **Sep 2028** (placeholder in `proposal/gantt.md`).
+
+## Panel choice: LS5 or PE6?
 
 | | LS5 (neuroscience) | PE6 (computer science) |
 |---|---|---|
-| Track-record fit | Strong (Nat Neurosci 2023, Neuron, Curr Biol, Nature co-authorships) | Weaker: few CV/ML venue papers yet |
-| Fit with the new professorship | Neutral | Strong |
-| Risk | Reviewers may see the CV/robotics aims as an add-on | Reviewers may see the fly work as "just biology", and the benchmark bar is high (CVPR-level baselines) |
+| Track-record fit | Strong (Nat Neurosci 2023, Neuron, Curr Biol, connectomics preprints) | Weaker: few CV/ML-venue papers yet |
+| Fit with the professorship | Neutral | Strong |
+| Risk | CV/robotics aims may look like an add-on | Fly work may look like "just biology"; high bar for CV baselines |
 
-**Recommendation: LS5 primary, PE6 secondary reviewer request.** Frame the project
-as *computational neuroscience with a computer-vision test bed*: the question is
-biological (why is the system dimorphic?), and the computer-vision aims are the
-**test** of whether the extracted computations are general. Revisit this if you have
-CV-venue papers by submission.
-
-## 5. Independence from former mentors
-
-The CoG panel checks that the PI is independent. Fenk and Borst / Ammer appear on the
-key preprints. Make clear:
-
-- MESH was conceived and built by you (sole software author in `CITATION.cff`);
-- HOVER's questions (dimorphism → task-specific SNNs → CV) are yours and not a continuation of the Fenk lab programme;
-- the Fenk lab is a **collaborator** (letter of commitment for *Drosophila* EMG/imaging
-  and micro-CT access), not a co-PI. Do not list former supervisors as team members.
-
-## 6. "Eigene Stelle" (DFG) vs. ERC
-
-With a professorship you can no longer use the DFG *Eigene Stelle* module (it funds the
-applicant's own position). The DFG version of this work should be resubmitted as a
-regular **Sachbeihilfe** (positions for PhD students and postdocs, no PI salary), or folded into HOVER.
-Before resubmitting, check DFG/ERC double-funding rules: overlapping objectives must
-be declared, and the same work cannot be funded twice.
+**LS5 primary, PE6 secondary.** Frame HOVER as computational neuroscience with a computer-vision
+test of generality. Step-1 panel members act as generalists (IfA p. 28), so the B1 must be readable
+by a molecular neuroscientist as well as a modeller. Revisit if you have CV-venue papers before
+January.

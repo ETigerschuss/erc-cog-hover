@@ -1,8 +1,10 @@
-<!-- ERC CoG Part B1(a) Extended Synopsis | max 5 pages + references | ~2600–2900 words of body text at 11 pt -->
+<!-- ERC-2027-CoG Part B1: Part I of the Scientific Proposal | max 5 pages, excluding cover page and references
+Must contain: (1) current state of knowledge, (2) scientific question and objectives, (3) overall approach (IfA p. 28).
+Read at Step 1 by panel members acting as GENERALISTS: keep jargon low. Header on every page: Serbe-Kamp | HOVER | Part B1 -->
 
 # HOVER: Hoverfly-Optimised Vision through Event-driven Recurrent spiking circuits
 
-**PI:** Étienne Serbe-Kamp · **Host:** IU [full legal name] · **Duration:** 60 months · **Panel:** LS5 (secondary PE6)
+**PI:** Étienne Serbe-Kamp · **Host:** IU Internationale Hochschule (Germany) · **Duration:** 60 months · **Panel:** LS5 (secondary PE6)
 
 ## 1. The problem: one body plan, two visual machines
 
@@ -134,9 +136,9 @@ identify the **minimal motif set** that accounts for task performance.
 **WP4 Bio-inspired active computer vision (M18–60).** We implement the minimal motifs as
 event-driven SNNs operating on event-camera input (DVS) mounted on a piezo/galvo
 micro-movement stage that reproduces fly retinal movements. Benchmarks: small-target
-detection in clutter (cf. STMD neurons [16]), drone pursuit, ego-motion estimation and
-gaze stabilisation on public event-camera datasets and our own hoverfly-perspective
-recordings. Baselines: CNN/transformer models of matched parameter count (including the
+detection in clutter (cf. STMD neurons [16]), closed-loop target tracking on mobile robots,
+ego-motion estimation and gaze stabilisation on public event-camera datasets and our own
+hoverfly-perspective recordings. All applications are civil. Baselines: CNN/transformer models of matched parameter count (including the
 `deepfly` velocity-estimation CNN [Drews *et al.* 2020]) and standard SNN conversions.
 Metrics: accuracy, latency, synaptic operations and energy on neuromorphic hardware
 (e.g., SpiNNaker2 or Loihi-class chips through European access programmes).
@@ -162,7 +164,10 @@ the gap-junction visuomotor pathway [14] and the stepwise evolution of retinal
 muscles [2], built MESH, developed differentiable models for stimulus optimisation, and led
 open citizen-science programmes and SpikerBot-based outreach. My professorship in
 computer vision provides the students, the teaching platform and the engineering
-setting in which WP4–5 become core activities rather than add-ons.
+setting in which WP4–5 become core activities rather than add-ons. HOVER is a new
+programme that I lead with my own group. It does not continue my postdoctoral projects:
+it moves from describing one circuit to asking *why* circuits differ between the sexes,
+and what that difference teaches machines.
 
 ## 6. Expected outcomes
 
