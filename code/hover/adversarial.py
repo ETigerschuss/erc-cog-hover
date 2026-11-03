@@ -116,13 +116,13 @@ def shift_vectors(d_rate: dict, baseline: dict, pull_common: dict, hyp: dict, be
     return out
 
 
-def objective_from_rates(d_rate, baseline, model: Model, hyp=MIO_HYPOTHESES, min_mio_hz=10.0):
+def objective_from_rates(d_rate, baseline, model: Model, hyp=MIO_HYPOTHESES, min_mio_hz=10.0, min_mag=0.15):
     vecs = shift_vectors(d_rate, baseline, model.pull, hyp, model.arena_rotation)
     (ha, va), (hb, vb) = list(vecs.items())[:2]
     ang = angle_between(direction(va), direction(vb))
     mag = min(np.linalg.norm(va), np.linalg.norm(vb))
     d_mio = abs(d_rate.get("MIO", 0.0))
-    score = ang * min(1.0, d_mio / min_mio_hz) * min(1.0, mag / 0.05)
+    score = ang * min(1.0, d_mio / min_mio_hz) * min(1.0, mag / min_mag)
     return score, dict(angle=ang, d_mio=d_mio, dirs={h: direction(v) for h, v in vecs.items()},
                        mags={h: float(np.linalg.norm(v)) for h, v in vecs.items()})
 
@@ -139,9 +139,16 @@ def evaluate_surrogate(model: Model, sur: Surrogate, p: dict, baseline: dict):
     return score, info
 
 
+SEED_PARAMS = {  # front-to-back motion on the male HSN field, counter-motion in the background
+    "az0": 0.0, "el0": 25.0, "rad0": 15.0, "dir0": 0.0, "speed0": 30.0, "con0": 1.0,
+    "az1": 60.0, "el1": -20.0, "rad1": 30.0, "dir1": 180.0, "speed1": 30.0, "con1": 0.3,
+    "bg_dir": 180.0, "bg_speed": 20.0, "bg_con": 0.2,
+}
+
+
 def search(model: Model, sur: Surrogate, baseline: dict, generations=25, lam=6, k=2, seed=1, log=print, p0=None):
     rng = np.random.default_rng(seed)
-    p = clip_params(p0) if p0 else random_params(rng, k)
+    p = clip_params(p0) if p0 else (clip_params(SEED_PARAMS) if k == 2 else random_params(rng, k))
     best, info = evaluate_surrogate(model, sur, p, baseline)
     sigma = 0.25
     hist = [best]
@@ -203,6 +210,7 @@ def main(argv=None):
     p, score, hist, info = search(male, sur, baseline, generations=a.gens, lam=a.lam, k=a.k, seed=a.seed)
     print("best (surrogate):", {k: round(v, 1) for k, v in p.items()}, f"angle {info['angle']:.1f}° ({time.time() - t0:.0f} s)")
     s_ver, info_v, r_m, mov = verify(male, p)
+    print(f"seed-stimulus check: " + str({k: round(v, 1) for k, v in verify(male, clip_params(SEED_PARAMS))[1]["d_rate"].items()}))
     print(f"Tier-1 verification: angle {info_v['angle']:.1f}°, MIO Δ {info_v['d_mio']:.1f} Hz, dirs {info_v['dirs']}, Δrates {info_v['d_rate']}")
     r_f = female.run(mov, onset_s=ONSET)
     dir_f = r_f["shift_dir"]
@@ -215,11 +223,11 @@ def main(argv=None):
     if a.out:
         pathlib.Path(a.out).write_text(json.dumps(res, indent=1, default=float))
     if a.fig:
-        panel(male, female, p, r_m, r_f, info_v, a.fig)
+        panel(male, female, mov, r_m, r_f, info_v, a.fig, params=p)
     return res
 
 
-def panel(male: Model, female: Model, p, r_m, r_f, info, out_png):
+def panel(male: Model, female: Model, mov, r_m, r_f, info, out_png, params=None, title="controversial stimulus on the male eye"):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -228,8 +236,8 @@ def panel(male: Model, female: Model, p, r_m, r_f, info, out_png):
     fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.2), dpi=300, gridspec_kw=dict(width_ratios=[1.25, 1.2, 0.9]))
     # (1) stimulus snapshot on the eye with RF contours
     ax = axes[0]
-    mov = render(male, p)
-    frame = mov[int((ONSET + 0.3) / male.dt_frame)]
+    p = params or {}
+    frame = mov[min(int((ONSET + 0.3) / male.dt_frame), mov.shape[0] - 1)]
     ax.imshow(frame, extent=[male.az_grid[0], male.az_grid[-1], male.el_grid[0], male.el_grid[-1]], origin="lower",
               cmap="gray", vmin=0, vmax=1, aspect="equal")
     A, E = np.meshgrid(male.az_grid, male.el_grid)
@@ -243,12 +251,12 @@ def panel(male: Model, female: Model, p, r_m, r_f, info, out_png):
         ax.annotate("", xy=(p[f"az{k}"] + 8 * np.cos(np.deg2rad(p[f"dir{k}"])), p[f"el{k}"] + 8 * np.sin(np.deg2rad(p[f"dir{k}"]))),
                     xytext=(p[f"az{k}"], p[f"el{k}"]), arrowprops=dict(arrowstyle="->", color="#ff9800", lw=1.8))
         k += 1
-    if p["bg_con"] > 0.02:
+    if p.get("bg_con", 0.0) > 0.02:
         ax.annotate("", xy=(120 + 10 * np.cos(np.deg2rad(p["bg_dir"])), -60 + 10 * np.sin(np.deg2rad(p["bg_dir"]))),
                     xytext=(120, -60), arrowprops=dict(arrowstyle="->", color="#ff9800", lw=1.2))
     ax.set_xlim(-15, 150); ax.set_ylim(-70, 70)
     ax.set_xlabel("azimuth (°)", fontsize=8); ax.set_ylabel("elevation (°)", fontsize=8); ax.tick_params(labelsize=7)
-    ax.set_title("controversial stimulus on the male eye", fontsize=9)
+    ax.set_title(title, fontsize=9)
     ax.legend(handles=[Line2D([], [], color="#2F5597", ls="-", label="HSN ♂"), Line2D([], [], color="#2F5597", ls="-.", label="HSN ♀"),
                        Line2D([], [], color="#ad1457", ls="--", label="HSNE"), Line2D([], [], color="#c2185b", ls=":", label="HSE")],
               fontsize=6, loc="lower right", frameon=True)

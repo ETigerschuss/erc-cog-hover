@@ -44,7 +44,8 @@ G_LPTC_MN, C_LPTC_MN = 0.1, 0.8    # LPTC <-> motor neuron gap junctions (tau = 
 
 
 def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params: str = "MOT",
-                  g_lptc_mn: float = G_LPTC_MN, lptc_leak_scale: float = 1.0, w_vs_mos: float = 1.0):
+                  g_lptc_mn: float = G_LPTC_MN, lptc_leak_scale: float = 1.0, w_vs_mos: float = 1.0,
+                  w_mio: float = 1.0):
     """Return the right-eye circuit as arrays.
 
     species: 'drosophila' (VS1-4, HSN, HSE, HSS, MOT, MOS) or 'eristalis_male' (adds HSNE and the
@@ -60,6 +61,10 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
     w_vs_mos: relative conductance of the VS1-4 -> MOS junctions (per cell) versus HS -> MOS; Falt et
     al. assumed equal weights per cell; the model's fit to the MOS/MOT divergence predicts the ratio,
     to be tested against the junction areas measured in WP1.
+    w_mio: conductance of the LPTC -> MIO junctions relative to the LPTC -> MOT/MOS junctions. With one
+    coupled cell (HSN, hypothesis H2) and w_mio = 1 the MIO would be modulated a quarter as much as
+    MOT (four HS cells); w_mio = 3 gives the three motor neurons comparable visual modulation (free
+    parameter; WP1 junction areas, WP2 EMG).
     """
     names = ["VS1", "VS2", "VS3", "VS4", "HSN", "HSE", "HSS"]
     if species.startswith("eristalis"):
@@ -94,7 +99,7 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
     if "MIO" in idx:
         src = {"HSN": ["HSN"], "HSNE": ["HSNE"], "HS": hs, "VS": ["VS1", "VS2", "VS3", "VS4"]}[mio_from]
         for s in src:
-            gj.append((idx[s], idx["MIO"], g_lptc_mn / len(src) ** 0.5, C_LPTC_MN))
+            gj.append((idx[s], idx["MIO"], g_lptc_mn * w_mio / len(src) ** 0.5, C_LPTC_MN * w_mio))
     GJ = np.array(gj, dtype=np.float64).reshape(-1, 4)
     return names, ctype, P, GJ
 
