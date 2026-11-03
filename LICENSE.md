@@ -1,0 +1,2 @@
+- Proposal text, figures and admin documents (`proposal/`, `docs/`, `teaching/`, `outreach/`, `admin/`): © Étienne Serbe-Kamp, all rights reserved, until the proposal is submitted. Keep this repository **private**.
+- Code (`code/`, `tools/`): MIT License.
