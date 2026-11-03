@@ -45,3 +45,6 @@ Numbering follows the DFG proposal so the figure and text citations carry over. 
 [39] coda.science: connectome data platform. [verify name, datasets and citation]
 [40] Codex: FlyWire connectome explorer, codex.flywire.ai. Matsliah A et al. (2024) Nature 634:149–157 [verify].
 [41] Serbe-Kamp É, et al. MESH: connectome-scale contact detection and EM proofreading for putative gap junctions. Software. github.com/ETigerschuss/MESH (MIT).
+[42] Lawrence PA, Johnston P (1986). The muscle pattern of a segment of Drosophila may be determined by neurons and not by contributing myoblasts. Cell 45(4):505–513. [verify]
+[43] Usui-Aoki K, Ito H, Ui-Tei K, Takahashi K, Lukacsovich T, Awano W, Nakata H, Piao ZF, Nilsson EE, Tomida J, Yamamoto D (2000). Formation of the male-specific muscle in female Drosophila by ectopic fruitless expression. Nat Cell Biol 2(8):500–506. [verify]
+[44] Eristalis tenax and other syrphid genome assemblies (e.g. Darwin Tree of Life, Wellcome Sanger Institute). [verify availability and citation]

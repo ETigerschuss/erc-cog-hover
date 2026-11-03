@@ -10,7 +10,8 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
 | Host | **IU Internationale Hochschule (Germany)**: a legal entity in an EU Member State, so eligible as a host | IfA p. 9–10 |
 | PhD window | PhD 2016 falls inside the CoG-2027 window (defence 1 Jan 2012 – 31 Dec 2021). StG-2027 is *not* possible (its window starts 2017), so the CoG is the right scheme. | IfA p. 11 |
 | Backyard Brains | Affiliation confirmed. Handled openly → [`coi_backyard_brains.md`](coi_backyard_brains.md) | — |
-| DFG | Sequential: ERC-2027-CoG first; DFG Sachbeihilfe only if the ERC fails → [`dfg_backup_strategy.md`](dfg_backup_strategy.md) | — |
+| DFG | Sequential: ERC-2027-CoG first; DFG Sachbeihilfe only if the ERC fails. The 2026 DFG draft was never submitted, so nothing is pending → [`dfg_backup_strategy.md`](dfg_backup_strategy.md) | — |
+| Experiments | At **MPI for Biological Intelligence** (Fenk lab: physiology) and **LMU** (Merrill lab: DNA analysis of where the third muscle comes from). Proposed form: each hosts one HOVER PhD student as an **additional beneficiary**. | IfA p. 24 fn 48, p. 30 |
 
 ## With IU's research / grants office ⏳ (start this week)
 
@@ -32,8 +33,8 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
    - lab space for fly rearing and an eye-tracking/EMG rig;
    - GPU/HPC access;
    - a teaching reduction that makes ≥ 40 % on HOVER real;
-   - **a doctoral route**: does IU have doctoral rights? If not, a co-supervision agreement with a
-     doctorate-granting university (e.g. LMU or TUM) for the three PhD students;
+   - **a doctoral route**: does IU have doctoral rights? If not, enrol all four HOVER PhD students at
+     LMU under a co-supervision agreement (natural now that LMU is a partner);
    - EU-grant administration.
 
    Put these in an internal agreement with IU.
@@ -43,9 +44,13 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
 1. **PhD document.** The certificate must show the **defence date** (*Tag der mündlichen Prüfung*).
    If it only shows the award date, ask your awarding university to complete the Annex 4.9 template
    (IfA p. 68). Request it now, before the Christmas closure.
-2. **Written consent** from every researcher you name (L. Fenk; any *Eristalis* lab; neuromorphic
-   platform hosts; advisory board) **before 12 Jan 2027**. Keep the e-mails as proof (IfA p. 26).
-   ERC support letters are *not* submitted and would be disregarded (IfA p. 33).
+2. **Written consent before 12 Jan 2027** (IfA p. 24, 26). Keep the e-mails as proof.
+   - From every researcher you name: L. Fenk, R. Merrill, neuromorphic platform hosts, any advisory board.
+   - From the **participating organisations**, the MPG (MPI-BI administration) and LMU (research
+     office), to join as additional beneficiaries. Get each one's PIC, a contact person, cost rates and
+     the budget for its own Part A section. Fill in "Links with other proposal participating
+     organisations" in Part A (IfA p. 25).
+   - ERC support letters are *not* submitted and would be disregarded (IfA p. 33).
 3. **Time commitment.** ≥ 40 % on HOVER and ≥ 50 % of *all* working time in the EU/AC, counting the
    Backyard Brains role (IfA p. 11). Write down your split: IU %, BYB %, HOVER %.
 4. **Independence.** This is the CoG benchmark (IfA p. 9) and the weakest point of the current CV.
@@ -56,22 +61,19 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
      ALIstim / controversial stimuli, or the HOVER SNN preliminary results), and collect a list of
      students and theses you supervised and any funds you raised as PI.
    - Do not list former supervisors as team members. Present them as collaborators with a defined,
-     limited role.
+     limited role. PhD 2 sits in the Fenk lab, so B2 must show that you select, fund and supervise
+     the student and that Fenk co-supervises locally.
 5. **Excluded reviewers.** You may name up to 3, with name, institution, town, country and web page
    (IfA p. 26).
-6. **Pending DFG proposal.** Clarify its status; see [`dfg_backup_strategy.md`](dfg_backup_strategy.md) §1.
+6. **DFG eligibility of IU staff** (for the backup): ask IU's research office now; see [`dfg_backup_strategy.md`](dfg_backup_strategy.md) §4.
 
 ## Decisions ❓
 
 1. **Panel.** Recommended: LS5 primary, PE6 secondary (reasoning below).
-2. **Where the experiments happen** (affects feasibility at Step 2):
-   - (a) a small HOVER insect lab at IU (rearing, tethered retinal tracking, EMG). Needs space,
-     possibly additional funding.
-   - (b) the experimental team member (PhD 2) hosted by a partner institution as an **additional
-     beneficiary**. This is allowed when it adds scientific value (IfA p. 24, fn 48), e.g. MPI-BI.
-   - (c) collaboration only, with no HOVER money to the partner.
-
-   Recommendation: (b), or (a) + (b). Option (c) alone makes WP2 depend on someone else's priorities.
+2. **Partner set-up.** Proposed: the MPG and LMU as additional beneficiaries, each hosting one HOVER
+   PhD student (budget in `proposal/PartA_budget_resources.md`). The alternative, collaboration only
+   with sequencing bought as a service, is lighter to administer but makes WP2 depend on others'
+   priorities. Confirm with Fenk and Merrill.
 3. **Start date.** Grant preparation follows the 17 Dec 2027 results. Plan a start around
    **Sep 2028** (placeholder in `proposal/gantt.md`).
 

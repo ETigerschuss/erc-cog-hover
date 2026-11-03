@@ -81,6 +81,8 @@ SNN with ≥10× fewer state variables preserves these predictions.
 → **H2 (Dedicated channel):** in males, the dimorphic HSN drives a dedicated motor
 neuron (RMN MOI) of the third muscle, forming a pursuit-specific active-vision channel.
 HSN/HSNE also feed the shared stabilisation channel (MOT/MOS) in both sexes.
+→ **H2b (Origin):** the male muscle is specified by its motor neuron, just as the male-specific
+Muscle of Lawrence of *Drosophila* forms only under *fruitless*-expressing motor neurons [42,43].
 
 **O3. Explain the dimorphism as a task-optimal solution.**
 → **H3 (Task optimality):** when connectome-constrained SNNs are trained on male-typical
@@ -121,9 +123,11 @@ male models** (H2 vs. alternatives: shared drive, HSNE-driven MOI, VS-driven MOI
 stimulus engine, we generate the stimuli where these models disagree most. We then
 present them while tracking retinal movements through the cornea (deep-red illumination,
 high-speed IR video; established in *Drosophila* [7]) in tethered males and females,
-with EMG of the third muscle via the partner lab.
+with EMG of all three muscles (at MPI for Biological Intelligence, Fenk lab).
 *High-risk/high-gain:* retinal tracking during free flight, using head-mounted
-ultralight markers in a pursuit arena.
+ultralight markers in a pursuit arena. With R. Merrill (LMU), sex- and stage-resolved
+transcriptomics and in situ mapping trace where the third muscle comes from and which
+genes make it male (H2b).
 
 **WP3 Theory: why dimorphic? (M12–54).** Using Tier-3 models and an embodied simulator
 (fly-scale optics, compound-eye sampling, retinal muscles as actuators), we optimise
@@ -180,6 +184,6 @@ by pitting models of different "task hypotheses" against each other in animals a
 
 ## References (abbreviated; full list in `references.md`)
 
-[1] Nordström *et al.* 2008 Curr Biol · [2] **Kviatko, …, Serbe-Kamp, …, Fenk** 2026 (Diptera eye-movement evolution) · [6] Viollet 2014 · [7] Fenk *et al.* 2022 Nature · [12] Dorkenwald *et al.* 2024 Nature · [13] Zheng *et al.* 2018 Cell · [14] **Falt, Ammer *et al.*** 2026 bioRxiv doi:10.64898/2026.08.11.744090 · [15] Straw *et al.* 2006 · [16] Nordström *et al.* 2006 · [23] Nicholas *et al.* 2025 · [26] **Ammer, Serbe-Kamp *et al.*** 2023 Nat Neurosci · [30] Golan *et al.* 2020 PNAS · [36] **Serbe-Kamp *et al.*** 2023 RIO · Drews *et al.* 2020 Curr Biol
+[1] Nordström *et al.* 2008 Curr Biol · [2] **Kviatko, …, Serbe-Kamp, …, Fenk** 2026 (Diptera eye-movement evolution) · [6] Viollet 2014 · [7] Fenk *et al.* 2022 Nature · [12] Dorkenwald *et al.* 2024 Nature · [13] Zheng *et al.* 2018 Cell · [14] **Falt, Ammer *et al.*** 2026 bioRxiv doi:10.64898/2026.08.11.744090 · [15] Straw *et al.* 2006 · [16] Nordström *et al.* 2006 · [23] Nicholas *et al.* 2025 · [26] **Ammer, Serbe-Kamp *et al.*** 2023 Nat Neurosci · [30] Golan *et al.* 2020 PNAS · [36] **Serbe-Kamp *et al.*** 2023 RIO · [38] Drews *et al.* 2020 Curr Biol · [42] Lawrence & Johnston 1986 Cell · [43] Usui-Aoki *et al.* 2000 Nat Cell Biol
 
 <!-- FIGURE A (to draw): modelling ladder. Left: EM/MESH gap junction → Tier 1 HH → Tier 2 LIF+GJ → Tier 3 trainable SNN → (WP3 task optimisation) → minimal motifs → WP4 event camera + micro-movement stage → WP5 SpikerBot. Centre: male vs female Eristalis circuits with HSN/HSNE/MOI highlighted. Right: controversial stimulus engine feeding experiments (WP2) and benchmarks (WP4). Reuse panels from DFG Fig. 1d,f and Fig. 2c. -->

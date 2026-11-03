@@ -18,6 +18,7 @@ gantt
     Controversial stimuli in silico (M13-24)  :w22, 2029-09, 12M
     Tethered experiments (M19-42)             :w23, 2030-03, 24M
     Free flight, high risk (M31-48)           :w24, 2031-03, 18M
+    Origin of the third muscle, LMU (M7-48)   :w25, 2029-03, 42M
     section WP3 Theory
     Embodied simulator (M12-27)               :w31, 2029-08, 16M
     Task optimisation + analysis (M25-54)     :w32, 2030-09, 30M
@@ -33,6 +34,6 @@ gantt
     MS2 model families + stimuli (M24)        :milestone, 2030-08, 0d
     MS3 event camera + robot zoo (M30)        :milestone, 2031-02, 0d
     MS4 H1/H2 decided (M36)                   :milestone, 2031-08, 0d
-    MS5 H3 + motif catalogue (M48)            :milestone, 2032-08, 0d
+    MS5 H3, H2b + motif catalogue (M48)       :milestone, 2032-08, 0d
     MS6 H4 + releases (M60)                   :milestone, 2033-08, 0d
 ```

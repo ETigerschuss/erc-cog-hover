@@ -5,7 +5,7 @@
 - Rough page counts (~550 words/page at 11 pt incl. some tables; figures not counted):
   B1 Part I <= 5, CV <= 4, B2 Part II <= 7 (references and Funding ID excluded).
 - Resources text <= 8000 characters.
-- Budget: sums the budget-csv block; indirect = 25 % of (A + C); total <= EUR 2,000,000.
+- Budget: sums the budget-csv block per beneficiary; indirect = 25 % of (A + C); total <= EUR 2,000,000.
 
 Exit code 1 if any check fails.
 """
@@ -57,14 +57,20 @@ check("Resources text", res is not None and len(res) <= 8000, f"{len(res or '')}
 
 m = re.search(r"```budget-csv\n(.*?)```", ptxt, re.S)
 rows = list(csv.DictReader(io.StringIO(m.group(1)))) if m else []
-sums = {}
+per = {}
 for r in rows:
-    key = r["category"].split(".")[0]
-    sums[key] = sums.get(key, 0) + int(r["amount"])
-base = sums.get("A", 0) + sums.get("C", 0)
-indirect = round(0.25 * base)
-total = base + sums.get("B", 0) + sums.get("D", 0) + indirect
-print("       Budget: " + ", ".join(f"{k}={v:,}" for k, v in sorted(sums.items())) + f", E (25% of A+C)={indirect:,}")
-check("Budget cap", total <= 2_000_000, f"total EUR {total:,} (cap 2,000,000 without additional funding)")
+    b = r.get("beneficiary", "ALL")
+    cat = r["category"].split(".")[0]
+    per.setdefault(b, {}).setdefault(cat, 0)
+    per[b][cat] += int(r["amount"])
+grand = 0
+for b, sums in per.items():
+    base = sums.get("A", 0) + sums.get("C", 0)
+    indirect = round(0.25 * base)
+    total = base + sums.get("B", 0) + sums.get("D", 0) + indirect
+    grand += total
+    print(f"       {b}: " + ", ".join(f"{k}={v:,}" for k, v in sorted(sums.items()))
+          + f", E={indirect:,} -> total {total:,}")
+check("Budget cap", grand <= 2_000_000, f"total EUR {grand:,} (cap 2,000,000 without additional funding)")
 
 sys.exit(0 if ok else 1)

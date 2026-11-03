@@ -7,6 +7,7 @@ from sexually dimorphic connectomes to bio-inspired computer vision**
 |---|---|
 | PI | Prof. Dr. Étienne Serbe-Kamp (ORCID 0000-0002-7097-6274), Professor of Computer Vision |
 | Host | IU Internationale Hochschule, Germany (eligible; GEP and PIC still to be confirmed) |
+| Partners | MPI for Biological Intelligence (Fenk lab: physiology) and LMU (Merrill lab: genetics of the third muscle), as additional beneficiaries hosting one PhD student each |
 | Call | **ERC-2027-COG**, deadline **Tue 12 Jan 2027**; plan to submit **Thu 7 Jan** |
 | Eligibility | PhD 2016, inside the CoG-2027 window (PhD defended 1 Jan 2012 – 31 Dec 2021) |
 | Panel | LS5 primary, PE6 secondary |
@@ -28,7 +29,8 @@ engineered spiking vision**. It will:
 
 1. build connectome-constrained spiking models of the fly gaze pathway, including gap junctions
    found with MESH, at three levels: biophysical, mathematically reduced, trainable;
-2. test the dimorphic predictions in *Eristalis* with controversial stimuli;
+2. test the dimorphic predictions in *Eristalis* with controversial stimuli, and trace where the male
+   third muscle comes from and which genes make it male;
 3. ask whether the male features emerge as task-optimal solutions;
 4. transfer the motifs to event-camera vision with active micro-movements;
 5. run everything on SpikerBots in IU computer-vision courses and a citizen-science "robot zoo".
@@ -83,7 +85,6 @@ bash tools/export_docx.sh                # .docx for pasting into the official E
 
 1. IU: PIC, GEP, signed support letter, cost rates, doctoral route.
 2. PhD defence-date document.
-3. Status of the 2026 DFG proposal (Funding ID).
+3. MPG and LMU: written consent to participate, PICs, contacts, budget sections; consent from Fenk and Merrill.
 4. DFG eligibility of IU staff (for the backup).
-5. Where the experiments happen.
-6. What coda.science provides. The site could not be reached from this environment; cite it correctly.
+5. What coda.science provides. The site could not be reached from this environment; cite it correctly.

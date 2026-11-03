@@ -65,7 +65,7 @@ Five work packages share one modelling ladder and one stimulus engine (Fig. B2: 
 - **T1.5 Motor readout.** Muscle activation → force (Hill-type model) → retinal displacement via
   measured muscle base vectors [7]. Validated against retinal tracking in WP2.
 
-### WP2 The dimorphic gaze circuit of *Eristalis* (M6–48; PhD 2, partner lab, PI) → H2
+### WP2 The dimorphic gaze circuit of *Eristalis* (M6–48; PhD 2 at MPI-BI, PhD 4 at LMU, PI) → H2, H2b
 
 - **T2.1 Model families.** Male and female circuits are built by homology (HSN, HSE, HSS, HSNE, VS;
   RMN MOT/MOS/MOI), constrained by the CT atlas (P5), fills (T2.3) and published *Eristalis*
@@ -77,7 +77,7 @@ Five work packages share one modelling ladder and one stimulus engine (Fig. B2: 
   contrast, spatio-temporal frequency) and under a naturalness prior. The expected evidence per trial
   sets the number of animals, i.e. the **power analysis is done in silico before any experiment**.
   **D2.1 (M24):** the stimulus set.
-- **T2.3 Experiments.** Tethered male and female *Eristalis*:
+- **T2.3 Experiments (MPI for Biological Intelligence, Fenk lab; PhD 2).** Tethered male and female *Eristalis*:
   - retinal tracking through the cornea (IR high-speed video, deep-red illumination [7]);
   - EMG of MOT, MOS and MOI;
   - neurobiotin fills of HSN and HSNE to test coupling to the RMNs;
@@ -87,6 +87,21 @@ Five work packages share one modelling ladder and one stimulus engine (Fig. B2: 
 - **T2.4 Free-flight retinal tracking (high risk, high gain).** Pursuit of artificial targets [21]
   in an arena with head-mounted ultralight markers. Started only if T2.3 succeeds; the other WPs do
   not depend on it.
+- **T2.5 Developmental and genetic origin of the third muscle (LMU, R. Merrill; PhD 4) → H2b.**
+  The third muscle exists only in males. Where does it come from, and what makes it male?
+  - *Origin:* a developmental time series of male and female pupae (micro-CT and phalloidin confocal
+    imaging) identifies the anlage the muscle forms from. The comparative data suggest that retinal
+    muscles were repurposed from antennal muscles [2].
+  - *Genes:* sex- and stage-resolved RNA-seq of the anlage region, and of the motor-neuron cell bodies
+    once identified, finds male-biased muscle-identity genes and sex-determination factors
+    (*doublesex*, *fruitless*). Candidates are localised by in situ HCR in the muscle and in RMN MOI.
+  - *H2b, the motor neuron specifies the muscle:* in *Drosophila*, the male-specific Muscle of Lawrence
+    forms only when its motor neurons carry the male *fruitless* program [42,43]. We predict the same
+    logic in *Eristalis*: a male-specific identity of RMN MOI induces the third muscle. Development would
+    then mirror the circuit hypothesis H2, with one dedicated neuron for one dedicated muscle.
+  - *Comparison:* syrphid species from the CT survey with and without a male third muscle test whether
+    candidate changes track the trait, using public genome assemblies where they exist [44].
+  - *Exploratory, high risk:* RNAi knock-down of candidates in pupae.
 
 ### WP3 Theory: why is vision dimorphic? (M12–54; Postdoc 1, PI) → H3
 
@@ -120,7 +135,7 @@ Five work packages share one modelling ladder and one stimulus engine (Fig. B2: 
 - **T4.4 Controversial stimuli for machines.** The WP2 engine is applied to CNN-vs-SNN pairs as a
   robustness diagnostic.
 
-### WP5 Teaching, citizen science, open science (M1–60; engineer / outreach coordinator, PI)
+### WP5 Teaching, citizen science, open science (M1–60; PI, student assistants, IU courses)
 
 - **T5.1 Course integration.** HOVER modules in IU computer-vision courses every semester (see the
   teaching plan); student projects deliver benchmark entries and robot data.
@@ -145,7 +160,7 @@ procurement buys hardware without the PI's involvement, and all code runs on ope
 | MS2 | 24 | Male/female model families; controversial stimuli designed in silico | Stimuli separate the model families with the planned number of animals? If not, refine models before experiments |
 | MS3 | 30 | Active event camera running; robot zoo launched | — |
 | MS4 | 36 | H1 decided; tethered *Eristalis* data complete | Fixes the constraints for WP3; go/no-go for T2.4 |
-| MS5 | 48 | H3 decided; motif catalogue | Motifs passed to WP4 |
+| MS5 | 48 | H3 and H2b decided; motif catalogue | Motifs passed to WP4 |
 | MS6 | 60 | H4 decided; benchmark, models and kits released | — |
 
 ## 4. Hypotheses: tests and what each outcome teaches
@@ -154,6 +169,7 @@ procurement buys hardware without the PI's involvement, and all code runs on ope
 |---|---|---|---|
 | H1 | The Tier-2 SNN with EM-derived weights predicts RMN preferred directions (± 15°) and eye-movement direction | Connectivity-only models miss ≥ 2 RMN tunings | Shows unannotated or neuromodulatory inputs matter; widens the MESH search |
 | H2 | Third-muscle activity follows HSN-preferred motion confined to the dorso-frontal field | Third-muscle EMG tracks MOT-type or VS-type motion | The muscle is a general range extension. The model comparison is still decisive. |
+| H2b | *fruitless*/*doublesex* are expressed male-specifically in RMN MOI and the MOI anlage; the muscle forms from a defined anlage only in males | No sex-biased expression in the motor neuron; muscle specification is cell-autonomous | Points to a muscle-intrinsic program. Still the first developmental account of a sexually dimorphic eye muscle |
 | H3 | Narrowed dorso-frontal integration and an extra effector emerge only under the pursuit objective | They emerge under both objectives, or neither | Points to developmental or genetic constraint rather than task optimality |
 | H4 | Motif SNN + active micro-movement beats matched baselines on ≥ 2 of 3 benchmarks in accuracy per energy | No advantage | A rigorous negative result for "bio-inspired" claims |
 
@@ -163,7 +179,8 @@ procurement buys hardware without the PI's involvement, and all code runs on ope
 |---|---|---|---|
 | GJ classifier does not generalise beyond validated sites | Medium | Medium | Expert + community proofreading; GJ weights become free parameters bounded by apposition area |
 | No *Eristalis* connectome, so the homology mapping is wrong | Medium | High | Competing model families instead of one model; stimuli built to discriminate them; fills as ground truth |
-| Partner experiments delayed | Medium | High | Experimental PhD hosted by the partner as additional beneficiary [option b]; own non-invasive tracking rig at IU |
+| Experiments at partner sites delayed | Medium | High | PhD 2 and PhD 4 are HOVER team members hosted at MPI-BI and LMU (additional beneficiaries), not favours; WP1, WP3 and WP4 do not wait for them; stimuli are designed in silico first |
+| Developing muscle tissue too small for RNA-seq | Medium | Medium | Pooled samples; low-input or single-nucleus protocols; in situ HCR for candidates known from *Drosophila* as fallback |
 | Free-flight tracking fails | High | Medium | Tethered and closed-loop virtual flight; no other WP depends on T2.4 |
 | H3 null | Medium | Low | Interpretable negative result (constraint vs optimality) |
 | SNNs lose to deep baselines (H4 null) | Medium | Medium | Report rigorously; hybrid motif front end + learned back end as a secondary result |
@@ -172,23 +189,23 @@ procurement buys hardware without the PI's involvement, and all code runs on ope
 ## 6. Team, working arrangements and environment
 
 - **PI (50 %, above the 40 % minimum):** scientific lead; WP1 and WP3 modelling; WP5 lead.
-- **Team:**
-  - Postdoc 1, computational neuroscience (48 months);
-  - Postdoc 2, neuromorphic computer vision (36 months);
-  - PhD 1, connectomics/ML; PhD 2, hoverfly physiology; PhD 3, SNN vision;
-  - research engineer / outreach coordinator (50 %);
-  - student assistants.
-- **Doctoral route:** PhD students enrolled at [doctorate-granting university] under a
-  co-supervision agreement [confirm whether IU has doctoral rights].
-- **Experiments:** [decide: (a) HOVER insect lab at IU / (b) PhD 2 hosted by MPI-BI as an additional
-  beneficiary / (a)+(b)].
+- **Team (one PI, three beneficiaries):**
+  - at IU: Postdoc 1, computational neuroscience (48 months); Postdoc 2, neuromorphic computer vision
+    (24 months, from M25); PhD 1, connectomics/ML; PhD 3, SNN vision; student assistants;
+  - at MPI for Biological Intelligence (Active Sensing, L. Fenk): PhD 2, hoverfly physiology;
+  - at LMU Munich (R. Merrill): PhD 4, evolutionary developmental genetics.
+
+  The PI selects and supervises all team members. The partner-group leaders co-supervise locally and
+  give access to their set-ups.
+- **Doctoral route:** PhD students enrol at LMU (doctorate-granting), co-supervised by the PI
+  [confirm the agreement and whether IU has doctoral rights].
 - **Collaborators** (written consent obtained before submission; roles limited to what is stated):
-  - L. Fenk, MPI-BI: *Drosophila* RMN imaging/EMG data, micro-CT;
-  - [*Eristalis* electrophysiology lab];
-  - [neuromorphic hardware platform].
-- **Working arrangements:** weekly team meeting; quarterly WP reviews against the milestones; shared
-  code base with CI; data management plan by M6.
-- **Environment:** IU computer-vision group, students, GPU resources, [lab space].
+  L. Fenk: physiology set-ups, *Drosophila* RMN data, micro-CT access; R. Merrill: genomics and
+  developmental genetics; [neuromorphic hardware platform].
+- **Working arrangements:** a monthly all-team meeting in Munich; quarterly WP reviews against the
+  milestones; a shared code and data base with continuous integration; a data management plan by M6.
+- **Environment:** the IU computer-vision group, students and GPU resources; physiology set-ups at
+  MPI-BI; genomics infrastructure at LMU.
 
 ## 7. Ethics, civil focus, open science and data
 
@@ -208,9 +225,10 @@ this proposal (IfA p. 29).*
 
 | Title | Funder | Amount | Period | Role | Status | Relation to HOVER |
 |---|---|---|---|---|---|---|
-| Investigation of Retinal Muscle Control During Active Vision in *Eristalis* Hoverflies | DFG (Sachbeihilfe, incl. Eigene Stelle) | [€] | [requested 2026–2029] | Applicant, with L. Fenk | [pending / withdrawn / funded] | [If still active: overlap and distinction. DFG = tethered EMG and biomechanics of three muscles at MPI-BI; HOVER = connectome-constrained SNN theory, dimorphism as task optimality, transfer to machine vision; no cost funded twice.] |
-| [IU start-up package] | IU | [€] | [ ] | PI | [ ] | [ ] |
-| [other] | | | | | | |
+| [IU start-up package] | IU | [€] | [ ] | PI | [current] | [what it pays for; no overlap with HOVER costs] |
+| [other current grants] | | | | | | |
+
+No applications for work related to HOVER are pending.
 
 ## References
 
