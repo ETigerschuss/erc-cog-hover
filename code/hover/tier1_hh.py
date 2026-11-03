@@ -206,20 +206,27 @@ def simulate(circuit, I_ext_fn, t_total_ms: float, pre_roll_ms: float = 500.0, d
 
 
 def spike_rate(v: np.ndarray, dt: float = DT, win_ms: float = 50.0, thresh: float = 0.0,
-               kernel: str = "box"):
+               kernel: str = "box", bin_ms: float = 1.0):
     """Firing rate (Hz) from a membrane-voltage trace (upward crossings of thresh), smoothed with a
-    boxcar of `win_ms` or a Gaussian of sigma = win_ms (kernel='gauss')."""
+    boxcar of `win_ms` or a Gaussian of sigma = win_ms (kernel='gauss'). Spikes are binned to
+    `bin_ms` before smoothing (the kernel is then short); the result is returned on the original
+    time grid."""
     up = (v[1:] > thresh) & (v[:-1] <= thresh)
     spikes = np.concatenate([[False], up]).astype(float)
+    f = max(int(round(bin_ms / dt)), 1)
+    n = len(spikes)
+    nb = int(np.ceil(n / f))
+    binned = np.zeros(nb)
+    np.add.at(binned, np.arange(n) // f, spikes)
     if kernel == "gauss":
-        sig = win_ms / dt
+        sig = win_ms / bin_ms
         x = np.arange(-int(4 * sig), int(4 * sig) + 1)
         k = np.exp(-0.5 * (x / sig) ** 2)
-        k /= k.sum() * dt / 1000.0
     else:
-        w = int(round(win_ms / dt))
-        k = np.ones(w) / (w * dt / 1000.0)
-    return np.convolve(spikes, k, mode="same")
+        k = np.ones(max(int(round(win_ms / bin_ms)), 1))
+    k = k / (k.sum() * bin_ms / 1000.0)
+    rate = np.convolve(binned, k, mode="same")
+    return np.repeat(rate, f)[:n]
 
 
 def displacement(rates: dict, baseline: dict, pull_dirs_deg: dict, dt: float = DT, gain: float = 1.0):
