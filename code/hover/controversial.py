@@ -33,7 +33,7 @@ def disagreement(a: Circuit, b: Circuit, readout: str, p: dict, dt=1 / 120) -> f
     return abs(ra.get(readout, 0.0) - rb.get(readout, 0.0))
 
 
-def search(a: Circuit, b: Circuit, readout: str = "MOI", generations: int = 15, lam: int = 6,
+def search(a: Circuit, b: Circuit, readout: str = "MIO", generations: int = 15, lam: int = 6,
            seed: int = 0, objective: Callable | None = None) -> tuple[dict, float, list[float]]:
     rng = np.random.default_rng(seed)
     keys = list(PARAM_BOUNDS)

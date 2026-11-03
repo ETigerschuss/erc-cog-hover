@@ -2,219 +2,298 @@
 Content: detailed implementation — methodology, work plan, risk assessment and mitigation, further background not in Part I.
 Must NOT repeat Part I; must be consistent with the Part A Resources section (budget table prevails).
 Step 2 questions answered here: methodology and working arrangements appropriate? timescales and resources adequate and justified?
-Header on every page: Serbe-Kamp | HOVER | Part B2 -->
+Header on every page: Serbe-Kamp | HOVER | Part B2
+Figures: B1 preliminary results (≈ ⅓ page, from your DFG material), B2 work-plan dependencies and B3 Gantt (proposal/figures/, ≈ ⅓ page together). -->
 
 # HOVER: Part II of the Scientific Proposal
 
 ## 1. Preliminary results and further background
 
-*(Only what Part I does not already say. About ¾ page, with Fig. B1: MESH contact map + EM; Tier-1 traces.)*
+*(Fig. B1: MESH contact map and EM cut-outs; electrical wiring diagram and RMN tuning prediction; Tier-1 traces; micro-CT of the male MIO; one controversial stimulus.)*
 
-**P1 MESH, a connectome-scale search for electrical synapses.** MESH finds all appositions (≤ 100 nm)
-between selected FlyWire/FAFB neurons using a k-d tree over mesh vertices. It groups them into sites,
-keeps only sites where the two segmentations are truly adjacent, subtracts annotated chemical synapses,
-and serves EM stacks for expert proofreading. For the 26-neuron LPTC–motor-neuron set it found 619
-contact sites. Of these, 49 motor-neuron–LPTC sites survived validation (2,895 EM images, public
-viewer), including the best-characterised candidate, MOT_R ↔ HSN_R [14].
+**P1 MESH: electrical synapses at connectome scale.** MESH retrieves the surface meshes of selected
+FlyWire neurons, builds a k-d tree over mesh vertices and finds every location where two membranes
+lie within 100 nm. Contacts are grouped into sites by hierarchical clustering, validated in the
+8-nm EM volume (only genuine membrane appositions without an annotated chemical specialisation are
+kept) and served to experts in a viewer. For the 26-neuron set of HS, VS and retinal motor neurons
+(RMNs) in both hemispheres it found 619 sites, of which 49 motor-neuron–LPTC sites survived
+validation (2,895 EM images, public viewer), including the best-characterised candidate, between the
+MOT motor neuron and HSN [14,41].
 
-**P2 A gap-junction visuomotor pathway.** Neurobiotin fills show RMN MOS coupled to VS and HS cells,
-and RMN MOT coupled to HS cells only. Two-photon imaging shows that RMN preferred directions are
-predicted by gap-junction connectivity alone, giving a vectorial efference copy [14].
+**P2 The electrical gaze pathway.** Each retinal muscle is innervated by one motor neuron (MOS RMN:
+FlyWire type CB0901; MOT RMN: CB0804). The two muscles pull orthogonally (51° and 320°). Only 3 % of
+the RMNs' chemical input comes from visual neurons, but neurobiotin fills and MESH agree that the MOS
+RMN is coupled to the three HS cells and VS1–4, and the MOT RMN to the HS cells only. A linear sum
+over the coupled cells predicts each RMN's preferred direction within 8°, and the vector sum of
+muscle pulls weighted by RMN activity predicts the two-dimensional optokinetic reflex (R² = 0.994).
+Mutants lacking the neuronal gap-junction protein shakB show a reduced reflex, and spontaneous
+retinal movements are preceded by motor-related potentials in HS cells that mirror the visual
+consequence of the movement (R² = 0.97, slope −1) [14]. The pathway from photoreceptor to retinal
+movement is therefore complete at the level of identified cells, which is the precondition for O1.
 
 **P3 Tier-1 model.** A Hodgkin–Huxley model of the right-eye circuit, with electrical and chemical
 coupling, runs inside MESH. It reproduces sustained RMN spiking and the eye-displacement direction
-seen after optogenetic MOT/MOS activation (unpublished).
+observed after optogenetic activation of the MOT and MOS motor neurons (unpublished).
 
 **P4 Differentiable detectors and controversial stimuli (ALIstim).** A PyTorch bank of
-Hassenstein–Reichardt and Barlow–Levick detectors with ON/OFF pathways, motion opponency [26] and LPTC
-integration, used to optimise stimuli by gradient descent. An open NumPy reimplementation with
-gap-junction-coupled LPTC → RMN networks for *Drosophila* and for male and female *Eristalis* already
-computes stimuli that separate competing male-circuit hypotheses (proof of principle, placeholder
-parameters).
+Hassenstein–Reichardt and Barlow–Levick detectors with ON/OFF pathways, motion opponency [26] and
+wide-field pooling, with which stimuli are optimised by gradient descent for one model or for the
+difference between two. An open NumPy reimplementation adds gap-junction-coupled LPTC → RMN circuits
+for *Drosophila* and for male and female *Eristalis* (including HSNE and the male MIO) and already
+returns stimuli that separate competing male-circuit hypotheses (proof of principle, placeholder
+parameters; `code/` in the project repository).
 
-**P5 Comparative anatomy.** Micro-CT of retinal muscles across Diptera, including male and female
-*Eristalis*: MOS and MOT in both sexes, plus the male-only third muscle (MOI) [2].
+**P5 Comparative anatomy.** Micro-CT and synchrotron tomography of 167 insect species, behaviour in
+59, show specific retinal muscles only in Diptera. Hoverflies are among the earliest-branching flies with a
+specific retinal muscle (MOT) and an optokinetic reflex, and males carry the additional M. interocularis (MIO) between the
+two eyes, placed to shift the bright-zone retina [2]. A thinner circumocular ridge is associated with
+retinal movements across the phylogeny, and both known muscles probably derive from antennal
+musculature: the first clues to where the MIO comes from.
 
-**P6 Teaching and outreach.** [fill: SpikerBot workshops, participants, citizen-science projects,
-IU courses from 2026/27, with numbers]
+**P6 Edge AI, teaching and participation.** TinyML classifiers for real-time event detection on
+Arduino-class hardware (Computational SpikerBox, SpikerBot; NIH SBIR), a high-school AI and
+neuroscience curriculum (book and code, in progress), a participatory plant-electrophysiology study
+with pupils as first authors [88], a research fellowship co-directed in more than 20 countries, and
+IU computer-vision courses from [semester; fill] with [n] students per cohort.
 
 ## 2. Methodology and work plan
 
-Five work packages share one modelling ladder and one stimulus engine (Fig. B2: dependency diagram).
-"→ H" marks the hypothesis a task tests. D = deliverable, M = project month.
+**Figure B2 (proposal/figures/fig_B2_workplan.png).** Work packages, tasks, deliverables (D), milestones (MS) and the main dependencies. Solid arrows: models and motifs flow from WP1 through WP3 to WP4 and onto robots; dashed arrows: data, labels and task statistics flow back from WP2 and WP5.
 
-### WP1 Connectome → spiking circuit, including electrical synapses (M1–36; Postdoc 1, PhD 1, PI) → H1
+Five work packages share one modelling ladder and one stimulus engine (Fig. B2). "→ H" marks the
+hypothesis a task tests; D = deliverable; M = project month. Team: PI; Postdoc 1 (PD1, IU,
+computational neuroscience); PhD 1 (IU, connectomics and machine learning); PhD 2 (IU, event-based
+spiking vision); research engineer (RE, IU, neuromorphic robotics, part-time); Postdoc 2 (PD2,
+MPI for Biological Intelligence, hoverfly physiology); PhD 3 (LMU, evolutionary developmental
+genetics); student assistants (SA).
 
-- **T1.1 Scale MESH.** Extend the neuron set to all LPTCs, RMNs and optic-flow descending neurons in
-  both hemispheres (FlyWire cell types).
-  - *Gap-junction classifier:* a 3D CNN on EM cutouts around appositions. Positives are
-    expert-validated appositions without a chemical synapse; negatives are rejected sites.
-  - *Proofreading:* uncertainty-ranked queues feed expert and community proofreading (T5.3).
-  - *Validation:* held-out expert labels (precision/recall) and agreement with the neurobiotin
-    coupling data (P2).
-  - **D1.1 (M18):** open gap-junction candidate atlas of the fly visuomotor system.
-- **T1.2 Tier 1, biophysical.** Morphologically reduced multi-compartment HS/VS cells (from FlyWire
-  skeletons), active RMN spike generation, and GJ conductances proportional to validated apposition
-  area. Fitted to RMN imaging (P2) and published HS/VS physiology [11,31,32].
-- **T1.3 Tier 2, reduced.** LIF/AdEx point neurons with linear GJ coupling. Effective coupling
-  conductances come from Tier-1 transfer impedances; AdEx parameters are fitted to Tier-1 f–I curves.
-  We report error bounds on RMN tuning and latency.
-  **D1.2 (M24):** reduced model plus the reduction method as a reusable tool.
+### WP1 Connectome → spiking circuit, with electrical synapses (M1–36; PhD 1, PD1, PI) → H1
+
+- **T1.1 Electrical synapses of the gaze system in both sexes.** Neuron set: all lobula-plate
+  tangential cells (the HS, VS and the further types catalogued in [90]), the four RMNs, neck motor
+  neurons and optic-flow descending neurons, in the female FlyWire connectome (v783 [12]) and the
+  male central-nervous-system connectome (v1.0 [39]). MESH detects appositions; a 3D convolutional
+  classifier trained on the expert-validated sites (membrane apposition, pentalaminar profile, no
+  chemical specialisation; negatives are rejected sites) ranks the rest; uncertainty-ranked queues go
+  to expert and community proofreading (T5.3). *Validation:* held-out expert labels (precision and
+  recall), agreement with the neurobiotin coupling in [14] and with the innexin immunostaining maps of
+  [50]. *Sex comparison:* cell types are matched across the two connectomes with the cross-dataset
+  typing of [47,39]; chemical and electrical connectivity of the gaze circuit are compared type by
+  type. The expected result, a monomorphic circuit in *Drosophila*, is the baseline against which the
+  hoverfly dimorphism is read; a difference would itself be a finding for H1's corollary.
+  **D1.1 (M18):** open atlas of candidate electrical synapses of the fly gaze system, female and
+  male, with the first sex comparison of this circuit (corollary of H1).
+- **T1.2 Tier 1, biophysical.** Morphologically reduced multi-compartment HS, VS and RMN models
+  built from the EM skeletons, active spike generation in the RMNs, chemical synapses from the
+  connectome and gap-junction conductances proportional to validated apposition area. Parameters are
+  fitted by gradient descent in a differentiable simulator [66] to published HS/VS physiology
+  [11,31,32], RMN calcium tuning and the optogenetic displacement vectors of [14]. The front end is the
+  differentiable detector bank (P4), with the connectome-constrained optic-lobe model of [45] as an
+  alternative input.
+- **T1.3 Tier 2, reduced.** Integrate-and-fire or adaptive-exponential point neurons with linear
+  gap-junction coupling. Effective couplings come from Tier-1 transfer impedances. For each module
+  (dendritic integration, gap-junction transfer, muscle mechanics) small Kolmogorov–Arnold networks
+  [93] are trained on Tier-1 input–output pairs, pruned and regressed to closed-form expressions, so
+  that the reduction is explicit and inspectable. We report error bounds on RMN tuning and latency
+  (target < 10 % against Tier 1). **D1.2 (M24):** reduced model and the reduction toolkit, reusable
+  for other circuits.
 - **T1.4 Tier 3, trainable.** A connectome-masked SNN with sign constraints, trained with surrogate
-  gradients. Its front end is the differentiable detector bank (P4).
-- **T1.5 Motor readout.** Muscle activation → force (Hill-type model) → retinal displacement via
-  measured muscle base vectors [7]. Validated against retinal tracking in WP2.
+  gradients [64,65] in a JAX/PyTorch stack that exports to the neuromorphic toolchains used in WP4.
+  Gap junctions enter as differentiable linear couplings, which also regularises training.
+- **T1.5 Motor readout and efference copy.** Muscle activation → force (Hill-type) → retinal
+  displacement through the measured pull directions; the efference copy is a model output, tested
+  against the HS recordings in [14]. Validated against retinal tracking in WP2.
 
-### WP2 The dimorphic gaze circuit of *Eristalis* (M6–48; PhD 2 at MPI-BI, PhD 4 at LMU, PI) → H2, H2b
+### WP2 The dimorphic gaze circuit of *Eristalis* (M6–48; PD2 at MPI-BI, PhD 3 at LMU, PI) → H2, H2b
 
 - **T2.1 Model families.** Male and female circuits are built by homology (HSN, HSE, HSS, HSNE, VS;
-  RMN MOT/MOS/MOI), constrained by the CT atlas (P5), fills (T2.3) and published *Eristalis*
-  LPTC/descending-neuron physiology [1,15,23].
-  Four male hypotheses: **M-H2** (HSN → MOI), **M-HSNE** (HSNE → MOI), **M-HS** (pooled HS → MOI),
-  **M-VS** (VS → MOI).
-- **T2.2 Controversial stimuli.** For every model pair, optimise stimuli that maximise the predicted
-  difference in retinal trajectory or MOI activity. Stimuli stay within display limits (luminance,
+  RMNs of MOT, MOS and MIO), constrained by the tomography atlas (P5), the fills of T2.3 and published
+  hoverfly physiology [1,15,17,23]. Four male hypotheses: **M-H2** (HSN → MIO), **M-HSNE** (HSNE →
+  MIO), **M-HS** (pooled HS → MIO), **M-VS** (VS → MIO), each with and without an additional
+  small-target input [16,63].
+- **T2.2 Controversial stimuli.** For every model pair, stimuli are optimised to maximise the
+  predicted difference in retinal trajectory or MIO activity, within display limits (luminance,
   contrast, spatio-temporal frequency) and under a naturalness prior. The expected evidence per trial
-  sets the number of animals, i.e. the **power analysis is done in silico before any experiment**.
+  sets the number of animals: the **power analysis is done in silico before any experiment**.
   **D2.1 (M24):** the stimulus set.
-- **T2.3 Experiments (MPI for Biological Intelligence, Fenk lab; PhD 2).** Tethered male and female *Eristalis*:
-  - retinal tracking through the cornea (IR high-speed video, deep-red illumination [7]);
-  - EMG of MOT, MOS and MOI;
-  - neurobiotin fills of HSN and HSNE to test coupling to the RMNs;
-  - stimulation on the open insect stimulation platform [22]; animals reared year-round [19].
+- **T2.3 Experiments (MPI for Biological Intelligence, Fenk laboratory; PD2, M7–42).** Tethered male
+  and female *Eristalis*: retinal tracking through the cornea by deep-pseudopupil imaging under
+  infrared light [7,14]; electromyography of MOT, MOS and MIO (the MIO is identified by its position
+  between the two eyes [2]); intracellular recordings and neurobiotin fills of HSN, HSNE and the RMNs
+  with sharp electrodes, the standard method in hoverfly tangential cells [1]; visual stimulation on
+  an open platform [22]; animals reared year-round [19]. *Analysis:* hierarchical Bayesian comparison
+  of the model families across animals [35].
+- **T2.4 Free-flight retinal tracking (high risk, high gain).** Pursuit of artificial targets in an
+  indoor arena [21] with head-mounted ultralight markers and high-speed cameras. Started only after
+  T2.3 succeeds (decision at MS4); no other task depends on it.
+- **T2.5 Developmental and genetic origin of the MIO (LMU, R. Merrill; PhD 3, M7–48) → H2b.**
+  - *Origin:* a developmental series of male and female pupae (micro-CT and phalloidin confocal
+    imaging) identifies the anlage the MIO forms from. Candidates: a split of the MOT anlage, or a
+    further repurposed antennal muscle, as proposed for MOS and MOT [2].
+  - *Genes:* sex- and stage-resolved RNA-seq of the anlage region at three pupal stages (pooled,
+    low-input protocols), using the chromosome-level *E. tenax* genome [44]; male-biased muscle-identity
+    genes and the sex-determination factors *doublesex* and *fruitless*; candidates localised by in
+    situ hybridisation chain reaction in the muscle and in the MIO motor neuron.
+  - *H2b, the motor neuron specifies the muscle:* in *Drosophila* the male-specific Muscle of Lawrence
+    forms only when its motor neurons carry the male *fruitless* programme [42,43,79]. We predict the
+    same logic in *Eristalis*: a male-specific identity of the MIO motor neuron induces the muscle, so
+    that one dedicated neuron builds one dedicated muscle, mirroring H2.
+  - *Comparison:* syrphid species with and without a male MIO from the tomography survey test whether
+    candidate changes track the trait. *Exploratory, high risk:* RNAi knock-down in pupae.
 
-  Analysis: hierarchical Bayesian model comparison across animals [35].
-- **T2.4 Free-flight retinal tracking (high risk, high gain).** Pursuit of artificial targets [21]
-  in an arena with head-mounted ultralight markers. Started only if T2.3 succeeds; the other WPs do
-  not depend on it.
-- **T2.5 Developmental and genetic origin of the third muscle (LMU, R. Merrill; PhD 4) → H2b.**
-  The third muscle exists only in males. Where does it come from, and what makes it male?
-  - *Origin:* a developmental time series of male and female pupae (micro-CT and phalloidin confocal
-    imaging) identifies the anlage the muscle forms from. The comparative data suggest that retinal
-    muscles were repurposed from antennal muscles [2].
-  - *Genes:* sex- and stage-resolved RNA-seq of the anlage region, and of the motor-neuron cell bodies
-    once identified, finds male-biased muscle-identity genes and sex-determination factors
-    (*doublesex*, *fruitless*). Candidates are localised by in situ HCR in the muscle and in RMN MOI.
-  - *H2b, the motor neuron specifies the muscle:* in *Drosophila*, the male-specific Muscle of Lawrence
-    forms only when its motor neurons carry the male *fruitless* program [42,43]. We predict the same
-    logic in *Eristalis*: a male-specific identity of RMN MOI induces the third muscle. Development would
-    then mirror the circuit hypothesis H2, with one dedicated neuron for one dedicated muscle.
-  - *Comparison:* syrphid species from the CT survey with and without a male third muscle test whether
-    candidate changes track the trait, using public genome assemblies where they exist [44].
-  - *Exploratory, high risk:* RNAi knock-down of candidates in pupae.
-
-### WP3 Theory: why is vision dimorphic? (M12–54; Postdoc 1, PI) → H3
+### WP3 Theory: why is vision dimorphic? (M12–54; PD1, PI) → H3
 
 - **T3.1 Embodied simulator.** Compound-eye sampling (including the male bright-zone resolution
-  [15]), retinal actuators, simplified flight dynamics. GPU-based and open.
-- **T3.2 Task optimisation.**
-  - Tier-3 networks are trained on *pursuit* (small fast targets in clutter [16,21]) or on
-    *stabilisation* (hovering against optic flow; feeding approach [18]).
-  - Both conditions share the same wiring prior and the same spike-count energy penalty, and both
-    are offered a third actuator.
-  - Readouts: receptive-field width and position of HSN-like units, actuator recruitment, and the
-    performance–energy trade-off.
-  - Controls: shuffled wiring prior, a range of energy penalties, ≥ 10 seeds.
-- **T3.3 Analysis.** Linear-response and mean-field theory of GJ-coupled populations;
-  information-theoretic receptive-field analysis; ablations to find the minimal motif set.
-  **D3.2 (M48):** the motif catalogue.
+  [15]), retinal actuators, simplified flight dynamics; GPU-based and open.
+- **T3.2 Task optimisation.** Tier-3 networks are trained on *pursuit* (small fast targets in clutter
+  [16,21]) or on *stabilisation* (hovering against optic flow; feeding approach [18]). Both conditions
+  share the wiring prior and the spike-count energy penalty [80], and both may recruit a third
+  actuator and shape its movement policy. Readouts: receptive-field width and position of HSN-like
+  units, actuator recruitment and the performance–energy trade-off. Controls: shuffled wiring prior,
+  a range of energy penalties, ≥ 10 seeds, and a variant in which the sensor-movement policy is
+  optimised jointly with the network.
+- **T3.3 Analysis.** Ablation to the minimal motif set; linear-response and mean-field theory of
+  gap-junction-coupled populations; information-theoretic receptive-field analysis; Kolmogorov–Arnold
+  readouts that convert trained networks into equations. **D3.2 (M48):** the motif catalogue.
 
-### WP4 Bio-inspired active computer vision (M18–60; Postdoc 2, PhD 3, PI) → H4
+### WP4 Active event-based machine vision (M13–60; PhD 2, RE, PD1, PI) → H4
 
-- **T4.1 Active event camera.** An event camera on a piezo/galvo stage replays recorded fly retinal
-  trajectories (WP2) and synthetic micro-movements. We measure event yield and acuity on static scenes.
-- **T4.2 Motif SNNs.** The catalogue motifs (D3.2) become event-driven SNNs, deployed on neuromorphic
-  hardware through European access programmes.
-- **T4.3 Benchmarks (civil tasks).** Three tasks:
-  - small-target detection in clutter;
-  - closed-loop target tracking on a ground robot;
-  - ego-motion and velocity estimation, against the `deepfly` CNN [38].
+- **T4.1 Active event-camera head.** A high-resolution event camera on a two-axis piezo tip-tilt
+  stage that reproduces fly retinal trajectories (amplitudes of a few degrees [7]), carried by a
+  pan-tilt gimbal on a motion platform that replays ego-motion. Movement policies: none, fixed
+  artificial microsaccades [54], fly-derived (recorded in WP2, including the male MIO pattern) and
+  learned (T3.2). Measures: event yield, static-scene acuity and latency.
+- **T4.2 Motif SNNs on neuromorphic hardware.** Catalogue motifs (D3.2) become event-driven SNNs,
+  deployed on a sensor-integrated chip with sub-milliwatt resting power [70] and on large-scale
+  systems [67,68] through EBRAINS and vendor research programmes. Ablations: a Kolmogorov–Arnold
+  parameterised event front end against convolutional front ends.
+- **T4.3 Benchmarks (civil tasks, pre-registered protocols).**
+  - **B-I Small-target detection and tracking in clutter:** our own *HoverEye* dataset, recorded with
+    the active head (balls, insects and small drones against vegetation, with motion-capture ground
+    truth) plus the public EV-IMO set [60]. Baselines: insect-inspired target detectors [61,107],
+    event-based deep detectors [94] and converted SNNs. Metrics: detection F1, track continuity,
+    event-to-output latency.
+  - **B-II Ego-motion and optic-flow estimation:** MVSEC [59] and DSEC [58]. Baselines: E-RAFT [57],
+    spiking optic-flow networks [55,56] and the fly-derived velocity CNN [38]. Metrics: endpoint error,
+    latency, synaptic operations and measured energy on hardware against a GPU board.
+  - **B-III Closed-loop hovering and pursuit on a quadrotor:** an indoor event-camera quadrotor with
+    an on-board neuromorphic processor in a netted motion-capture arena, the robotic counterpart of the
+    hoverfly arena of [21]. Tasks: hold position against optic flow (female task) and intercept a
+    moving target (male task). Baselines: classical flow-based control and a GPU CNN pipeline [55].
+    Metrics: position error, time to capture, energy per trial.
 
-  Baselines are matched in parameters and synaptic operations. Metrics: accuracy, latency, synaptic
-  operations and measured energy. **D4.3 (M54):** open benchmark.
-- **T4.4 Controversial stimuli for machines.** The WP2 engine is applied to CNN-vs-SNN pairs as a
-  robustness diagnostic.
+  *Protocol.* Each benchmark is pre-registered (tasks, splits, metrics, baselines, seeds, stopping
+  rules) before data collection. Models are matched in parameter count and in synaptic operations
+  per inference; energy is measured with a power meter on the deployed hardware and reported as
+  accuracy per joule next to the GPU reference; five seeds per model; HoverEye is recorded under a
+  CC-BY licence with target sizes, speeds and backgrounds drawn from the hoverfly-watch statistics
+  (T5.4). H4 counts as supported if the motif SNNs with active sampling reach at least the baseline
+  accuracy at one third of the energy, or 20 % higher accuracy per joule, on two of the three
+  benchmarks. Results go to an open leaderboard that accepts outside entries.
+  **D4.3 (M54):** the benchmark, HoverEye and the `hover-snn` library.
+- **T4.4 Controversial stimuli for machines.** The WP2 engine applied to CNN–SNN pairs as a
+  robustness diagnostic, and to the three movement policies.
 
-### WP5 Teaching, citizen science, open science (M1–60; PI, student assistants, IU courses)
+### WP5 Embodied validation at scale, teaching and open science (M1–60; PI, SA, IU courses)
 
 - **T5.1 Course integration.** HOVER modules in IU computer-vision courses every semester (see the
-  teaching plan); student projects deliver benchmark entries and robot data.
-- **T5.2 Robot zoo.** Schools and makerspaces run *Drosophila*-, female- and male-type circuits on
-  standard pursuit and stabilisation tasks. Logs go to an open database and are analysed with
-  mixed-effects models.
-- **T5.3 MESH community proofreading** of candidate sites, feeding T1.1.
-- **T5.4 Open releases.** Code under MIT, data under CC-BY, teacher kits. Firmware is hardware-neutral,
-  with SpikerBot as the reference platform plus one open platform.
-- **T5.5 Evaluation.** Learning outcomes measured before and after; IU ethics approval.
+  teaching plan in the repository); student projects deliver benchmark entries and robot data;
+  distance students receive a robot kit by mail.
+- **T5.2 Robot zoo.** Schools, makerspaces and citizens run fly-type, female-type and male-type
+  circuits on low-cost two-wheeled camera robots over printable pursuit and stabilisation courses.
+  Logs (spikes, motor commands, camera-derived performance) go to an open database and are analysed
+  with mixed-effects models [35] with participant and device as random effects: thousands of embodied
+  trials under uncontrolled optics, lighting and noise.
+- **T5.3 Community proofreading** of candidate electrical synapses in the MESH viewer, with an expert
+  gold standard, feeding T1.1 [85].
+- **T5.4 Hoverfly watch.** Smartphone slow-motion videos of male hovering and pursuit in gardens,
+  with location and EXIF data stripped, give natural pursuit statistics (target sizes, speeds,
+  backgrounds) for T3.2 and B-I.
+- **T5.5 Open releases and evaluation.** Code under MIT, data under CC-BY, teacher kits; firmware
+  hardware-neutral with one commercial and one open reference platform; learning outcomes measured
+  before and after; IU ethics approval.
 
-*Conflict of interest:* the PI holds a role at Backyard Brains, the SpikerBot manufacturer. IU
-procurement buys hardware without the PI's involvement, and all code runs on open hardware.
+*Conflict of interest:* the PI holds a senior role at Backyard Brains, the manufacturer of one of
+the candidate classroom robots. IU procurement selects robots against a hardware-neutral
+specification without the PI's involvement, the quadrotor and the active head (WP4) use unrelated
+vendors, and all code runs on at least one open platform.
 
 ## 3. Timeline, milestones and decision points
 
-*(Fig. B3: Gantt chart from `gantt.md`.)*
+**Figure B3 (proposal/figures/fig_B3_gantt.png).** Gantt chart of the 22 tasks and six milestones (M1 = September 2028, placeholder). WP1, WP3 and WP4 form the modelling and engineering spine; WP2 and WP5 run alongside and feed data back.
 
 | MS | Month | Milestone | Decision |
 |---|---|---|---|
-| MS1 | 12 | GJ atlas v1; Tier-2 *Drosophila* model | Tier-2 error vs Tier 1 < 10 %? If not, keep Tier 1 for WP2 |
-| MS2 | 24 | Male/female model families; controversial stimuli designed in silico | Stimuli separate the model families with the planned number of animals? If not, refine models before experiments |
-| MS3 | 30 | Active event camera running; robot zoo launched | — |
-| MS4 | 36 | H1 decided; tethered *Eristalis* data complete | Fixes the constraints for WP3; go/no-go for T2.4 |
-| MS5 | 48 | H3 and H2b decided; motif catalogue | Motifs passed to WP4 |
-| MS6 | 60 | H4 decided; benchmark, models and kits released | — |
+| MS1 | 12 | Electrical-synapse atlas v1 (female); Tier-2 *Drosophila* model | Tier-2 error against Tier 1 < 10 %? If not, Tier 1 serves WP2 |
+| MS2 | 24 | Male atlas and sex comparison; male and female *Eristalis* model families; controversial stimuli designed in silico | Do the stimuli separate the families with the planned number of animals? If not, refine models before experiments |
+| MS3 | 30 | Active head and quadrotor flying; robot zoo launched; HoverEye v1 | Hardware access confirmed, else GPU emulation with energy modelling |
+| MS4 | 36 | H1 decided; tethered *Eristalis* data complete | Constraints fixed for WP3; go/no-go for T2.4 |
+| MS5 | 48 | H2, H2b and H3 decided; motif catalogue | Motifs passed to WP4 |
+| MS6 | 60 | H4 decided; benchmark, models, dataset and kits released | — |
 
 ## 4. Hypotheses: tests and what each outcome teaches
 
 | Hyp. | Supported if | Falsified if | Value if falsified |
 |---|---|---|---|
-| H1 | The Tier-2 SNN with EM-derived weights predicts RMN preferred directions (± 15°) and eye-movement direction | Connectivity-only models miss ≥ 2 RMN tunings | Shows unannotated or neuromodulatory inputs matter; widens the MESH search |
-| H2 | Third-muscle activity follows HSN-preferred motion confined to the dorso-frontal field | Third-muscle EMG tracks MOT-type or VS-type motion | The muscle is a general range extension. The model comparison is still decisive. |
-| H2b | *fruitless*/*doublesex* are expressed male-specifically in RMN MOI and the MOI anlage; the muscle forms from a defined anlage only in males | No sex-biased expression in the motor neuron; muscle specification is cell-autonomous | Points to a muscle-intrinsic program. Still the first developmental account of a sexually dimorphic eye muscle |
+| H1 | The Tier-2 SNN with EM-derived weights predicts RMN preferred directions (± 15°), eye-movement direction and latency in both sexes | Connectivity-only models miss ≥ 2 RMN tunings | Unannotated or neuromodulatory inputs matter; the MESH search is widened |
+| H2 | MIO activity follows HSN-preferred motion confined to the dorso-frontal field | MIO EMG tracks MOT-type or VS-type motion | The muscle is a general range extension; the model comparison still decides between families |
+| H2b | *fruitless* or *doublesex* are expressed male-specifically in the MIO motor neuron and anlage; the muscle forms from a defined anlage only in males | No sex-biased expression in the motor neuron; specification is muscle-intrinsic | A muscle-intrinsic programme; still the first developmental account of a dimorphic eye muscle |
 | H3 | Narrowed dorso-frontal integration and an extra effector emerge only under the pursuit objective | They emerge under both objectives, or neither | Points to developmental or genetic constraint rather than task optimality |
-| H4 | Motif SNN + active micro-movement beats matched baselines on ≥ 2 of 3 benchmarks in accuracy per energy | No advantage | A rigorous negative result for "bio-inspired" claims |
+| H4 | Motif SNNs with active micro-movements beat matched baselines in accuracy per energy on ≥ 2 of 3 benchmarks | No advantage | A rigorous, open negative result for bio-inspired claims; the benchmark remains |
 
 ## 5. Risks and mitigation
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| GJ classifier does not generalise beyond validated sites | Medium | Medium | Expert + community proofreading; GJ weights become free parameters bounded by apposition area |
-| No *Eristalis* connectome, so the homology mapping is wrong | Medium | High | Competing model families instead of one model; stimuli built to discriminate them; fills as ground truth |
-| Experiments at partner sites delayed | Medium | High | PhD 2 and PhD 4 are HOVER team members hosted at MPI-BI and LMU (additional beneficiaries), not favours; WP1, WP3 and WP4 do not wait for them; stimuli are designed in silico first |
-| Developing muscle tissue too small for RNA-seq | Medium | Medium | Pooled samples; low-input or single-nucleus protocols; in situ HCR for candidates known from *Drosophila* as fallback |
-| Free-flight tracking fails | High | Medium | Tethered and closed-loop virtual flight; no other WP depends on T2.4 |
-| H3 null | Medium | Low | Interpretable negative result (constraint vs optimality) |
-| SNNs lose to deep baselines (H4 null) | Medium | Medium | Report rigorously; hybrid motif front end + learned back end as a secondary result |
+| Gap-junction classifier does not generalise beyond validated sites | Medium | Medium | Expert and community proofreading; gap-junction weights become bounded free parameters |
+| No *Eristalis* connectome, so the homology mapping is wrong | Medium | High | Competing model families instead of one model; discriminating stimuli; fills as ground truth |
+| Hoverfly physiology slower than planned (non-genetic animal) | Medium | High | An experienced postdoc at the only site with the set-ups; stimuli designed in silico first; WP1, WP3 and WP4 do not wait |
+| Developing muscle tissue too small for RNA-seq | Medium | Medium | Pooled samples, low-input protocols; HCR for *Drosophila*-known candidates as fallback |
+| Free-flight tracking fails | High | Medium | Tethered closed-loop virtual flight; no task depends on T2.4 |
+| Quadrotor integration delayed or unsafe | Medium | Medium | Benchmarks B-I and B-II are independent; the active head on the motion platform covers ego-motion; indoor netted arena, no outdoor flight |
+| Neuromorphic hardware access restricted | Low | Medium | Two hardware routes plus GPU emulation with calibrated energy models |
+| H3 null | Medium | Low | Interpretable result (constraint versus optimality) |
+| SNNs lose to deep baselines (H4 null) | Medium | Medium | Reported rigorously; hybrid motif front end with learned back end as a secondary result |
 | Recruitment delays | Low | Medium | Posting on EURAXESS at signature; IU computer-vision students as the MSc → PhD pipeline |
 
 ## 6. Team, working arrangements and environment
 
 - **PI (50 %, above the 40 % minimum):** scientific lead; WP1 and WP3 modelling; WP5 lead.
-- **Team (one PI, three beneficiaries):**
-  - at IU: Postdoc 1, computational neuroscience (48 months); Postdoc 2, neuromorphic computer vision
-    (24 months, from M25); PhD 1, connectomics/ML; PhD 3, SNN vision; student assistants;
-  - at MPI for Biological Intelligence (Active Sensing, L. Fenk): PhD 2, hoverfly physiology;
-  - at LMU Munich (R. Merrill): PhD 4, evolutionary developmental genetics.
-
-  The PI selects and supervises all team members. The partner-group leaders co-supervise locally and
-  give access to their set-ups.
-- **Doctoral route:** PhD students enrol at LMU (doctorate-granting), co-supervised by the PI
-  [confirm the agreement and whether IU has doctoral rights].
+- **Team, three beneficiaries.** At IU: PD1, computational neuroscience and SNN theory (48 months);
+  PhD 1, connectomics and machine learning; PhD 2, event-based spiking vision and neuromorphic
+  hardware; a part-time research engineer for the active head, the quadrotor and the robot fleet (M13–48);
+  student assistants. At MPI for Biological Intelligence (Active Sensing, L. Fenk): PD2, hoverfly
+  physiology (36 months, M7–42). At LMU Munich (R. Merrill): PhD 3, evolutionary developmental
+  genetics (48 months). The PI selects, funds and supervises all team members; the partner group
+  leaders co-supervise locally and give access to their set-ups.
+- **Relation to the Fenk laboratory's ERC project** on *Drosophila* eye-movement mechanisms: HOVER
+  works on *Eristalis*, on models and on machines; the division of scope is fixed in a written
+  collaboration agreement; data and tools flow both ways.
+- **Doctoral route:** PhD students enrol at LMU (doctorate-granting), co-supervised by the PI [confirm
+  the agreement and whether IU has doctoral rights].
 - **Collaborators** (written consent obtained before submission; roles limited to what is stated):
-  L. Fenk: physiology set-ups, *Drosophila* RMN data, micro-CT access; R. Merrill: genomics and
-  developmental genetics; [neuromorphic hardware platform].
-- **Working arrangements:** a monthly all-team meeting in Munich; quarterly WP reviews against the
-  milestones; a shared code and data base with continuous integration; a data management plan by M6.
-- **Environment:** the IU computer-vision group, students and GPU resources; physiology set-ups at
-  MPI-BI; genomics infrastructure at LMU.
+  L. Fenk (physiology set-ups, *Drosophila* RMN data, tomography access); R. Merrill (genomics and
+  developmental genetics); [neuromorphic hardware platform contact]; [drone or event-camera partner].
+- **Working arrangements:** monthly all-team meeting in Munich; quarterly WP reviews against the
+  milestones; one shared code and data repository with continuous integration; pre-registration of the
+  benchmark protocols; a data management plan by M6.
+- **Data and software management:** every model tier, stimulus set, recording and benchmark run is
+  versioned and released with a DOI (Zenodo, DANDI for physiology, the FlyWire and MaleCNS
+  annotation channels for proofread synapses); software follows a tested, documented release
+  process with the pre-built MESH viewer as the model; PhD 1 acts as data steward with 10 % of time;
+  a FAIR audit is part of every milestone review.
+- **Environment:** the IU computer-vision group, its students and GPU resources [confirm]; physiology
+  set-ups and tomography at MPI-BI; genomics infrastructure at LMU; EBRAINS neuromorphic access.
 
 ## 7. Ethics, civil focus, open science and data
 
-- **Civil focus:** HOVER has an exclusive focus on civil applications. Insects only (no
-  vertebrates). Human participants (students, citizens including school pupils) take part with
-  informed and parental consent under IU ethics approval, with GDPR-compliant data handling.
+- **Civil focus:** HOVER has an exclusive focus on civil applications. The quadrotor flies indoors
+  only. Insects only (no vertebrates). Human participants (students, citizens including school pupils)
+  take part with informed and parental consent under IU ethics approval, with GDPR-compliant data
+  handling; uploaded videos are stripped of location and metadata.
 - **AI:** HOVER develops AI-based vision models; no personal data are used for training.
-- **Open science:** all code is released under MIT, data under CC-BY via DANDI/Zenodo, with immediate
-  open access to publications. Details are in the ethics self-assessment.
+- **Open science:** code under MIT, data under CC-BY via DANDI and Zenodo, immediate open access to
+  publications, pre-registered benchmark protocols. Details are in the ethics self-assessment.
 
 ---
 
@@ -226,6 +305,7 @@ this proposal (IfA p. 29).*
 | Title | Funder | Amount | Period | Role | Status | Relation to HOVER |
 |---|---|---|---|---|---|---|
 | [IU start-up package] | IU | [€] | [ ] | PI | [current] | [what it pays for; no overlap with HOVER costs] |
+| [LMUexcellence Innovation Fund project] | LMU | [€] | [2024–] | [role] | [status] | [subject; no overlap] |
 | [other current grants] | | | | | | |
 
 No applications for work related to HOVER are pending.

@@ -3,4 +3,7 @@ __pycache__/
 .ipynb_checkpoints/
 *.docx~
 .DS_Store
-build/
+build/*
+!build/B1_full.pdf
+!build/B2_full.pdf
+tools/_render_svg.js

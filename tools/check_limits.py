@@ -2,7 +2,7 @@
 
 - Abstract: <= 2000 characters (form field) and identical on the B1 cover page.
 - Acronym: <= 20 characters.
-- Rough page counts (~550 words/page at 11 pt incl. some tables; figures not counted):
+- Rough page counts (~650 words/page at 11 pt; figures not counted; run tools/render_pdf.py for real counts):
   B1 Part I <= 5, CV <= 4, B2 Part II <= 7 (references and Funding ID excluded).
 - Resources text <= 8000 characters.
 - Budget: sums the budget-csv block per beneficiary; indirect = 25 % of (A + C); total <= EUR 2,000,000.
@@ -17,7 +17,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 P = ROOT / "proposal"
-WORDS_PER_PAGE = 550
+WORDS_PER_PAGE = 650  # calibrated on tools/render_pdf.py output (11 pt Times, 2 cm margins); render_pdf.py is authoritative
 ok = True
 
 

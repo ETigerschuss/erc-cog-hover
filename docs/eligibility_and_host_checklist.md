@@ -46,6 +46,8 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
    (IfA p. 68). Request it now, before the Christmas closure.
 2. **Written consent before 12 Jan 2027** (IfA p. 24, 26). Keep the e-mails as proof.
    - From every researcher you name: L. Fenk, R. Merrill, neuromorphic platform hosts, any advisory board.
+   - Agree in writing with L. Fenk how HOVER (*Eristalis*, models, machines) and her ERC CoG
+     *FlyActiveComp* (*Drosophila* eye-movement mechanisms) divide the field; B2 §6 states this.
    - From the **participating organisations**, the MPG (MPI-BI administration) and LMU (research
      office), to join as additional beneficiaries. Get each one's PIC, a contact person, cost rates and
      the budget for its own Part A section. Fill in "Links with other proposal participating
@@ -61,8 +63,8 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
      ALIstim / controversial stimuli, or the HOVER SNN preliminary results), and collect a list of
      students and theses you supervised and any funds you raised as PI.
    - Do not list former supervisors as team members. Present them as collaborators with a defined,
-     limited role. PhD 2 sits in the Fenk lab, so B2 must show that you select, fund and supervise
-     the student and that Fenk co-supervises locally.
+     limited role. The HOVER postdoc sits in the Fenk lab, so B2 must show that you select, fund and direct
+     this person and that Fenk co-supervises locally.
 5. **Excluded reviewers.** You may name up to 3, with name, institution, town, country and web page
    (IfA p. 26).
 6. **DFG eligibility of IU staff** (for the backup): ask IU's research office now; see [`dfg_backup_strategy.md`](dfg_backup_strategy.md) §4.
@@ -70,10 +72,11 @@ Page numbers refer to the ERC-2027 Information for Applicants (IfA v11.0).
 ## Decisions ❓
 
 1. **Panel.** Recommended: LS5 primary, PE6 secondary (reasoning below).
-2. **Partner set-up.** Proposed: the MPG and LMU as additional beneficiaries, each hosting one HOVER
-   PhD student (budget in `proposal/PartA_budget_resources.md`). The alternative, collaboration only
-   with sequencing bought as a service, is lighter to administer but makes WP2 depend on others'
-   priorities. Confirm with Fenk and Merrill.
+2. **Partner set-up.** Decided 3 Nov 2026: the MPG and LMU as additional beneficiaries; a **36-month
+   postdoc** in the Fenk lab (physiology in a non-genetic insect needs an experienced person) and a
+   **PhD student** in the Merrill lab (budget in `proposal/PartA_budget_resources.md`). Personnel
+   cannot be covered by ERC additional funding, so the team fits under the €2.0 M cap. Confirm with
+   Fenk and Merrill; get the MPG and LMU research offices' consent and PICs.
 3. **Start date.** Grant preparation follows the 17 Dec 2027 results. Plan a start around
    **Sep 2028** (placeholder in `proposal/gantt.md`).
 

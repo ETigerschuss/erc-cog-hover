@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1690" height="870" viewBox="0 0 1690 870" font-family="Inter, Arial, Helvetica, sans-serif">
+<rect width="1690" height="870" fill="#fff"/>
+<rect x="540.0" y="40" width="222.0" height="690" fill="#F7F7F7"/>
+<text x="651.0" y="30" font-size="20" text-anchor="middle" fill="#333">Year 1</text>
+<rect x="762.0" y="40" width="222.0" height="690" fill="#FFFFFF"/>
+<text x="873.0" y="30" font-size="20" text-anchor="middle" fill="#333">Year 2</text>
+<rect x="984.0" y="40" width="222.0" height="690" fill="#F7F7F7"/>
+<text x="1095.0" y="30" font-size="20" text-anchor="middle" fill="#333">Year 3</text>
+<rect x="1206.0" y="40" width="222.0" height="690" fill="#FFFFFF"/>
+<text x="1317.0" y="30" font-size="20" text-anchor="middle" fill="#333">Year 4</text>
+<rect x="1428.0" y="40" width="222.0" height="690" fill="#F7F7F7"/>
+<text x="1539.0" y="30" font-size="20" text-anchor="middle" fill="#333">Year 5</text>
+<line x1="540.0" y1="40" x2="540.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="540.0" y="60" font-size="16" text-anchor="middle" fill="#666">M0</text>
+<line x1="651.0" y1="40" x2="651.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="651.0" y="60" font-size="16" text-anchor="middle" fill="#666">M6</text>
+<line x1="762.0" y1="40" x2="762.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="762.0" y="60" font-size="16" text-anchor="middle" fill="#666">M12</text>
+<line x1="873.0" y1="40" x2="873.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="873.0" y="60" font-size="16" text-anchor="middle" fill="#666">M18</text>
+<line x1="984.0" y1="40" x2="984.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="984.0" y="60" font-size="16" text-anchor="middle" fill="#666">M24</text>
+<line x1="1095.0" y1="40" x2="1095.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1095.0" y="60" font-size="16" text-anchor="middle" fill="#666">M30</text>
+<line x1="1206.0" y1="40" x2="1206.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1206.0" y="60" font-size="16" text-anchor="middle" fill="#666">M36</text>
+<line x1="1317.0" y1="40" x2="1317.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1317.0" y="60" font-size="16" text-anchor="middle" fill="#666">M42</text>
+<line x1="1428.0" y1="40" x2="1428.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1428.0" y="60" font-size="16" text-anchor="middle" fill="#666">M48</text>
+<line x1="1539.0" y1="40" x2="1539.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1539.0" y="60" font-size="16" text-anchor="middle" fill="#666">M54</text>
+<line x1="1650.0" y1="40" x2="1650.0" y2="730" stroke="#DDD" stroke-width="1"/>
+<text x="1650.0" y="60" font-size="16" text-anchor="middle" fill="#666">M60</text>
+<text x="20" y="91" font-size="20" font-weight="700" fill="#2F5597">WP1</text>
+<text x="80" y="91" font-size="18" fill="#222">T1.1 Electrical synapses, both sexes (MESH, classifier)</text>
+<rect x="540.0" y="75" width="333.0" height="20" rx="4" fill="#C9D8F0" stroke="#2F5597" stroke-width="1.5"/>
+<text x="80" y="121" font-size="18" fill="#222">T1.2 Tier 1 biophysical</text>
+<rect x="540.0" y="105" width="277.5" height="20" rx="4" fill="#C9D8F0" stroke="#2F5597" stroke-width="1.5"/>
+<text x="80" y="151" font-size="18" fill="#222">T1.3 Tier 2 reduced (KAN reduction)</text>
+<rect x="651.0" y="135" width="333.0" height="20" rx="4" fill="#C9D8F0" stroke="#2F5597" stroke-width="1.5"/>
+<text x="80" y="181" font-size="18" fill="#222">T1.4 Tier 3 trainable SNN</text>
+<rect x="762.0" y="165" width="444.0" height="20" rx="4" fill="#C9D8F0" stroke="#2F5597" stroke-width="1.5"/>
+<text x="80" y="211" font-size="18" fill="#222">T1.5 Motor readout, efference copy</text>
+<rect x="706.5" y="195" width="388.5" height="20" rx="4" fill="#C9D8F0" stroke="#2F5597" stroke-width="1.5"/>
+<text x="20" y="241" font-size="20" font-weight="700" fill="#2E7D6B">WP2</text>
+<line x1="20" y1="219" x2="1670" y2="219" stroke="#BBB" stroke-width="1"/>
+<text x="80" y="241" font-size="18" fill="#222">T2.1 Model families by homology</text>
+<rect x="632.5" y="225" width="351.5" height="20" rx="4" fill="#CFE8DD" stroke="#2E7D6B" stroke-width="1.5"/>
+<text x="80" y="271" font-size="18" fill="#222">T2.2 Controversial stimuli in silico</text>
+<rect x="762.0" y="255" width="222.0" height="20" rx="4" fill="#CFE8DD" stroke="#2E7D6B" stroke-width="1.5"/>
+<text x="80" y="301" font-size="18" fill="#222">T2.3 Tethered Eristalis physiology (PD2, MPI-BI)</text>
+<rect x="873.0" y="285" width="444.0" height="20" rx="4" fill="#CFE8DD" stroke="#2E7D6B" stroke-width="1.5"/>
+<text x="80" y="331" font-size="18" fill="#222">T2.4 Free-flight pursuit (high risk)</text>
+<rect x="1206.0" y="315" width="222.0" height="20" rx="4" fill="#CFE8DD" stroke="#2E7D6B" stroke-width="1.5"/>
+<text x="80" y="361" font-size="18" fill="#222">T2.5 Origin of the MIO (PhD 3, LMU)</text>
+<rect x="651.0" y="345" width="777.0" height="20" rx="4" fill="#CFE8DD" stroke="#2E7D6B" stroke-width="1.5"/>
+<text x="20" y="391" font-size="20" font-weight="700" fill="#6A4C93">WP3</text>
+<line x1="20" y1="369" x2="1670" y2="369" stroke="#BBB" stroke-width="1"/>
+<text x="80" y="391" font-size="18" fill="#222">T3.1 Embodied simulator</text>
+<rect x="743.5" y="375" width="296.0" height="20" rx="4" fill="#DED3EE" stroke="#6A4C93" stroke-width="1.5"/>
+<text x="80" y="421" font-size="18" fill="#222">T3.2 Task optimisation</text>
+<rect x="984.0" y="405" width="444.0" height="20" rx="4" fill="#DED3EE" stroke="#6A4C93" stroke-width="1.5"/>
+<text x="80" y="451" font-size="18" fill="#222">T3.3 Analysis, motif catalogue</text>
+<rect x="1206.0" y="435" width="333.0" height="20" rx="4" fill="#DED3EE" stroke="#6A4C93" stroke-width="1.5"/>
+<text x="20" y="481" font-size="20" font-weight="700" fill="#C55A11">WP4</text>
+<line x1="20" y1="459" x2="1670" y2="459" stroke="#BBB" stroke-width="1"/>
+<text x="80" y="481" font-size="18" fill="#222">T4.1 Active event-camera head</text>
+<rect x="762.0" y="465" width="333.0" height="20" rx="4" fill="#FBD9BF" stroke="#C55A11" stroke-width="1.5"/>
+<text x="80" y="511" font-size="18" fill="#222">T4.2 Motif SNNs on neuromorphic hardware</text>
+<rect x="984.0" y="495" width="555.0" height="20" rx="4" fill="#FBD9BF" stroke="#C55A11" stroke-width="1.5"/>
+<text x="80" y="541" font-size="18" fill="#222">T4.3 Benchmarks B-I, B-II, B-III (quadrotor)</text>
+<rect x="984.0" y="525" width="629.0" height="20" rx="4" fill="#FBD9BF" stroke="#C55A11" stroke-width="1.5"/>
+<text x="80" y="571" font-size="18" fill="#222">T4.4 Controversial stimuli for machines</text>
+<rect x="1206.0" y="555" width="333.0" height="20" rx="4" fill="#FBD9BF" stroke="#C55A11" stroke-width="1.5"/>
+<text x="20" y="601" font-size="20" font-weight="700" fill="#7B2D8E">WP5</text>
+<line x1="20" y1="579" x2="1670" y2="579" stroke="#BBB" stroke-width="1"/>
+<text x="80" y="601" font-size="18" fill="#222">T5.1 Course modules (every semester)</text>
+<rect x="540.0" y="585" width="1110.0" height="20" rx="4" fill="#E8D3EE" stroke="#7B2D8E" stroke-width="1.5"/>
+<text x="80" y="631" font-size="18" fill="#222">T5.2 Robot zoo</text>
+<rect x="873.0" y="615" width="777.0" height="20" rx="4" fill="#E8D3EE" stroke="#7B2D8E" stroke-width="1.5"/>
+<text x="80" y="661" font-size="18" fill="#222">T5.3 Community proofreading</text>
+<rect x="651.0" y="645" width="555.0" height="20" rx="4" fill="#E8D3EE" stroke="#7B2D8E" stroke-width="1.5"/>
+<text x="80" y="691" font-size="18" fill="#222">T5.4 Hoverfly watch</text>
+<rect x="762.0" y="675" width="666.0" height="20" rx="4" fill="#E8D3EE" stroke="#7B2D8E" stroke-width="1.5"/>
+<text x="80" y="721" font-size="18" fill="#222">T5.5 Releases, evaluation</text>
+<rect x="965.5" y="705" width="684.5" height="20" rx="4" fill="#E8D3EE" stroke="#7B2D8E" stroke-width="1.5"/>
+<line x1="762.0" y1="40" x2="762.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="762.0,742 753.0,754 762.0,766 771.0,754" fill="#333"/>
+<text x="762.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS1</text>
+<line x1="984.0" y1="40" x2="984.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="984.0,742 975.0,754 984.0,766 993.0,754" fill="#333"/>
+<text x="984.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS2</text>
+<line x1="1095.0" y1="40" x2="1095.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="1095.0,742 1086.0,754 1095.0,766 1104.0,754" fill="#333"/>
+<text x="1095.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS3</text>
+<line x1="1206.0" y1="40" x2="1206.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="1206.0,742 1197.0,754 1206.0,766 1215.0,754" fill="#333"/>
+<text x="1206.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS4</text>
+<line x1="1428.0" y1="40" x2="1428.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="1428.0,742 1419.0,754 1428.0,766 1437.0,754" fill="#333"/>
+<text x="1428.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS5</text>
+<line x1="1650.0" y1="40" x2="1650.0" y2="740" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>
+<polygon points="1650.0,742 1641.0,754 1650.0,766 1659.0,754" fill="#333"/>
+<text x="1650.0" y="788" font-size="18" font-weight="700" text-anchor="middle" fill="#333">MS6</text>
+<text x="20" y="826" font-size="18" fill="#333">Milestones: MS1 (M12) electrical-synapse atlas v1 + Tier-2 model · MS2 (M24) model families + discriminating stimuli · MS3 (M30) active head, quadrotor and robot zoo running</text>
+<text x="20" y="854" font-size="18" fill="#333">MS4 (M36) H1 decided, tethered Eristalis data complete · MS5 (M48) H2, H2b, H3 decided, motif catalogue · MS6 (M60) H4 decided, benchmark, dataset and kits released</text>
+</svg>

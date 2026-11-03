@@ -7,7 +7,7 @@ This is the reduced form of the HH model in the MESH dev build.
 
 Circuits:
   drosophila()           HS(N,E,S) chain + VS1-4 chain; MOT <- HS; MOS <- VS + HS
-  eristalis(sex, moi_from)  adds HSNE; male adds RMN MOI driven by `moi_from`
+  eristalis(sex, mio_from)  adds HSNE; male adds RMN MIO driven by `mio_from`
                          (H2: 'HSN'; alternatives: 'HSNE', 'HS', 'VS')
 """
 from __future__ import annotations
@@ -70,7 +70,7 @@ def drosophila() -> Circuit:
     return Circuit(hs + vs + rmn, gj)
 
 
-def eristalis(sex: str = "male", moi_from: str = "HSN") -> Circuit:
+def eristalis(sex: str = "male", mio_from: str = "HSN") -> Circuit:
     c = drosophila()
     hsn = c.neurons[0]
     if sex == "male":                       # dimorphic HSN: narrowed dorso-frontal RF [Nordström 2008]
@@ -79,11 +79,11 @@ def eristalis(sex: str = "male", moi_from: str = "HSN") -> Circuit:
     c.gj[("HSN", "HSNE")] = 0.3
     c.gj[("HSNE", "MOT")] = 0.25
     if sex == "male":
-        c.neurons.append(Neuron("MOI", "rmn"))
+        c.neurons.append(Neuron("MIO", "rmn"))
         sources = {"HSN": ["HSN"], "HSNE": ["HSNE"], "HS": ["HSN", "HSNE", "HSE", "HSS"],
-                   "VS": ["VS1", "VS2"]}[moi_from]
+                   "VS": ["VS1", "VS2"]}[mio_from]
         for s in sources:
-            c.gj[(s, "MOI")] = 0.35 / len(sources) ** 0.5
+            c.gj[(s, "MIO")] = 0.35 / len(sources) ** 0.5
     return c
 
 

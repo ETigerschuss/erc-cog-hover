@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="640" viewBox="0 0 1700 640" font-family="Inter, Arial, Helvetica, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+<marker id="arrP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7B2D8E"/></marker>
+<marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D6B"/></marker></defs>
+<rect width="1700" height="640" fill="#fff"/>
+<rect x="20" y="20" width="395" height="390" rx="14" fill="#EEF3FB" stroke="#1F3F7A" stroke-width="3"/>
+<text x="38" y="56" font-size="26" font-weight="700" fill="#1F3F7A">WP1  Connectome → SNN</text>
+<text x="38" y="84" font-size="19" fill="#1F3F7A">M1–36 · PhD 1, PD1, PI · → H1</text>
+<text x="38" y="120" font-size="18" fill="#333">T1.1 electrical synapses, ♀ and ♂</text>
+<text x="38" y="147" font-size="18" fill="#333">T1.2 Tier 1 biophysical (fitted)</text>
+<text x="38" y="174" font-size="18" fill="#333">T1.3 Tier 2 reduced (KAN equations)</text>
+<text x="38" y="201" font-size="18" fill="#333">T1.4 Tier 3 trainable SNN</text>
+<text x="38" y="228" font-size="18" fill="#333">T1.5 motor readout, efference copy</text>
+<rect x="38" y="266" width="359" height="126" rx="8" fill="#fff" stroke="#1F3F7A" stroke-width="1.5"/>
+<text x="52" y="294" font-size="17" font-weight="700" fill="#1F3F7A">D1.1 (M18) synapse atlas, ♀ + ♂</text>
+<text x="52" y="321" font-size="17" font-weight="700" fill="#1F3F7A">D1.2 (M24) reduced model + toolkit</text>
+<text x="52" y="348" font-size="17" font-weight="400" fill="#333">MS1 (M12): Tier-2 error &lt; 10 %?</text>
+<text x="52" y="375" font-size="17" font-weight="400" fill="#333">MS4 (M36): H1 decided</text>
+<rect x="435" y="20" width="395" height="390" rx="14" fill="#F2F8F5" stroke="#1F5F50" stroke-width="3"/>
+<text x="453" y="56" font-size="26" font-weight="700" fill="#1F5F50">WP2  Eristalis dimorphism</text>
+<text x="453" y="84" font-size="19" fill="#1F5F50">M6–48 · PD2, PhD 3, PI · → H2, H2b</text>
+<text x="453" y="120" font-size="18" fill="#333">T2.1 ♂/♀ model families (homology)</text>
+<text x="453" y="147" font-size="18" fill="#333">T2.2 stimuli that split the models</text>
+<text x="453" y="174" font-size="18" fill="#333">T2.3 tethered physiology and fills</text>
+<text x="453" y="201" font-size="18" fill="#333">T2.4 free-flight pursuit, high risk</text>
+<text x="453" y="228" font-size="18" fill="#333">T2.5 origin of the MIO: evo-devo</text>
+<rect x="453" y="266" width="359" height="126" rx="8" fill="#fff" stroke="#1F5F50" stroke-width="1.5"/>
+<text x="467" y="294" font-size="17" font-weight="700" fill="#1F5F50">D2.1 (M24) discriminating stimuli</text>
+<text x="467" y="321" font-size="17" font-weight="400" fill="#333">MS2 (M24): stimuli split families?</text>
+<text x="467" y="348" font-size="17" font-weight="400" fill="#333">MS4 (M36): data done; go/no-go T2.4</text>
+<text x="467" y="375" font-size="17" font-weight="400" fill="#333">MS5 (M48): H2, H2b decided</text>
+<rect x="850" y="20" width="395" height="390" rx="14" fill="#F3EEFA" stroke="#4B3570" stroke-width="3"/>
+<text x="868" y="56" font-size="26" font-weight="700" fill="#4B3570">WP3  Theory</text>
+<text x="868" y="84" font-size="19" fill="#4B3570">M12–54 · PD1, PI · → H3</text>
+<text x="868" y="120" font-size="18" fill="#333">T3.1 embodied simulator</text>
+<text x="868" y="147" font-size="18" fill="#333">T3.2 pursuit vs stabilisation, same</text>
+<text x="888" y="174" font-size="18" fill="#333">wiring prior and energy budget</text>
+<text x="868" y="201" font-size="18" fill="#333">T3.3 ablation, mean field, KAN</text>
+<rect x="868" y="266" width="359" height="126" rx="8" fill="#fff" stroke="#4B3570" stroke-width="1.5"/>
+<text x="882" y="294" font-size="17" font-weight="700" fill="#4B3570">D3.2 (M48) minimal motif catalogue</text>
+<text x="882" y="321" font-size="17" font-weight="400" fill="#333">MS5 (M48): H3 decided; motifs → WP4</text>
+<rect x="1265" y="20" width="415" height="390" rx="14" fill="#FFF1E6" stroke="#8A3D00" stroke-width="3"/>
+<text x="1283" y="56" font-size="26" font-weight="700" fill="#8A3D00">WP4  Active event vision</text>
+<text x="1283" y="84" font-size="19" fill="#8A3D00">M13–60 · PhD 2, RE, PD1, PI · → H4</text>
+<text x="1283" y="120" font-size="18" fill="#333">T4.1 active event-camera head</text>
+<text x="1283" y="147" font-size="18" fill="#333">T4.2 motif SNNs on neuromorphic HW</text>
+<text x="1283" y="174" font-size="18" fill="#333">T4.3 benchmarks: B-I small targets,</text>
+<text x="1303" y="201" font-size="18" fill="#333">B-II ego-motion, B-III quadrotor</text>
+<text x="1283" y="228" font-size="18" fill="#333">T4.4 machine controversial stimuli</text>
+<rect x="1283" y="266" width="379" height="126" rx="8" fill="#fff" stroke="#8A3D00" stroke-width="1.5"/>
+<text x="1297" y="294" font-size="17" font-weight="700" fill="#8A3D00">D4.3 (M54) benchmark + HoverEye data</text>
+<text x="1297" y="321" font-size="17" font-weight="400" fill="#333">MS3 (M30): head and quadrotor flying</text>
+<text x="1297" y="348" font-size="17" font-weight="400" fill="#333">MS6 (M60): H4 decided; releases</text>
+<rect x="20" y="450" width="1660" height="170" rx="14" fill="#F6EEF9" stroke="#7B2D8E" stroke-width="3"/>
+<text x="38" y="486" font-size="26" font-weight="700" fill="#5A1F6B">WP5  Embodied validation at scale, teaching, open science</text>
+<text x="38" y="514" font-size="19" fill="#5A1F6B">M1–60 · PI, student assistants, IU courses</text>
+<text x="38" y="552" font-size="18" fill="#333">T5.1 course modules every semester → benchmark entries and robot data</text>
+<text x="38" y="580" font-size="18" fill="#333">T5.2 robot zoo on low-cost camera robots → embodied robustness data (H3, H4)</text>
+<text x="880" y="552" font-size="18" fill="#333">T5.3 community proofreading of electrical synapses → T1.1</text>
+<text x="880" y="580" font-size="18" fill="#333">T5.4 hoverfly watch: pursuit statistics → T3.2 · T5.5 releases, evaluation</text>
+<line x1="415" y1="190" x2="435" y2="190" stroke="#333" stroke-width="4" marker-end="url(#arr)"/>
+<line x1="435" y1="230" x2="415" y2="230" stroke="#2E7D6B" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arrG)"/>
+<line x1="830" y1="190" x2="850" y2="190" stroke="#333" stroke-width="4" marker-end="url(#arr)"/>
+<line x1="1245" y1="190" x2="1265" y2="190" stroke="#333" stroke-width="4" marker-end="url(#arr)"/>
+<line x1="1472" y1="410" x2="1472" y2="450" stroke="#333" stroke-width="4" marker-end="url(#arr)"/>
+<line x1="217" y1="450" x2="217" y2="410" stroke="#7B2D8E" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arrP)"/>
+<line x1="1047" y1="450" x2="1047" y2="410" stroke="#7B2D8E" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arrP)"/>
+<text x="1055" y="438" font-size="16" fill="#7B2D8E">statistics</text>
+<text x="225" y="438" font-size="16" fill="#7B2D8E">labels</text>
+<text x="1480" y="438" font-size="16" fill="#555">models</text>
+</svg>

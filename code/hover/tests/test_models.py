@@ -24,10 +24,10 @@ def test_mot_prefers_horizontal_mos_vertical():
     assert mos_v > 0
 
 
-def test_male_has_moi_female_not():
+def test_male_has_mio_female_not():
     s = grating(180, FIELD, 0.3, DT)
-    assert "MOI" in rmn_rates(eristalis("male"), s, DT)
-    assert "MOI" not in rmn_rates(eristalis("female"), s, DT)
+    assert "MIO" in rmn_rates(eristalis("male"), s, DT)
+    assert "MIO" not in rmn_rates(eristalis("female"), s, DT)
 
 
 def test_gap_junction_matrix_symmetric():

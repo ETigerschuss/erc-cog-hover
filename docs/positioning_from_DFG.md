@@ -7,22 +7,23 @@ Source: `ETigerschuss/dfg-eristalis` → `proposal.md` (as-submitted version, 20
 | Core question | What does the male third retinal muscle do? | **What makes a visual system task-specific, and do those motifs generalise to engineered spiking vision?** The *Eristalis* dimorphism is the natural experiment. |
 | Level | Circuit → muscle → retinal displacement | Connectome → SNN theory → active-vision CV systems → robots / people |
 | Models | Tier-1 HH toy model in MESH; CMA-ES adversarial stimuli | Three-tier modelling ladder (biophysical HH/compartmental → reduced LIF/AdEx with gap junctions → trainable SNN), with **mathematical reduction** linking the tiers; controversial stimuli between *model families*, not only between 2- and 3-muscle circuits |
-| Experiments | EMG, patch clamp, free flight, micro-CT done in-house | Hypothesis-critical experiments by HOVER PhD students hosted at **MPI for Biological Intelligence** (Fenk lab: physiology) and **LMU** (Merrill lab: developmental genetics) |
+| Experiments | EMG, patch clamp, free flight, micro-CT done in-house | Hypothesis-critical experiments by a HOVER **postdoc** hosted at **MPI for Biological Intelligence** (Fenk lab: physiology, 36 months) and a HOVER **PhD student** at **LMU** (Merrill lab: developmental genetics), both as additional beneficiaries |
 | Development / genetics | — | **New:** where the male third muscle comes from and which genes make it male (T2.5, H2b), with the motor neuron as candidate inducer |
-| Computer vision | Braitenberg-vehicle outreach day | A full work package: event cameras, SNNs with active micro-movements, small-target detection in clutter, ego-motion; benchmarks against CNNs (Drews et al. 2020 `deepfly`) |
+| Computer vision | Braitenberg-vehicle outreach day | A full work package with a CV research question (do task-specific active sensing and fly motifs beat passive deep vision per joule?): active event-camera head with fixed/fly-derived/learned movement policies, motif SNNs on neuromorphic chips, pre-registered benchmarks (small targets in clutter, ego-motion on MVSEC/DSEC, closed-loop quadrotor hover and pursuit) against E-RAFT, spiking optic-flow nets and `deepfly`; Kolmogorov–Arnold readouts for interpretable motifs |
 | Outreach | One day, ~200 visitors | Continuous: SpikerBot inside IU CV courses every semester, a distributed "robot zoo" citizen-science experiment, and community proofreading of gap junctions in MESH |
-| Connectomics | FlyWire (FAFB) via MESH | FlyWire via Codex, plus newer datasets on platforms such as coda.science (**verify what it provides and how to cite it**), MESH gap-junction proofreading pipeline, transfer of the Drosophila wiring to Eristalis |
+| Connectomics | FlyWire (FAFB) via MESH | Female FlyWire (v783) **and** the complete male CNS connectome (Berg et al. 2026, Cell): first sex comparison of the gaze circuit; MESH gap-junction classifier and community proofreading; transfer of the Drosophila wiring to Eristalis |
 
 ## Material reused directly
 
 - Fig. 1 (CT, stepwise evolution, Kviatko et al.), Fig. 2 (neurobiotin + MESH + RMN tuning, Falt, Ammer et al.), Fig. 3 (Tier-1 circuit model).
-- H2 (HSN → RMN MOI → third muscle) becomes **H2** in HOVER, generalised to: "dimorphic receptive fields + dedicated effector = a task-specific channel".
+- H2 (HSN → RMN MIO → third muscle) becomes **H2** in HOVER, generalised to: "dimorphic receptive fields + dedicated effector = a task-specific channel".
 - Risk table structure, data management plan (rewrite for IU infrastructure).
 
 ## Material that must go or shrink
 
 - Free-flight EMG in three species: too wet-lab-heavy for a CV professorship. Keep one
   *Eristalis* free-flight eye-tracking aim as the **high-risk/high-gain** element (through a partner).
+- The third muscle is the **M. interocularis (MIO)** (Kviatko et al.); the DFG draft's "MOI" was a working name and would clash with the motion-opponency index used in Falt et al. 2026.
 - *Musca* / *Calliphora* comparisons → cite as literature only.
 - Muscle biomechanics (Hill model, micro-CT dynamics) → a reduced module in WP1, collaborator-supported.
 

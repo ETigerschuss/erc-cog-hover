@@ -1,5 +1,5 @@
 """Demo: RMN directional tuning in Drosophila vs. Eristalis models, plus one
-controversial-stimulus search between the H2 model (MOI <- HSN) and an alternative (MOI <- HSNE).
+controversial-stimulus search between the H2 model (MIO <- HSN) and an alternative (MIO <- HSNE).
 
 Run:  python -m hover.demo
 """
@@ -22,16 +22,16 @@ def tuning(circuit):
 def main():
     for label, c in [("Drosophila", drosophila()),
                      ("Eristalis female", eristalis("female")),
-                     ("Eristalis male (H2: MOI<-HSN)", eristalis("male", "HSN"))]:
+                     ("Eristalis male (H2: MIO<-HSN)", eristalis("male", "HSN"))]:
         pd = tuning(c)
         print(f"{label:32s} " + "  ".join(f"{k}: {v:5.1f} deg" for k, v in pd.items()))
     print("(0 deg = rightward, 90 deg = downward; HS cells are given a leftward preferred direction in this toy field)")
 
     p, score, hist = search(eristalis("male", "HSN"), eristalis("male", "HSNE"),
-                            readout="MOI", generations=12, lam=5)
-    print("\nControversial stimulus H2 (MOI<-HSN) vs alt (MOI<-HSNE):")
+                            readout="MIO", generations=12, lam=5)
+    print("\nControversial stimulus H2 (MIO<-HSN) vs alt (MIO<-HSNE):")
     print("  " + ", ".join(f"{k}={v:.1f}" for k, v in p.items()))
-    print(f"  |delta MOI rate| = {score:.1f} Hz  (search trace: {[round(float(h), 1) for h in hist]})")
+    print(f"  |delta MIO rate| = {score:.1f} Hz  (search trace: {[round(float(h), 1) for h in hist]})")
 
 
 if __name__ == "__main__":

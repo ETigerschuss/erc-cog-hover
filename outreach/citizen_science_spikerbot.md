@@ -7,7 +7,7 @@ contributors who generate data and co-own results, not only an audience.
 
 ### 1. Robot zoo: a distributed embodied experiment (tests H3/H4 in the real world)
 - Participants (schools, makerspaces, IU students, outreach events) run standardised
-  circuits ("Drosophila-type", "Eristalis female-type", "Eristalis male-type with third effector")
+  circuits ("Drosophila-type", "Eristalis female-type", "Eristalis male-type with the third effector (MIO)")
   on spiking robots with a camera.
 - Standard tasks with printable arenas: (a) follow a moving target (pursuit), (b) hold
   heading against a rotating pattern (stabilisation/OKR).
@@ -27,8 +27,10 @@ contributors who generate data and co-own results, not only an audience.
   the WP3 task definitions. Link to existing pollinator-monitoring schemes.
 
 ## Platform and neutrality
-- SpikerBot (Backyard Brains) is the reference platform because it natively runs
-  spiking-neuron circuits with a camera at classroom cost.
+- Two-wheeled camera robots are the scale platform because they run spiking-neuron circuits with a
+  camera at classroom cost and need no flight permissions; SpikerBot (Backyard Brains) is one candidate,
+  procured by IU against a hardware-neutral specification. The quadrotor and the active event-camera
+  head (WP4) stay in the lab.
 - All firmware and circuit files are open (MIT) and portable to ESP32/RPi robots, so the
   project does not depend on one vendor. The PI's Backyard Brains affiliation is declared and managed:
   see `docs/coi_backyard_brains.md`.
