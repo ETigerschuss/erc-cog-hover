@@ -113,3 +113,4 @@ lists must appear exactly as published (IfA p. 28).
 [106] Floreano D, Wood RJ (2015). Science, technology and the future of small autonomous drones. Nature 521(7553):460–466.
 [107] Bagheri ZM, Wiederman SD, Cazzolato BS, Grainger S, O'Carroll DC (2017). Performance of an insect-inspired target tracker in natural conditions. Bioinspir Biomim 12(2):025006 [verify].
 [108] Gehrig D, Scaramuzza D (2024). Low-latency automotive vision with event cameras. Nature 629:1034–1040.
+[109] Zhao A, Gruntman E, Nern A, Iyer N, Rogers EM, Koskela S, Siwanowicz I, Dreher M, Flynn MA, Laughland C, Ludwig H, Thomson A, Moran C, Gezahegn B, Bock DD, Reiser MB (2025). Eye structure shapes neuron function in *Drosophila* motion vision. Nature 646:135–144 [verify page range].

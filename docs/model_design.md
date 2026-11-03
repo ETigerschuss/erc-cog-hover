@@ -192,6 +192,24 @@ for completing the basis in the male.
 Figure: `proposal/figures/fig_model_validation.png` (eye map with local axes; LPTC tuning; RMN tuning
 in the holder frame with Falt's PDs; OKR plot), produced by `python -m hover.validate_falt --wvs 2`.
 
+## 3b. Controversial stimuli for the male hoverfly (Stage 7 results)
+
+Hypotheses: MIO pull anterior (0°) vs dorsal (90°), MIO driven by HSN (`w_mio` = 3). Objective:
+angle between the predicted retinal-shift vectors × min(1, ΔMIO/10 Hz) × min(1, |shift|/0.15).
+
+| Engine | stimulus | MIO / MOT / MOS Δrate | shift directions (anterior, dorsal) | female | run time |
+|---|---|---|---|---|---|
+| parametric (1+5)-ES on the rate surrogate, Tier-1 verified (`hover/adversarial.py`) | full-contrast grating patch, centre (3°, 24°), radius 25°, direction 23°, 38°/s, on a faint (0.3) background moving at 218°, 23°/s, plus a weak lateral patch | +12.6 / +6.2 / +7.9 Hz | 175°, 124° (51° apart) | 169° | 2 min |
+| pixel-level gradient descent, autograd through Stages 0–3 (`hover/adversarial_pixel.py`, 40 Adam steps on 20 × 14 × 18 control points) | high-contrast blotch pattern, strongest over the HSN field | +9.1 / +1.8 / −3.0 Hz | 202°, 85° (117° apart) | 302° | 3 min |
+
+The parametric stimulus is the experiment-ready one (Fig. B1g): it separates the two MIO hypotheses
+by 51° with retinal shifts of normal size, while the female circuit predicts a direction close to the
+"anterior" hypothesis, so a second objective (male vs female) is needed to separate those two; the
+engine supports it (`objective_from_rates` with any pair of models). The pixel-optimised stimulus
+shows the ALIstim-type capability on the full pipeline: it nulls MOT and MOS almost completely and
+reaches a 117° separation, at the price of small absolute shifts (magnitudes 0.05–0.08 vs 0.16–0.21).
+Both results are stored next to the code (`adversarial_result.json`, `adversarial_pixel_result.json`).
+
 ## 4. Free parameters and hypotheses of the hoverfly models
 
 | Parameter | Prior / v0 value | Fixed by |

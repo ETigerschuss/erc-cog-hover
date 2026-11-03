@@ -197,10 +197,19 @@ def main(argv=None):
     ap.add_argument("--wvs", type=float, default=1.0)
     ap.add_argument("--out", default=None)
     ap.add_argument("--fig", default=None)
+    ap.add_argument("--replot", default=None, help="JSON result of an earlier run: verify its stimulus and draw the panel only")
     a = ap.parse_args(argv)
     t0 = time.time()
     male = Model("eristalis", "male", mio_from="HSN", mio_pull=0.0, w_vs_mos=a.wvs)
     female = Model("eristalis", "female", w_vs_mos=a.wvs)
+    if a.replot:
+        prev = json.loads(pathlib.Path(a.replot).read_text())
+        p = clip_params(prev["stimulus"])
+        s_ver, info_v, r_m, mov = verify(male, p)
+        r_f = female.run(mov, onset_s=ONSET)
+        print(f"replot: angle {info_v['angle']:.1f}°, MIO Δ {info_v['d_mio']:.1f} Hz, dirs {info_v['dirs']}, female {r_f['shift_dir']:.1f}°")
+        panel(male, female, mov, r_m, r_f, info_v, a.fig or "panel.png", params=p)
+        return prev
     print(f"male: {male.eye.n} ommatidia, {male.eye.n_patch} circuits, cells {male.names}; female: {female.eye.n} ommatidia ({time.time() - t0:.0f} s)")
     runs = tuning_runs(male)
     baseline = {nm: float(np.mean([r["baseline"][nm] for r in runs])) for nm in male.motor_neurons}
@@ -263,10 +272,12 @@ def panel(male: Model, female: Model, mov, r_m, r_f, info, out_png, params=None,
     # (2) LPTC responses and motor-neuron rates
     ax = axes[1]
     t = r_m["t"] / 1000.0
+    k = np.ones(int(10.0 / DT)) / int(10.0 / DT)  # 10 ms boxcar for display (removes the spikelets)
     for nm, col in (("HSN", "#2F5597"), ("HSNE", "#ad1457"), ("HSE", "#c2185b"), ("VS2", "#2e7d32")):
         i = male.names.index(nm)
-        ax.plot(t, r_m["V"][:, i] - r_m["V"][r_m["base"], i].mean(), color=col, lw=0.8, label=nm)
-    ax.set_ylabel("LPTC ΔV (mV)", fontsize=8); ax.set_xlabel("time (s)", fontsize=8); ax.tick_params(labelsize=7)
+        v = np.convolve(r_m["V"][:, i] - r_m["V"][r_m["base"], i].mean(), k, mode="same")
+        ax.plot(t, v, color=col, lw=0.9, label=nm)
+    ax.set_ylabel("LPTC ΔV (mV, 10 ms smoothed)", fontsize=8); ax.set_xlabel("time (s)", fontsize=8); ax.tick_params(labelsize=7)
     ax.axvspan((male.pre_ms / 1000 + ONSET), (male.pre_ms / 1000 + DURATION), color="0.9", zorder=0)
     ax2 = ax.twinx()
     for nm, col in (("MOT", "#e65100"), ("MOS", "#6a1b9a"), ("MIO", "#000000")):
@@ -287,9 +298,9 @@ def panel(male: Model, female: Model, mov, r_m, r_f, info, out_png, params=None,
     ax.axhline(0, color="0.8", lw=0.5); ax.axvline(0, color="0.8", lw=0.5)
     ax.set_xticks([]); ax.set_yticks([])
     ax.text(1.05, 0.03, "post.", fontsize=6, ha="right"); ax.text(-1.1, 0.03, "ant.", fontsize=6)
-    ax.text(0.03, 1.0, "dorsal", fontsize=6); ax.text(0.03, -1.08, "ventral", fontsize=6)
+    ax.text(0.03, 1.0, "dorsal", fontsize=6); ax.text(-1.1, -1.08, "ventral", fontsize=6)
     ax.legend(handles=[Line2D([], [], color=c, lw=2, label=f"{h}: {direction(v):.0f}°") for h, v in vecs.items() for c in [cols[h]]],
-              fontsize=6, loc="lower left", frameon=True)
+              fontsize=6, loc="lower right", frameon=True)
     ax.set_title(f"predicted retinal shift ({info['angle']:.0f}° apart)", fontsize=9)
     fig.tight_layout()
     fig.savefig(out_png)

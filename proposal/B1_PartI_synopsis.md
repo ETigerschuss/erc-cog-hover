@@ -203,7 +203,7 @@ natural target statistics that define the WP3 tasks. WP5 builds on my open citiz
 Hodgkin–Huxley model of the right-eye gaze circuit with electrical and chemical coupling already
 reproduces motor-neuron spiking and the direction of optogenetically evoked eye movements. The
 Tier-1 model, extended by the MIO, already returns a stimulus on which two hypotheses about the MIO's
-pull direction predict retinal shifts 36° apart (B2, Fig. B1).
+pull direction predict retinal shifts 51° apart (B2, Fig. B1).
 The tomography atlas of male and female hoverflies is in hand [2], hoverflies can be reared
 year-round with a published protocol [19], and the hoverfly genome is public [44]. I have shipped TinyML pipelines
 on classroom robots and teach computer vision to the cohorts that will run WP5. Hypothesis-critical
