@@ -1,6 +1,6 @@
 # ERC-2027-CoG: the rules that shape HOVER
 
-Source: *Information for Applicants to the Starting and Consolidator Grant 2027 Calls* (IfA),
+Source: *Information for Applicants to the Starting and Consolidator Grant 2027 Calls* (IfA; copy in [`reference/`](reference/ERC2027_StG_CoG_Information_for_Applicants_v11.pdf)),
 version 11.0, 22 July 2026. Page numbers below refer to it. The ERC Consolidator Grant web page
 was also used. The legally binding texts are the ERC Work Programme 2027 and the Model Grant
 Agreement (MGA). Check the call page on the Funding & Tenders Portal (F&T) for updates and the FAQ.
