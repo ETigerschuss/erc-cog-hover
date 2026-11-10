@@ -39,11 +39,12 @@ def md_to_html(md_text: str) -> str:
     # embed figures above their caption
     def fig(m):
         path = (ROOT / m.group(2)).resolve()
-        return f'<img class="fig" src="file://{path}">\n\n<p class="caption"><b>Figure {m.group(1)}.</b>'
+        # the caption stays Markdown (so that italics render); its paragraph is classed after conversion
+        return f'<img class="fig" src="file://{path}">\n\n**Figure {m.group(1)}.**'
     md_text = re.sub(r"\*\*Figure ([A-Z0-9]+) \(([^)]+)\)\.\*\*", fig, md_text)
     out = subprocess.run(["pandoc", "-f", "gfm+tex_math_dollars", "-t", "html5"], input=md_text,
                          capture_output=True, text=True, check=True)
-    return out.stdout
+    return re.sub(r"<p><strong>Figure ([A-Z0-9]+)\.</strong>", r'<p class="caption"><strong>Figure \1.</strong>', out.stdout)
 
 
 def render(html_body: str, pdf_path: pathlib.Path, header: str) -> int:
