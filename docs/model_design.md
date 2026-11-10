@@ -210,11 +210,106 @@ shows the ALIstim-type capability on the full pipeline: it nulls MOT and MOS alm
 reaches a 117° separation, at the price of small absolute shifts (magnitudes 0.05–0.08 vs 0.16–0.21).
 Both results are stored next to the code (`adversarial_result.json`, `adversarial_pixel_result.json`).
 
+## 3c. The MIO pull direction on the full circle (12 hypotheses, `hover/mio_ring.py`)
+
+The MIO is a fan-shaped muscle (§3d), so no single fibre orientation gives its pull. The model
+therefore treats the pull direction θ as free on the whole circle, in 12 steps of 30°. With the
+common MOT/MOS term c and the MIO weight w, the predicted retinal shift under hypothesis k is
+v_k = c + w·u(θ_k). The 12 predictions can only be told apart if the stimulus isolates the MIO:
+for ρ = |c|/|w| < 1 the predicted directions wind once around the circle, and for ρ → 0 the measured
+shift direction *is* the pull direction. The design goal changes from "largest angle between two
+hypotheses" to "smallest ρ at a sufficient MIO drive".
+
+| Stimulus | ΔMIO / ΔMOT / ΔMOS (Hz) | ρ | smallest separation of neighbouring hypotheses (ideal 30°) | largest error of "shift = pull" |
+|---|---|---|---|---|
+| pairwise, parametric (Fig. B1g) | +12.5 / +6.5 / +8.4 | 0.85 | 16° | 57° |
+| pairwise, pixel (§3b) | +9.1 / +1.8 / −3.0 | 0.39 | 22° | 23° |
+| MIO-isolating, parametric (two wide patches moving at 114° and 266°, no background) | +10.7 / +5.5 / +2.3 | 0.55 | 19° | 33° |
+| **MIO-isolating, pixel** (30 Adam steps from the pairwise pixel solution) | +10.5 / +2.5 / +1.1 | **0.26** | **24°** | **15°** |
+
+All numbers are Tier-1 verifications. With the isolating stimulus one measurement of the retinal-shift
+direction reads out θ to within 15°, whatever θ is, and the female circuit hardly moves at all
+(shift magnitude 0.01 against 0.07–0.12 in the male): the stimulus predicts a retinal movement in
+males only. Figure: `proposal/figures/fig_mio_ring.png` (not yet used in B2). Result files:
+`code/hover/mio_ring_result.json` and `.z.npy`.
+
+Limits of the 12-direction description: it assumes a rigid shift by one muscle with one motor
+command. A fan can also (i) be driven in compartments, which would let the nervous system steer the
+pull within the fan's angular span, and (ii) gather the retina toward its focus, a non-rigid, radial
+deformation that changes the local sampling geometry of the love spot rather than its direction.
+The isolating stimulus is the right probe for all three cases because it assumes no direction; the
+readout then needs the pseudopupil's shape as well as its position.
+
+## 3d. What the CT images say about the pull direction
+
+Images: male *Eristalis* frontal section (`proposal/figures/src/ct_eristalis_m.jpg`), male
+*Melanostoma* and *Sphaerophoria* sagittal renderings (DFG repository,
+`271_melanostoma_M_MIO_colored.png`, `297_sphaerophoria_M_MIO.png`, and the two zooms).
+
+- Frontal view (*Eristalis*): the muscle sits at the dorsal midline directly below the cuticular
+  septum where the two eyes meet, as an inverted V: apex at the septum, one limb to the dorso-medial
+  corner of each circumocular ridge (COR). Both eyes are attached to one median structure.
+- Sagittal views (*Melanostoma*, *Sphaerophoria*): the muscle is elongated along the eye junction
+  beneath the frons, between antennae and ocellar triangle. Its fibres are radial: they converge on a
+  focus at the inner edge and fan out to the outer margin along the junction, with a larger lobe
+  toward the vertex and a smaller one toward the antennae (*Melanostoma*: focus at about one third of
+  the length from the antennal end; *Sphaerophoria*: nearly central, bow-tie shaped).
+
+Reading. (1) Robust: each limb pulls its retina toward the median plane. In the eye's own
+frame that is "anterior" (0°; medial), and it is mirror-symmetric in the two eyes. (2) The fan adds a
+component along the eye junction whose sign the images cannot settle, because it depends on which end
+is the fixed origin (septum) and which the movable insertion (COR), and on the lobe asymmetry:
+dorsal if the focus is the insertion, ventral if it is the origin. (3) Part of the action may be
+along the ommatidial axes, which changes focus rather than gaze. Anatomical prior on the ring: the
+half-circle facing the midline (270° → 0° → 90°), centred on 0°.
+
+Functional prior. If HSN drives the MIO as HS cells drive MOT, the reflex is compensatory only when
+the pull is opposite to HSN's local preferred direction (as MOT: PD 141°, pull 320°). The male HSN
+field sits where the local +h axis is tilted upward (§1, Stage 0), so its PD is front-to-back and up
+(≈ 140–150°) and the compensatory pull is ≈ 320–330°: anterior with a ventral component. Both priors
+agree on the medial half-circle; the best single estimate is 330° ± 40°, and "dorsal" (90°), one of
+the two hypotheses of Fig. B1g, is the less likely one.
+
+## 3e. Hypothesis H2d: the MIO is a vergence muscle (binocular command, depth)
+
+Because one median muscle attaches to both CORs, its contraction shifts both retinae toward the
+midline. Photoreceptors sample inverted images (Falt *et al.*), so the lines of sight of the two love
+spots rotate apart on contraction and together on relaxation: the MIO changes the **vergence** of the
+two acute zones, something MOS and MOT can only do by coordinated commands to four muscles
+(Fenk *et al.* 2022 [7] report such vergence movements in *Drosophila* during gap crossing).
+
+- Sign check. A target approaching on the midline moves back-to-front in both HSN fields; HSN
+  hyperpolarises, the MIO relaxes, both retinae move laterally and the lines of sight converge on the
+  target. A receding target does the opposite. An HSN-driven, medially pulling MIO is therefore a
+  negative-feedback vergence reflex of the love spots.
+- Depth. Disparity ≈ b/d for an interocular baseline b of the two bright zones [b to be measured;
+  1–3 mm assumed]: 0.6–1.7° at 10 cm, 0.3–0.9° at 20 cm, 0.1–0.3° at 50 cm. With Δφ ≈ 1° the
+  vergence state carries range within about 10–20 cm, further if timing is used: mirror-symmetric
+  movements sweep a target over corresponding receptors of the two eyes with a time difference
+  proportional to disparity (the principle shown for photoreceptor microsaccades by Kemppainen
+  *et al.* 2022 [52]). Male hoverflies launch interceptions without measuring range, assuming a
+  conspecific of standard size and speed (Collett & Land 1978 [72]); a vergence signal would supply
+  range in the terminal phase.
+- Efference copy. By the electrical coupling of Falt *et al.*, the MIO command flows back into HSN
+  on both sides: a range-related signal inside the visual system (extends H2c).
+- Predictions that separate "one median vergence muscle" from "two independent third muscles":
+  (i) binocular expansion or contraction confined to the two HSN fields moves both retinae
+  mirror-symmetrically; binocular rotation moves them in opposite senses if the halves are
+  independent and not at all if one command sums both HSNs; (ii) both pseudopupils recorded at once;
+  (iii) number of motor axons and whether the two limbs are separate bellies (µCT, backfills);
+  (iv) HSN membrane potential co-varies with spontaneous MIO activity.
+- Model. Needs the bilateral extension: mirrored left eye, binocular stimulus geometry with target
+  distance, the MIO as one actuator on both eyes, read out as version and vergence. Not built yet.
+- Machine vision (candidate H4g). Two event cameras with mirror-symmetric micro-vergence: depth of
+  static scenes from inter-ocular event timing, decoded by coincidence-detecting spiking units.
+
 ## 4. Free parameters and hypotheses of the hoverfly models
 
 | Parameter | Prior / v0 value | Fixed by |
 |---|---|---|
-| θ_MIO (pull direction) | 0° (anterior/medial pull) or 90° (dorsal); CT fibre orientation says mainly horizontal | WP2 CT at contraction, EMG + tracking |
+| θ_MIO (pull direction) | free on the full circle, 12 directions (§3c); prior: medial half-circle, best estimate 330° ± 40° (§3d) | isolating stimulus + DPP tracking, EMG, µCT fibre tracing |
+| MIO laterality | one median vergence actuator (H2d) or two independent halves | two-camera DPP, backfills, µCT |
+| MIO action | rigid shift, compartmental steering, or radial deformation | pseudopupil shape and position |
 | MIO drive | HSN (H2), HSNE, pooled HS, VS | neurobiotin fills, stimuli optimised on MIO activity |
 | HSN ♂ receptive field | Nordström 2008 contours (Gaussian fits above) | WP2 recordings |
 | HSNE local PD | +h with an upward component | WP2 recordings |
@@ -236,6 +331,7 @@ Both results are stored next to the code (`adversarial_result.json`, `adversaria
 | `hover/validate_falt.py` | 3 | done: direction tuning, β fit, report, validation figure |
 | `hover/adversarial.py` | 7 | done: parametric (1+λ)-ES on the rate surrogate, Tier-1 verification, female prediction, Fig. B1g panel |
 | `hover/frontend_ad.py` | 7 | done: autograd re-implementation of Stages 0–3 for pixel-level gradient descent (ALIstim-style) |
+| `hover/mio_ring.py` | 7 | done: 12-direction scan of the MIO pull, MIO-isolating stimulus (ES and pixel gradient), figure |
 | `hover/mio_search.py` | 7 | superseded (first-generation front end; kept for the record) |
 
 Run times (4 cores): eye maps 0.3–1.7 s; one stimulus through the front end 1–2 s (*Eristalis*);
@@ -258,12 +354,13 @@ the proposal promises in WP4.
 
 ## 7. What I still need from you
 
-1. From the CT: the two candidate MIO pull directions you consider anatomically plausible (the
-   search currently contrasts an anterior/medial pull with a dorsal pull), and the MOS/MOT pull
-   directions in *Eristalis* if they differ from *Drosophila*.
-2. Any hoverfly HS/HSNE tuning curves beyond Nordström 2008 (your own recordings, if they exist),
-   and your preferred bright-zone parameters (centre, extent, Δφ) from Straw 2006 or your CT.
-3. Your decision on the readout (§6; recommended: retinal trajectory primary, tethered flight
-   secondary, robot embodiment).
-4. Whether you want the Falt methods typo (§2) raised with the co-authors before the preprint is
+1. For the MIO: which attachment is fixed (septum) and which moves (COR), whether the two limbs are
+   separate bellies, and the number of motor axons, if the CT or your dissections show it. A fibre
+   tracing of one scan would replace the prior of §3d by a number.
+2. The interocular baseline of the two bright zones and their binocular overlap (Straw 2006 or CT),
+   for the depth range in §3e.
+3. Any hoverfly HS/HSNE tuning curves beyond Nordström 2008, and your preferred bright-zone
+   parameters (centre, extent, Δφ).
+4. Your decision on the readout (§6) and on taking H2d (vergence) and the 12-direction panel into B2.
+5. Whether you want the Falt methods typo (§2) raised with the co-authors before the preprint is
    cited in the proposal.

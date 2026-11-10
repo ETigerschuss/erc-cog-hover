@@ -18,6 +18,7 @@ neurons → retinal-shift vector. Three circuits: *Drosophila* ♀ (ground truth
 | `validate_falt.py` | `python -m hover.validate_falt --wvs 2 --fig out.png`: RMN/LPTC direction tuning vs Falt et al., frame-rotation fit, OKR check |
 | `adversarial.py` | `python -m hover.adversarial --out r.json --fig panel.png`: controversial stimulus for the MIO pull direction (ES on a rate surrogate, Tier-1 verification, female prediction) |
 | `frontend_ad.py` | autograd version of the front end for pixel-level gradient descent on the stimulus (ALIstim-style) |
+| `mio_ring.py` | `python -m hover.mio_ring --z0 hover/adversarial_pixel_result.z.npy --fig out.png`: MIO pull direction free on the circle (12 hypotheses), MIO-isolating stimulus, figure |
 | `tests/` | `python -m hover.tests.test_tier1`, `python -m hover.tests.test_pipeline` |
 
 ```bash
