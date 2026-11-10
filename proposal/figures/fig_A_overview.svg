@@ -121,7 +121,7 @@
   <text x="1160" y="92" font-size="24" fill="#1F5F50">WP2 · Eristalis, MPI-BI + LMU</text>
   <rect x="1530" y="36" width="130" height="40" rx="20" fill="#2E7D6B"/>
   <text x="1595" y="64" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">H2 · H2b</text>
-  <text x="1160" y="126" font-size="20" fill="#333">• competing ♂ circuits: HSN → MIO? HSNE? VS?</text>
+  <text x="1160" y="126" font-size="20" fill="#333">• ♂ vs ♀, both eyes: MIO as vergence muscle?</text>
   <text x="1160" y="153" font-size="20" fill="#333">• tethered ♂/♀: retinal tracking, EMG of</text>
   <text x="1180" y="180" font-size="20" fill="#333">MOT, MOS and MIO; neurobiotin fills</text>
   <text x="1160" y="207" font-size="20" fill="#333">• high risk: retinal tracking in free flight</text>
@@ -146,11 +146,11 @@
   <text x="1160" y="622" font-size="24" fill="#8A3D00">WP4 · active event-based vision</text>
   <rect x="1570" y="566" width="90" height="40" rx="20" fill="#C55A11"/>
   <text x="1615" y="594" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">H4</text>
-  <text x="1160" y="656" font-size="20" fill="#333">• event camera on a micro-movement stage;</text>
+  <text x="1160" y="656" font-size="20" fill="#333">• two event cameras on micro-movement stages;</text>
   <text x="1180" y="683" font-size="20" fill="#333">fixed vs fly-derived vs learned policies</text>
   <text x="1160" y="710" font-size="20" fill="#333">• motif SNNs on neuromorphic chips (sub-mW)</text>
   <text x="1160" y="737" font-size="20" fill="#333">• benchmarks vs matched deep networks:</text>
-  <text x="1180" y="764" font-size="20" fill="#333">small targets · ego-motion · quadrotor</text>
+  <text x="1180" y="764" font-size="20" fill="#333">small targets · ego-motion · depth · quadrotor</text>
 
   <!-- ===================== f: validate at scale ===================== -->
   <rect x="20" y="820" width="1660" height="200" rx="16" fill="#F6EEF9" stroke="#7B2D8E" stroke-width="3"/>

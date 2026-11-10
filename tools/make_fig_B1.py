@@ -7,7 +7,7 @@ Sources (copied into proposal/figures/src/ by this script when run with --import
   tier1_traces.png   Tier-1 model output in MESH: LPTC Vm, MN spikes, pseudopupil, polar
   ct_eristalis_m.png micro-CT, male Eristalis, three retinal muscles in red (Kviatko et al.)
   ct_melanostoma.png micro-CT, male Melanostoma, the MIO in red (Kviatko et al.)
-  fig_B1e_mio_controversial.png   new panel from code/hover/mio_search.py
+  fig_B1e_mio_controversial.png   panel g from code/hover/binocular_search.py (male vs female, both eyes)
 
 Usage:  python3 tools/make_fig_B1.py [--import /home/user/dfg-eristalis]
 Output: proposal/figures/fig_B1_preliminary.png (3400 px wide, 17 cm at 500 dpi)

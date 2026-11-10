@@ -32,11 +32,11 @@ BOUNDS = {"psi": (-120.0, 120.0), "el": (-50.0, 60.0), "rad": (8.0, 40.0), "dir"
 SEED_DICHOPTIC = {  # a frontal patch whose disparity changes (front-to-back in both eyes), contracting surround
     "psi0": 0.0, "el0": 25.0, "rad0": 18.0, "dir0": 0.0, "speed0": 0.0, "dspeed0": 30.0, "con0": 1.0,
     "psi1": 70.0, "el1": -10.0, "rad1": 30.0, "dir1": 180.0, "speed1": 20.0, "dspeed1": 0.0, "con1": 0.3,
-    "bgL_dir": 0.0, "bgL_speed": 20.0, "bgR_dir": 180.0, "bgR_speed": 20.0, "bg_con": 0.2}
+    "bgL_dir": 30.0, "bgL_speed": 25.0, "bgR_dir": 150.0, "bgR_speed": 25.0, "bg_con": 0.35}
 SEED_SCREEN = {     # local expansion over the two HSN fields, contracting surround
     "psi0": 12.0, "el0": 25.0, "rad0": 12.0, "dir0": 0.0, "speed0": 30.0, "dspeed0": 0.0, "con0": 1.0,
     "psi1": -12.0, "el1": 25.0, "rad1": 12.0, "dir1": 180.0, "speed1": 30.0, "dspeed1": 0.0, "con1": 1.0,
-    "bgL_dir": 0.0, "bgL_speed": 20.0, "bgR_dir": 180.0, "bgR_speed": 20.0, "bg_con": 0.2}
+    "bgL_dir": 30.0, "bgL_speed": 25.0, "bgR_dir": 150.0, "bgR_speed": 25.0, "bg_con": 0.35}
 
 
 def _base(key):
@@ -73,7 +73,7 @@ def render(bm: BinocularModel, p: dict, wavelength=20.0):
     return mR, mL, (HR, HL)
 
 
-def evaluate(male: BinocularModel, female: BinocularModel, p: dict, female_weight=0.5):
+def evaluate(male: BinocularModel, female: BinocularModel, p: dict, female_weight=1.0):
     mR, mL, _ = render(male, p)
     rm = male.run(mR, mL, onset_s=ONSET)
     rf = female.run(mR, mL, onset_s=ONSET)
@@ -82,21 +82,24 @@ def evaluate(male: BinocularModel, female: BinocularModel, p: dict, female_weigh
     return score, dict(diff=diff, male=rm, female=rf)
 
 
-def search(male, female, p0, generations=18, lam=5, seed=1, single_screen=False, log=print, checkpoint=None):
+def search(male, female, p0, generations=18, lam=5, seed=1, single_screen=False, log=print, checkpoint=None, female_weight=1.0):
     rng = np.random.default_rng(seed)
     p = clip(p0, single_screen)
-    best, info = evaluate(male, female, p)
+    best, info = evaluate(male, female, p, female_weight)
     scale = {k: BOUNDS[_base(k)][1] - BOUNDS[_base(k)][0] for k in p}
-    sigma = 0.2
+    sigma = 0.15
     hist = [best]
     for gen in range(generations):
         improved = False
         for _ in range(lam):
-            q = clip({k: v + sigma * scale[k] * rng.standard_normal() for k, v in p.items()}, single_screen)
-            s, inf = evaluate(male, female, q)
+            mask = rng.random(len(p)) < 0.35                       # change a few parameters at a time
+            if not mask.any():
+                mask[rng.integers(len(p))] = True
+            q = clip({k: v + (sigma * scale[k] * rng.standard_normal() if mk else 0.0) for (k, v), mk in zip(p.items(), mask)}, single_screen)
+            s, inf = evaluate(male, female, q, female_weight)
             if s > best:
                 best, p, info, improved = s, q, inf, True
-        sigma = min(0.4, sigma * 1.3) if improved else max(0.03, sigma * 0.8)
+        sigma = min(0.4, sigma * 1.3) if improved else max(0.05, sigma * 0.85)
         hist.append(best)
         if checkpoint:   # the run can be finished from here with --replot or --resume
             pathlib.Path(checkpoint).write_text(json.dumps(dict(stimulus=p, history=hist, generation=gen + 1), indent=1))
@@ -170,7 +173,8 @@ def panel(male, female, p, info, extra, out_png, title="controversial stimulus, 
     mv = [m["d_rate"].get(k, 0.0) for k in keys]; fv = [f["d_rate"].get(k, np.nan) for k in keys]
     ax.bar(x - wbar / 2, mv, wbar, color=S1, edgecolor="white", linewidth=1.0, label="male")
     ax.bar(x + wbar / 2, np.nan_to_num(fv), wbar, color=S2, edgecolor="white", linewidth=1.0, label="female")
-    ax.text(x[-1] + wbar / 2, 0.6, "no\nmuscle", ha="center", va="bottom", fontsize=5.5, color=MUTED)
+    ax.text(x[-1] + 0.06, 0.25, "female:\nno muscle", ha="left", va="bottom", fontsize=5.5, color=MUTED)
+    ax.set_xlim(-0.6, len(keys) - 0.1)
     ax.axhline(0, color=MUTED, lw=0.6)
     ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=6.5)
     ax.set_ylabel("motor-neuron rate change (Hz)", fontsize=7); ax.tick_params(axis="y", labelsize=6.5)
@@ -213,6 +217,7 @@ def main(argv=None):
     ap.add_argument("--lam", type=int, default=5)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--single-screen", action="store_true")
+    ap.add_argument("--female-weight", type=float, default=1.0, help="penalty on the female's movement (0: plain difference)")
     ap.add_argument("--out", default=None)
     ap.add_argument("--fig", default=None)
     ap.add_argument("--replot", default=None, help="JSON of an earlier run: re-evaluate its stimulus and draw the panel")
@@ -224,11 +229,11 @@ def main(argv=None):
     print(f"models ready ({time.time() - t0:.0f} s)", flush=True)
     if a.replot:
         prev = json.loads(pathlib.Path(a.replot).read_text())
-        p = clip(prev["stimulus"]); score, info = evaluate(male, female, p); hist = prev.get("history", [])
+        p = clip(prev["stimulus"]); score, info = evaluate(male, female, p, a.female_weight); hist = prev.get("history", [])
     else:
         p0 = json.loads(pathlib.Path(a.resume).read_text())["stimulus"] if a.resume else (SEED_SCREEN if a.single_screen else SEED_DICHOPTIC)
         p, score, hist, info = search(male, female, p0, generations=a.gens, lam=a.lam, seed=a.seed, single_screen=a.single_screen,
-                                      log=lambda s: print(s, flush=True),
+                                      log=lambda s: print(s, flush=True), female_weight=a.female_weight,
                                       checkpoint=(str(pathlib.Path(a.out).with_suffix(".ckpt.json")) if a.out else None))
     mR, mL, _ = render(male, p)
     m = info["male"]

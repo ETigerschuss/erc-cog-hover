@@ -60,7 +60,7 @@ principles that engineered spiking vision can use**. It will:
 | [`docs/dfg_backup_strategy.md`](docs/dfg_backup_strategy.md) | Sequential DFG backup, timing | — |
 | [`docs/positioning_from_DFG.md`](docs/positioning_from_DFG.md) | What changes from the DFG *Eristalis* proposal | — |
 | [`teaching/`](teaching/), [`outreach/`](outreach/) | Course integration; citizen-science design | B2 WP5 |
-| [`code/`](code/), [`prior_work/`](prior_work/) | `hover` package: **integrated model v0** (sphere eye map with Zhao-2025 axes, Ammer-2023 detectors and local opponency circuits, LPTC receptive fields, **Tier-1 HH model ported from MESH**, Falt-2026 oculomotor model; `docs/model_design.md`), **Falt validation** (`validate_falt.py`), **MIO controversial-stimulus searches** (`adversarial.py`, `adversarial_pixel.py`, Fig. B1g); first-generation EMD/SNN code; ALIstim notebook | preliminary results |
+| [`code/`](code/), [`prior_work/`](prior_work/) | `hover` package: **integrated model v0** (sphere eye map with Zhao-2025 axes, Ammer-2023 detectors and local opponency circuits, LPTC receptive fields, **Tier-1 HH model ported from MESH**, Falt-2026 oculomotor model; `docs/model_design.md`), **Falt validation** (`validate_falt.py`), **two-eye model with the MIO as a median vergence muscle** (`binocular.py`) and the **male-vs-female controversial stimulus** (`binocular_search.py`, Fig. B1g); pull-direction scan and pixel-gradient searches (`mio_ring.py`, `adversarial*.py`); first-generation EMD/SNN code; ALIstim notebook | preliminary results |
 | [`tools/`](tools/) | `check_limits.py` (abstract, word counts, Resources, budget cap) · `render_pdf.py` (ERC-format PDFs with **real page counts**) · `render_figures.py`, `make_gantt_svg.py`, `make_fig_B1.py` · `export_docx.sh` | — |
 
 ## Quick start
@@ -91,7 +91,7 @@ bash tools/export_docx.sh                # .docx for pasting into the official E
 
 Science (this draft):
 1. Fig. B1 is assembled; replace panel (d) with a cleaner export of the Tier-1 traces from MESH if
-   you have one, and re-run `python -m hover.adversarial --out r.json --fig proposal/figures/fig_B1e_mio_controversial.png`
+   you have one, and re-run `python -m hover.binocular_search --out r.json --fig proposal/figures/fig_B1e_mio_controversial.png`
    once WP2-style receptive fields or conductances are updated, then `python3 tools/make_fig_B1.py`.
 2. Post the Kviatko *et al.* manuscript on bioRxiv before 12 Jan and add the DOI to references [2].
 3. Fill the `[fill]` / `[verify]` marks in the CV (defence date, roles in co-authored papers, grants).

@@ -9,7 +9,7 @@ Figures: B1 preliminary results (≈ ⅓ page, from your DFG material), B2 work-
 
 ## 1. Preliminary results and further background
 
-**Figure B1 (proposal/figures/fig_B1_preliminary.png).** *Preliminary results.* (a) MESH: neuron meshes of the right-eye gaze circuit with contact sites, and the EM cut-out of a validated membrane apposition between the MOS motor neuron and VS2 (FlyWire, 8 nm). (b) The electrical wiring motif: VS1–4 couple to the MOS motor neuron, HS cells to both motor neurons [14]. (c) Measured against predicted preferred directions of the two retinal motor neurons; the prediction uses gap-junction connectivity alone [14]. (d) The Tier-1 model inside MESH: membrane potentials of the right-eye LPTCs and of both motor neurons, decoded eye displacement and its direction during a 500 ms drive of the motor neurons. (e) Micro-CT of a male *Eristalis* head with the three retinal muscles in red [2]. (f) The MIO (red) of a male *Melanostoma*, between the eyes [2]. (g) Controversial stimulus computed with the Tier-1 model extended by HSNE and an HSN-driven MIO motor neuron: a full-contrast grating confined to the male HSN field, moving front-to-back and slightly upward, on a faint counter-moving background (left; contours: receptive fields of the male and female HSN, HSNE and HSE) drives the three motor neurons (middle; LPTC membrane potentials and motor-neuron rates of the biophysical network) and yields predicted retinal-shift directions of 175° if the MIO pulls anteriorly and 124° if it pulls dorsally (0° posterior, 90° dorsal), against 169° for the female circuit (right).
+**Figure B1 (proposal/figures/fig_B1_preliminary.png).** *Preliminary results.* (a) MESH: neuron meshes of the right-eye gaze circuit with contact sites, and the EM cut-out of a validated membrane apposition between the MOS motor neuron and VS2 (FlyWire, 8 nm). (b) The electrical wiring motif: VS1–4 couple to the MOS motor neuron, HS cells to both motor neurons [14]. (c) Measured against predicted preferred directions of the two retinal motor neurons; the prediction uses gap-junction connectivity alone [14]. (d) The Tier-1 model inside MESH: membrane potentials of the right-eye LPTCs and of both motor neurons, decoded eye displacement and its direction during a 500 ms drive of the motor neurons. (e) Micro-CT of a male *Eristalis* head with the three retinal muscles in red [2]. (f) The MIO (red) of a male *Melanostoma*, between the eyes [2]. (g) Controversial stimulus for male against female from the two-eye model, in which one HSN-driven command contracts the median MIO: a frontal pattern receding in depth on a contracting surround (left; arrows: drift in each eye; contours: HSN fields) raises the male's MIO rate while MOT and MOS change little in either sex (middle); both male retinae move toward the midline, the female's stay still, and the male with the MIO cut resembles the female (right).
 
 **P1 MESH: electrical synapses at connectome scale.** MESH retrieves the surface meshes of selected
 FlyWire neurons, builds a k-d tree over mesh vertices and finds every location where two membranes
@@ -35,7 +35,7 @@ movement is therefore complete at the level of identified cells, which is the pr
 coupling, runs inside MESH. It reproduces sustained RMN spiking and the eye-displacement direction
 observed after optogenetic activation of the MOT and MOS motor neurons (unpublished).
 
-**P4 A validated ground-truth model, and controversial stimuli from it (Fig. B1g).** We have built the model that WP1–WP3 refine (`code/hover`): an eye map on the sphere with the local lattice axes of [109], the T4/T5 detectors and multilevel-opponency circuits of [26] feeding the LPTC receptive fields, the MESH Tier-1 electrical network with HH retinal motor neurons, and the vector-sum oculomotor model of [14]. Fitted to *Drosophila* with one frame rotation and one wiring ratio, it reproduces the measured MOS (212° vs 212°) and MOT (146° vs 141°) preferred directions, the HS→MOT and VS+HS→MOS relations and the direction of the optokinetic reflex (mean error 17°; [14]: 7°), and it predicts VS1–4→MOS junctions twice as strong as HS→MOS, a number T1.1 reads off FAFB. Extended by HSNE, the male HSN field [1] and an HSN-coupled MIO motor neuron, the same model is searched, by an evolution strategy verified with the biophysical network and by pixel-level gradient descent through the differentiable front end (ALIstim), for the stimulus on which two MIO pull directions, anterior or dorsal, predict the most different retinal shifts. The answer is a grating confined to the male HSN field on a faint counter-moving background: it drives the MIO about twice as much as MOT and MOS, the two hypotheses predict shift directions 51° apart (117° for the pixel-optimised stimulus), and the female circuit predicts a third one (Fig. B1g). The same machinery will rank every WP2 experiment before an animal is used.
+**P4 A validated model of both eyes, and the stimulus that separates the sexes (Fig. B1g).** We have built the model that WP1–WP3 refine: an eye map with local lattice axes [109], T4/T5 detectors with multilevel opponency [26], LPTC receptive fields, the MESH Tier-1 network with electrically coupled HS and VS cells [11,32] and spiking retinal motor neurons, and the oculomotor model of [14]. Fitted to *Drosophila* with one frame rotation and one wiring ratio, it reproduces the measured MOS (212° vs 212°) and MOT (146° vs 141°) preferred directions and the direction of the optokinetic reflex (mean error 17°; [14]: 7°), and predicts VS1–4→MOS junctions twice as strong as HS→MOS, a number T1.1 reads off FAFB. The hoverfly model has two eyes. Tomography shows the MIO as one median fan between the circumocular ridges of both eyes (Fig. B1e,f): it can only pull both retinae toward the midline, a vergence movement of the two bright zones. In the model one motor neuron, coupled to HSN of both sides, drives it; because HS cells are coupled, the whole horizontal system reaches it with graded weight, and it prefers mirror-symmetric motion to rotation (12 against 5 Hz). Searching binocular stimuli for the largest male–female difference in eye movements with the female at rest returns a frontal pattern that recedes in depth on a contracting surround: both male retinae move toward the midline (MIO +7 Hz), the female's stay still, and 77 % of the difference vanishes when the MIO is cut in silico (Fig. B1g); a single-display variant reaches 90 % of this contrast. The same machinery will rank every WP2 experiment before an animal is used.
 
 **P5 Comparative anatomy.** Micro-CT and synchrotron tomography of 167 insect species, behaviour in
 59, show specific retinal muscles only in Diptera. Hoverflies are among the earliest-branching flies with a
@@ -54,11 +54,9 @@ more than 20 countries, and IU computer-vision courses from [semester; fill] wit
 **Figure B2 (proposal/figures/fig_B2_workplan.png).** Work packages, tasks, deliverables (D), milestones (MS) and the main dependencies. Solid arrows: models and motifs flow from WP1 through WP3 to WP4 and onto robots; dashed arrows: data, labels and task statistics flow back from WP2 and WP5.
 
 Five work packages share one modelling ladder and one stimulus engine (Fig. B2). "→ H" marks the
-hypothesis a task tests; D = deliverable; M = project month. Team: PI; Postdoc 1 (PD1, IU,
-computational neuroscience); PhD 1 (IU, connectomics and machine learning); PhD 2 (IU, event-based
-spiking vision); research engineer (RE, IU, neuromorphic robotics, part-time); Postdoc 2 (PD2,
-MPI for Biological Intelligence, hoverfly physiology); PhD 3 (LMU, evolutionary developmental
-genetics); student assistants (SA).
+hypothesis a task tests; D = deliverable; M = project month. Team (§6): PD1, PhD 1, PhD 2 and a research
+engineer (RE) at IU; PD2 at the MPI for Biological Intelligence; PhD 3 at LMU; student assistants
+(SA).
 
 ### WP1 Connectome → spiking circuit, with electrical synapses (M1–36; PhD 1, PD1, PI) → H1
 
@@ -101,20 +99,20 @@ genetics); student assistants (SA).
 
 - **T2.1 Model families.** Male and female circuits are built by homology (HSN, HSE, HSS, HSNE, VS;
   RMNs of MOT, MOS and MIO), constrained by the tomography atlas (P5), the fills of T2.3 and published
-  hoverfly physiology [1,15,17,23]. Four male hypotheses: **M-H2** (HSN → MIO), **M-HSNE** (HSNE →
-  MIO), **M-HS** (pooled HS → MIO), **M-VS** (VS → MIO), each with and without an additional
-  small-target input [16,63].
-- **T2.2 Controversial stimuli.** For every model pair, stimuli are optimised to maximise the
-  predicted difference in retinal trajectory or MIO activity, within display limits (luminance,
-  contrast, spatio-temporal frequency) and under a naturalness prior. The expected evidence per trial
+  hoverfly physiology [1,15,17,23]. Both eyes are modelled. **M-H2**: one motor command, driven by HSN of both sides through the
+  coupled HS network, contracts the median MIO and pulls both retinae toward the midline.
+  Alternatives: independent left and right commands, and drive from HSNE, pooled HS or VS, each
+  with and without a small-target input [16,63].
+- **T2.2 Controversial stimuli.** For male against female, and for every pair of male models, binocular
+  stimuli (including patterns that move in depth) are optimised to maximise the predicted difference
+  in the retinal movements of both eyes, within display limits and under a naturalness prior. The expected evidence per trial
   sets the number of animals: the **power analysis is done in silico before any experiment**.
   **D2.1 (M24):** the stimulus set.
 - **T2.3 Experiments (MPI for Biological Intelligence, Fenk laboratory; PD2, M7–42).** Tethered male
-  and female *Eristalis*: retinal tracking through the cornea by deep-pseudopupil imaging under
-  infrared light [7,14]; electromyography of MOT, MOS and MIO (the MIO is identified by its position
+  and female *Eristalis*: retinal tracking of both eyes through the cornea by deep-pseudopupil imaging
+  under infrared light [7,14]; electromyography of MOT, MOS and MIO (the MIO is identified by its position
   between the two eyes [2]); intracellular recordings and neurobiotin fills of HSN, HSNE and the RMNs
-  with sharp electrodes, the standard method in hoverfly tangential cells [1]; visual stimulation on
-  an open platform [22]; animals reared year-round [19]. *Analysis:* hierarchical Bayesian comparison
+  with sharp electrodes, the standard method in hoverfly tangential cells [1]; visual stimulation on an open platform [22] and with targets moved in depth; animals reared year-round [19]. *Analysis:* hierarchical Bayesian comparison
   of the model families across animals [35].
 - **T2.4 Free-flight retinal tracking (high risk, high gain).** Pursuit of artificial targets in an
   indoor arena [21] with head-mounted ultralight markers and high-speed cameras. Started only after
@@ -151,11 +149,12 @@ genetics); student assistants (SA).
 
 ### WP4 Active event-based machine vision (M13–60; PhD 2, RE, PD1, PI) → H4
 
-- **T4.1 Active event-camera head.** A high-resolution event camera on a two-axis piezo tip-tilt
-  stage that reproduces fly retinal trajectories (amplitudes of a few degrees [7]), carried by a
+- **T4.1 Active event-camera head.** Two high-resolution event cameras on two-axis piezo tip-tilt
+  stages that reproduce fly retinal trajectories (amplitudes of a few degrees [7]), carried by a
   pan-tilt gimbal on a motion platform that replays ego-motion. Movement policies: none, fixed
-  artificial microsaccades [54], fly-derived (recorded in WP2, including the male MIO pattern) and
-  learned (T3.2). Measures: event yield, static-scene acuity and latency.
+  artificial microsaccades [54], fly-derived (recorded in WP2), mirror-symmetric vergence of the two
+  sensors (the male MIO pattern) and learned (T3.2). Measures: event yield, static-scene acuity,
+  depth and latency.
 - **T4.2 Motif SNNs on neuromorphic hardware.** Catalogue motifs (D3.2) become event-driven SNNs,
   deployed on a sensor-integrated chip with sub-milliwatt resting power [70] and on large-scale
   systems [67,68] through EBRAINS and vendor research programmes. Ablations: a Kolmogorov–Arnold
@@ -182,7 +181,7 @@ genetics); student assistants (SA).
   CC-BY licence with target sizes, speeds and backgrounds drawn from the hoverfly-watch statistics
   (T5.4). H4 counts as supported if the motif SNNs with active sampling reach at least the baseline
   accuracy at one third of the energy, or 20 % higher accuracy per joule, on two of the three
-  benchmarks. Results go to an open leaderboard that accepts outside entries.
+  benchmarks.
   **D4.3 (M54):** the benchmark, HoverEye and the `hover-snn` library.
 - **T4.4 Controversial stimuli for machines.** The WP2 engine applied to CNN–SNN pairs and to the
   movement policies as a robustness diagnostic (H4d).
@@ -227,12 +226,12 @@ vendors, and all code runs on at least one open platform.
 | Hyp. | Supported if | Falsified if | Value if falsified |
 |---|---|---|---|
 | H1 | The Tier-2 SNN with EM-derived weights predicts RMN preferred directions (± 15°), eye-movement direction and latency in both sexes | Connectivity-only models miss ≥ 2 RMN tunings | Unannotated or neuromodulatory inputs matter; the MESH search is widened |
-| H2 | MIO activity follows HSN-preferred motion confined to the dorso-frontal field | MIO EMG tracks MOT-type or VS-type motion | The muscle is a general range extension; the model comparison still decides between families |
+| H2 | One command moves both male retinae toward the midline; MIO activity follows mirror-symmetric horizontal motion in the two HSN fields (motion in depth) rather than rotation; the model's stimulus moves male but not female retinae | The limbs act independently, or MIO EMG tracks MOT-type or VS-type motion | Push-pull tracking with the bright zones, or a general range extension; the model comparison still decides |
 | H2b | *fruitless* or *doublesex* are expressed male-specifically in the MIO motor neuron and anlage; the muscle forms from a defined anlage only in males | No sex-biased expression in the motor neuron; specification is muscle-intrinsic | A muscle-intrinsic programme; still the first developmental account of a dimorphic eye muscle |
 | H3 | Narrowed dorso-frontal integration and an extra effector emerge only under the pursuit objective | They emerge under both objectives, or neither | Points to developmental or genetic constraint rather than task optimality |
 | H4 | Motif SNNs with active micro-movements beat matched baselines in accuracy per energy on ≥ 2 of 3 benchmarks | No advantage | A rigorous, open negative result for bio-inspired claims; the benchmark remains |
 | H1b | The Tier-1/2 model reproduces, with no added pathway, the motor-related potentials of HS cells during spontaneous retinal movements (direction tuning R² ≥ 0.9 against [14]) | The coupling alone cannot produce them | Identifies the missing element (a chemical pathway, a delay) and constrains Tier 1 |
-| H2c | Spontaneous MIO activity produces male-specific motor-related potentials in HSN; female HSN shows none | HSN motor-related potentials are the same in both sexes | The MIO channel is one-way; the efference copy is not part of the dimorphism |
+| H2c | Spontaneous MIO activity produces male-specific motor-related potentials in HSN of both sides; female HSN shows none | HSN motor-related potentials are the same in both sexes | The MIO channel is one-way; the efference copy is not part of the dimorphism |
 | H3b | The narrowed male HSN field emerges only with the spike-count penalty | It emerges at any penalty, or never | Separates task from efficiency as the cause of the narrowing |
 
 **Computer-vision hypotheses tested in WP4** (all against baselines matched in parameters and synaptic operations; metrics: accuracy per joule and latency; pre-registered):
@@ -245,6 +244,7 @@ vendors, and all code runs on at least one open platform.
 | H4d Opponency and normalisation | Push-pull coding with dynamic signal compression [38] is more robust to contrast change and to controversial stimuli than convolutional front ends | T4.4 diagnostic on B-I and B-II |
 | H4e Specialisation per joule | Under one energy budget, two task-specialised circuits with a shared front end, the dimorphic solution, beat one generalist circuit on the combined pursuit and stabilisation task | B-III with pursuit and hover episodes mixed |
 | H4f Hyperacuity | Known micro-movements let the network localise small targets below the pixel pitch, as photoreceptor micro-movements do in the fly [51] | Localisation error against pixel size, B-I |
+| H4g Depth from vergence | Mirror-symmetric micro-movements of two event sensors, the MIO motif, give the depth of static scenes from the timing of events between the sensors [52], at lower latency and energy than event-stereo matching | Depth error, latency and energy on DSEC [58] and with the two-camera head; range to target in B-III |
 
 ## 5. Risks and mitigation
 
@@ -278,12 +278,10 @@ vendors, and all code runs on at least one open platform.
   (physiology set-ups, *Drosophila* RMN data, tomography); R. Merrill (genomics, developmental
   genetics); [neuromorphic hardware contact]; [event-camera or drone partner].
 - **Working arrangements:** monthly all-team meeting in Munich; quarterly WP reviews against the
-  milestones; one shared code and data repository with continuous integration; pre-registration of the
-  benchmark protocols; a data management plan by M6.
+  milestones; one shared code and data repository with continuous integration; a data management plan by M6.
 - **Data and software management:** every model tier, stimulus set, recording and benchmark run is
   versioned and released with a DOI (Zenodo, DANDI for physiology, the FlyWire and MaleCNS
-  annotation channels for proofread synapses); software follows a tested, documented release
-  process with the pre-built MESH viewer as the model; PhD 1 acts as data steward with 10 % of time;
+  annotation channels for proofread synapses); PhD 1 acts as data steward with 10 % of time;
   a FAIR audit is part of every milestone review.
 - **Environment:** the IU computer-vision group, students and GPU resources [confirm]; physiology
   and tomography at MPI-BI; genomics at LMU; EBRAINS neuromorphic access.

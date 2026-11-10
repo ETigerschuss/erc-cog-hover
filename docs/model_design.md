@@ -1,9 +1,15 @@
 # HOVER model v0: from the eye to the eye movement, three circuits, one stimulus engine
 
-Status 3 Nov 2026. This document fixes the architecture of the computational model that underlies
+Status 10 Nov 2026. This document fixes the architecture of the computational model that underlies
 WP1–WP3 and the preliminary results in B2, answers the question "does the whole set-up make sense",
 records what the first implementation reproduces, and lists what is fixed by data, what is a free
 parameter, and what still has to be supplied. Code: `code/hover/` (see §5).
+
+**Update 10 Nov.** Four decisions since the first version: (i) the HS–HS and VS–VS junctions are
+restored to their MESH strength (§1, Stage 4); (ii) hypothesis H2 is sharpened to one direction: the
+MIO is a median muscle that pulls both retinae toward the midline (§3d, §3e); (iii) the hoverfly
+model has two eyes (§3f); (iv) the controversial stimulus contrasts male with female (§3f, Fig. B1g).
+The direction scan of §3c remains as the check of the assumed direction.
 
 ## 0. Verdict
 
@@ -112,7 +118,7 @@ Taken verbatim from the Ammer *et al.* 2023 Figure-7 notebook (supplied 3 Nov):
 ### Stage 4: electrical network (`hover/tier1_hh.py`)
 
 MESH Tier-1 presets for LPTCs (graded, K⁺ and T-type Ca²⁺) and motor neurons (HH + persistent Na⁺),
-low-pass-filtered bidirectional gap junctions. Three changes for HOVER: (i) conductance drive
+low-pass-filtered bidirectional gap junctions. Changes for HOVER: (i) conductance drive
 g·g_leak with reversal potentials rest + 40 / rest − 20 mV, so that the Tier-1 LPTC reproduces the
 Ammer membrane in steady state; (ii) `lptc_leak_scale` = 50: the preset LPTC leak (0.057) is far below
 the junction conductances, so the motor neurons would clamp the LPTCs; the real cells are large and
@@ -126,7 +132,14 @@ the LPTCs, with 15 ms they are 1.5–2 mV and the rate-coded modulation is uncha
 settings a preferred-direction grating modulates MOT by +22/−15 Hz (HS cells) and MOS by +31 Hz
 (VS cells); stronger coupling drives the HH neurons into depolarisation block. The male's MIO
 receives its single HSN input with a junction three times the HS→MOT conductance (`w_mio` = 3), so
-that the three motor neurons have comparable visual modulation; this is a free parameter (§4).
+that the three motor neurons have comparable visual modulation; this is a free parameter (§4). (v) The HS–HS and VS–VS junctions scale with the LPTC leak, so that
+the MESH ratio of junction to membrane conductance (0.9) is kept: a potential change in HSS reaches
+HSE with 0.29 and HSN with 0.08 of its amplitude, HSN reaches HSNE with 0.36 and HSE with 0.30, VS1
+reaches VS2 with 0.30 and VS3 with 0.11 (HS and VS cells are electrically coupled [11,32]). An
+earlier version of this model kept the junctions at their absolute preset value, which removed the
+coupling once the cells were made stiff; all numbers below are with the coupling restored. The
+*Drosophila* validation (§3) is unchanged by it, because full-field gratings drive the coupled cells
+alike.
 
 ### Stage 5: frames and the oculomotor model (`hover/oculomotor.py`)
 
@@ -222,15 +235,20 @@ hypotheses" to "smallest ρ at a sufficient MIO drive".
 
 | Stimulus | ΔMIO / ΔMOT / ΔMOS (Hz) | ρ | smallest separation of neighbouring hypotheses (ideal 30°) | largest error of "shift = pull" |
 |---|---|---|---|---|
-| pairwise, parametric (Fig. B1g) | +12.5 / +6.5 / +8.4 | 0.85 | 16° | 57° |
-| pairwise, pixel (§3b) | +9.1 / +1.8 / −3.0 | 0.39 | 22° | 23° |
-| MIO-isolating, parametric (two wide patches moving at 114° and 266°, no background) | +10.7 / +5.5 / +2.3 | 0.55 | 19° | 33° |
-| **MIO-isolating, pixel** (30 Adam steps from the pairwise pixel solution) | +10.5 / +2.5 / +1.1 | **0.26** | **24°** | **15°** |
+| pairwise, parametric (the earlier Fig. B1g stimulus) | +9.9 / +6.7 / +8.7 | 1.09 | 1° | 104° |
+| pairwise, pixel (§3b) | +6.2 / +1.9 / −2.9 | 0.56 | 19° | 34° |
+| MIO-isolating, parametric | +7.8 / +4.6 / +1.0 | 0.59 | – | – |
+| **MIO-isolating, pixel** (30 Adam steps from the pairwise pixel solution) | +7.2 / +2.6 / +1.3 | **0.40** | **22°** | **23°** |
+
+(With the HS chain coupling restored. Without it the same searches gave ρ = 0.26 and a largest error
+of 15°: the coupling spreads every horizontal-system signal into HSN and from HSN into its
+neighbours, so the MIO cannot be driven alone. This is the reason for giving up the direction scan as
+the main design and committing to the anatomical direction, §3f.)
 
 All numbers are Tier-1 verifications. With the isolating stimulus one measurement of the retinal-shift
-direction reads out θ to within 15°, whatever θ is, and the female circuit hardly moves at all
-(shift magnitude 0.01 against 0.07–0.12 in the male): the stimulus predicts a retinal movement in
-males only. Figure: `proposal/figures/fig_mio_ring.png` (not yet used in B2). Result files:
+direction reads out θ to within 23°, whatever θ is, and the female circuit hardly moves at all
+(shift magnitude 0.01): the stimulus predicts a retinal movement in males only. The scan is kept as
+the check of the direction assumed in §3f. Figure: `proposal/figures/fig_mio_ring.png` (not yet used in B2). Result files:
 `code/hover/mio_ring_result.json` and `.z.npy`.
 
 Limits of the 12-direction description: it assumes a rigid shift by one muscle with one motor
@@ -270,7 +288,7 @@ field sits where the local +h axis is tilted upward (§1, Stage 0), so its PD is
 agree on the medial half-circle; the best single estimate is 330° ± 40°, and "dorsal" (90°), one of
 the two hypotheses of Fig. B1g, is the less likely one.
 
-## 3e. Hypothesis H2d: the MIO is a vergence muscle (binocular command, depth)
+## 3e. Hypothesis H2, sharpened: the MIO is a vergence muscle (binocular command, depth)
 
 Because one median muscle attaches to both CORs, its contraction shifts both retinae toward the
 midline. Photoreceptors sample inverted images (Falt *et al.*), so the lines of sight of the two love
@@ -298,17 +316,75 @@ two acute zones, something MOS and MOT can only do by coordinated commands to fo
   independent and not at all if one command sums both HSNs; (ii) both pseudopupils recorded at once;
   (iii) number of motor axons and whether the two limbs are separate bellies (µCT, backfills);
   (iv) HSN membrane potential co-varies with spontaneous MIO activity.
-- Model. Needs the bilateral extension: mirrored left eye, binocular stimulus geometry with target
-  distance, the MIO as one actuator on both eyes, read out as version and vergence. Not built yet.
-- Machine vision (candidate H4g). Two event cameras with mirror-symmetric micro-vergence: depth of
+- Model. Built in §3f (mirrored left eye, the MIO as one actuator on both eyes, version and vergence
+  readout); the stimulus geometry of real targets at a given distance is not yet included.
+- Machine vision (H4g in B2). Two event cameras with mirror-symmetric micro-vergence: depth of
   static scenes from inter-ocular event timing, decoded by coincidence-detecting spiking units.
+
+## 3f. Two eyes: the bilateral model and the male-versus-female stimulus (`hover/binocular.py`, `hover/binocular_search.py`)
+
+Geometry. Stimuli are defined in head-centred coordinates (azimuth ψ positive to the animal's right).
+The right eye sees ψ ∈ [−20°, 165°] at its own azimuth az = ψ, the left eye ψ ∈ [−165°, 20°] at
+az = −ψ, so one right-eye front end serves both eyes with a mirrored movie. Each eye can be given its
+own movie (dichoptic stimulation). The Tier-1 network is duplicated (suffixes _R, _L). The MIO is
+either **one motor neuron** coupled to HSN of both sides (H2; half the junction conductance per side,
+so the total equals that of one independent neuron) or **two motor neurons**, one per side. Pull
+directions: MOS 51°, MOT 320° in each eye's own frame, MIO 0° (toward the midline). Readout per eye:
+anterior/medial component a and dorsal component d of the retinal shift; "medial" = (a_R + a_L)/2
+(both retinae toward the midline; the lines of sight diverge), "version" = (a_R − a_L)/2 (conjugate
+shift toward the animal's left). Not included: heterolateral LPTC input (H1, H2, Hu) and the disparity
+geometry of real targets.
+
+A consequence of the anatomy of the receptive fields: the male HSN fields of the two eyes are centred
+on the midline and overlap almost completely. Conjugate motion in this zone drives the two HSNs in
+opposite directions; they are driven together only by motion that differs between the eyes (a change
+of disparity, i.e. motion in depth), by upward motion (the local +h axes of the two eyes are mirror
+images and both tilt upward there) and, through the HS chain, by mirror-symmetric motion of the
+surround.
+
+Predictions for five stimuli (medial / version / ΔMIO in Hz; two-command model: left / right):
+
+| Stimulus | male, one command (H2) | male, two commands | female |
+|---|---|---|---|
+| yaw rotation (full field) | +0.15 / +0.18 / +5.5 | +0.14 / +0.28 / -6.3 / +15.8 | +0.10 / +0.19 / – |
+| expansion (full field) | +0.37 / +0.00 / +12.5 | +0.36 / +0.00 / +12.1 / +12.1 | +0.27 / +0.00 / – |
+| frontal patch, conjugate drift to the right | +0.05 / +0.04 / +3.0 | +0.05 / +0.08 / -1.6 / +7.6 | +0.02 / +0.03 / – |
+| frontal patch, receding in depth | +0.13 / +0.00 / +7.5 | +0.13 / +0.00 / +7.1 / +7.6 | +0.05 / +0.00 / – |
+| frontal patch, approaching in depth | -0.03 / +0.00 / -1.9 | -0.02 / +0.00 / -1.6 / -1.3 | -0.02 / +0.00 / – |
+
+Reading: the sexes differ in the medial component whenever the horizontal system is driven
+symmetrically; one command and two commands differ in the conjugate response to conjugate motion
+(two commands double it and split the MIO rates). Approaching patterns hardly drive the model, a
+consequence of the weak null-direction responses of the conductance model that WP2 recordings will
+have to check.
+
+Controversial stimulus, male against female. Both sexes see the same binocular stimulus (two
+half-field backgrounds, two patches, each patch with a conjugate and an optional disparity drift;
+19 parameters). Objective: |shift_male − shift_female| − |shift_female| over the four shift
+components, i.e. the largest sex difference with the female at rest; (1+6) evolution strategy with
+sparse mutations, 30 generations, every evaluation on the full Tier-1 network of both sexes.
+
+- **Dichoptic** (Fig. B1g; `binocular_result.json`): a frontal patch (ψ 0°, elevation 26°, radius
+  22°) whose pattern drifts at 33°/s in opposite directions in the two eyes (front-to-back in both: it
+  recedes in depth), on a surround that contracts and drifts upward (contrast 0.5), plus a weaker
+  patch below it. male: medial +0.090, MIO +7.1 Hz, MOT +3.2/+2.5, MOS +0.1/+1.2 Hz (left/right); female: medial +0.005, MOT +1.6/+0.6, MOS -1.0/-0.1 Hz; difference 0.121, of which 77 % disappears when the MIO is cut.
+- **Single display** (`binocular_result_single_screen.json`; panel in
+  `proposal/figures/src/fig_binocular_single_screen.png`): the same image for both eyes: an upward
+  drifting patch on the midline (ψ 2°, elevation 28°, 44°/s) and a patch left of it drifting toward
+  the midline, on the same kind of surround. male: medial +0.085, MIO +6.5 Hz, MOT +2.7/+3.2, MOS +0.6/+0.7 Hz (left/right); female: medial +0.008, MOT +0.9/+1.5, MOS -0.2/-0.0 Hz; difference 0.109, of which 77 % disappears when the MIO is cut. This solution relies on the upward tilt of
+  the local lattice axes in the dorso-frontal eye (`yaw_fraction`), which is taken from *Drosophila*
+  and unmeasured in *Eristalis*; the dichoptic solution does not.
+
+In both cases the male with two independent MIO commands behaves like the one-command male (the
+stimulus is symmetric), so this stimulus tests the sex difference, and the conjugate-motion pair of
+the table tests one command against two.
 
 ## 4. Free parameters and hypotheses of the hoverfly models
 
 | Parameter | Prior / v0 value | Fixed by |
 |---|---|---|
-| θ_MIO (pull direction) | free on the full circle, 12 directions (§3c); prior: medial half-circle, best estimate 330° ± 40° (§3d) | isolating stimulus + DPP tracking, EMG, µCT fibre tracing |
-| MIO laterality | one median vergence actuator (H2d) or two independent halves | two-camera DPP, backfills, µCT |
+| θ_MIO (pull direction) | H2: 0°, toward the midline (§3d); the 12-direction scan (§3c) is the check | isolating stimulus + DPP tracking of both eyes, EMG, µCT fibre tracing |
+| MIO laterality | H2: one command for both limbs; alternative: two independent commands (§3f) | conjugate vs mirror-symmetric motion with two-camera DPP, backfills, µCT |
 | MIO action | rigid shift, compartmental steering, or radial deformation | pseudopupil shape and position |
 | MIO drive | HSN (H2), HSNE, pooled HS, VS | neurobiotin fills, stimuli optimised on MIO activity |
 | HSN ♂ receptive field | Nordström 2008 contours (Gaussian fits above) | WP2 recordings |
@@ -332,6 +408,8 @@ two acute zones, something MOS and MOT can only do by coordinated commands to fo
 | `hover/adversarial.py` | 7 | done: parametric (1+λ)-ES on the rate surrogate, Tier-1 verification, female prediction, Fig. B1g panel |
 | `hover/frontend_ad.py` | 7 | done: autograd re-implementation of Stages 0–3 for pixel-level gradient descent (ALIstim-style) |
 | `hover/mio_ring.py` | 7 | done: 12-direction scan of the MIO pull, MIO-isolating stimulus (ES and pixel gradient), figure |
+| `hover/binocular.py` | 4–6 | done: both eyes, bilateral Tier-1 network, median or independent MIO, version/vergence readout |
+| `hover/binocular_search.py` | 7 | done: male-versus-female controversial stimulus (dichoptic and single display), Fig. B1g panel |
 | `hover/mio_search.py` | 7 | superseded (first-generation front end; kept for the record) |
 
 Run times (4 cores): eye maps 0.3–1.7 s; one stimulus through the front end 1–2 s (*Eristalis*);
@@ -355,12 +433,13 @@ the proposal promises in WP4.
 ## 7. What I still need from you
 
 1. For the MIO: which attachment is fixed (septum) and which moves (COR), whether the two limbs are
-   separate bellies, and the number of motor axons, if the CT or your dissections show it. A fibre
-   tracing of one scan would replace the prior of §3d by a number.
-2. The interocular baseline of the two bright zones and their binocular overlap (Straw 2006 or CT),
-   for the depth range in §3e.
-3. Any hoverfly HS/HSNE tuning curves beyond Nordström 2008, and your preferred bright-zone
-   parameters (centre, extent, Δφ).
-4. Your decision on the readout (§6) and on taking H2d (vergence) and the 12-direction panel into B2.
+   separate bellies, and the number of motor axons, if the CT or your dissections show it.
+2. How you would present a pattern that moves in depth to a tethered hoverfly (a real target on a
+   linear stage, or separate images for the two eyes), and whether the single-display stimulus of
+   §3f should be the first experiment instead.
+3. The interocular baseline of the two bright zones and their binocular overlap (Straw 2006 or CT),
+   for the depth range in §3e, and the local facet-row orientation in the male dorso-frontal eye.
+4. Any hoverfly HS/HSNE tuning curves beyond Nordström 2008, in particular null-direction responses,
+   and your preferred bright-zone parameters (centre, extent, Δφ).
 5. Whether you want the Falt methods typo (§2) raised with the co-authors before the preprint is
    cited in the proposal.

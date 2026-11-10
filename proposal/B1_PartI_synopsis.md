@@ -42,9 +42,11 @@ saccade-like shifts [7]. In a comparative survey of 167 insect species by micro-
 tomography, with behaviour in 59 of them, we found retinal movements only in Diptera, reconstructed
 their stepwise evolution (spontaneous movements came before the stabilising reflex) and discovered in
 hoverflies **a male-only third retinal muscle, the M. interocularis (MIO)**, lodged between the two
-nearly fused male eyes and positioned to shift exactly the bright-zone region of the retina [2]. The
-male hoverfly therefore has not only a different sensor and a different circuit but a different
-*active-vision effector*: a complete pursuit channel that females lack. This is a natural knockout
+nearly fused male eyes and positioned to shift exactly the bright-zone region of the retina [2]. Attached to both
+eyes, it can only pull both retinae toward the midline: a vergence movement of the two acute zones,
+like the one *Drosophila* makes when judging gaps [7]. The male hoverfly therefore has not only a
+different sensor and a different circuit but a different *active-vision effector*: a pursuit
+channel that females lack. This is a natural knockout
 experiment with an evolutionary rationale built in: the male features exist for pursuit. In
 *Drosophila*, the sex-determination genes *fruitless* and *doublesex* are known to rewire visual
 pathways for male courtship [77,78] and to specify a male-only muscle through its motor neuron
@@ -107,8 +109,9 @@ mathematically reduced SNN with ≥ 10× fewer state variables preserves these p
 the *Drosophila* gaze circuit is monomorphic; the hoverfly's is not.
 
 **O2. Test.** Map the model onto male and female *Eristalis* and test the dimorphic circuit.
-→ **H2 (Dedicated channel).** In males the dimorphic HSN drives a dedicated motor neuron of the MIO,
-forming a pursuit-specific active-vision channel; HSN and HSNE also feed the shared stabilisation
+→ **H2 (A vergence channel).** In males the dimorphic HSN of both sides drives one motor command of
+the MIO, which pulls both retinae toward the midline: a binocular channel that sets the vergence of
+the two bright zones and signals target range; HSN and HSNE also feed the shared stabilisation
 channel (MOT, MOS) in both sexes. → **H2b (Origin).** The MIO is specified by its motor neuron, as
 the male-only Muscle of Lawrence of *Drosophila* forms only under *fruitless*-expressing motor
 neurons [42,43,79].
@@ -123,7 +126,7 @@ task-dependent micro-movements of the sensor, outperform parameter- and energy-m
 baselines on small-target detection in clutter and on ego-motion estimation, and achieve closed-loop
 hovering and pursuit on an indoor quadrotor at a fraction of the energy.
 
-*The computer-vision question behind H4.* Five predictions are specific enough to fail (H4a–f in
+*The computer-vision question behind H4.* Six predictions are specific enough to fail (H4a–g in
 B2). (i) A sensor-movement policy tuned to the task improves small-target detection at the same event
 rate: the male-type policy wins on pursuit, the stabilising policy on ego-motion, and a fixed rotation
 [54] wins on neither. (ii) Feeding the motor command back into the motion units through the fly's
@@ -132,7 +135,8 @@ better than software compensation. (iii) Linear electrical pooling cuts the late
 to motor command without loss of accuracy. (iv) Opponent push-pull coding with contrast normalisation
 makes velocity estimates robust to contrast and clutter [38]. (v) Under one energy budget, two
 task-specialised circuits with a shared front end, the dimorphic solution, beat one generalist.
-Success is measured as accuracy per joule and as latency, against baselines matched in parameters
+(vi) Mirror-symmetric micro-movements of two event sensors, the MIO motif, give the depth of static
+scenes from the timing of events between the sensors. Success is measured as accuracy per joule and as latency, against baselines matched in parameters
 and synaptic operations, under protocols registered before the data exist.
 
 **O5. Validate at scale and open everything.** Every model runs on low-cost spiking robots in IU
@@ -159,9 +163,10 @@ Validation: retinal-motor-neuron imaging, eye tracking and the efference-copy re
 **WP2 The dimorphic gaze circuit of *Eristalis* (M6–48).** No hoverfly connectome exists, so male and
 female circuits are built by homology from the *Drosophila* model (HSN, HSE, HSS, VS cells, the
 hoverfly-specific HSNE, and the motor neurons of MOT, MOS and MIO), constrained by our tomography
-atlas [2], neurobiotin fills and published hoverfly physiology [1,15,23]. This gives **competing male
-models** (H2 against shared drive, HSNE-driven MIO and VS-driven MIO). The stimulus engine generates
-the stimuli on which these models disagree most. A HOVER postdoc in the Fenk laboratory (MPI for
+atlas [2], neurobiotin fills and published hoverfly physiology [1,15,23]. This gives male and female
+models of both eyes and **competing male models** (H2 against independent left and right commands,
+HSNE-driven and VS-driven MIO). The stimulus engine generates the binocular stimuli on which male
+and female, and the competing male models, disagree most. A HOVER postdoc in the Fenk laboratory (MPI for
 Biological Intelligence), which holds the only established retinal-tracking and retinal-muscle
 set-ups, presents them to tethered males and females while tracking the retina through the cornea
 and recording the three muscles electromyographically. *High risk, high gain:* retinal tracking
@@ -177,9 +182,10 @@ test whether the male features emerge (H3) and extract the **minimal motif set**
 mean-field analysis of gap-junction-coupled populations and Kolmogorov–Arnold readouts that turn the
 trained networks into equations.
 
-**WP4 Active event-based machine vision (M13–60).** The motifs become event-driven SNNs on an event
-camera mounted on a piezo micro-movement stage that replays fly retinal trajectories, with movement
-policies that are fixed, fly-derived or learned. Networks are deployed on sensor-integrated and
+**WP4 Active event-based machine vision (M13–60).** The motifs become event-driven SNNs on a head
+of two event cameras on piezo micro-movement stages that replay fly retinal trajectories, with
+movement policies that are fixed, fly-derived (including the mirror-symmetric MIO pattern) or
+learned. Networks are deployed on sensor-integrated and
 large-scale neuromorphic hardware [67,68,70] through European access programmes. Three benchmarks
 with pre-registered protocols: small-target detection and tracking in clutter against insect-inspired
 [61] and deep [94] detectors; ego-motion estimation on public event-camera datasets [58,59] against
@@ -202,8 +208,8 @@ natural target statistics that define the WP3 tasks. WP5 builds on my open citiz
 *Feasibility.* The pieces exist. MESH runs and has produced validated electrical synapses [14,41]. A
 Hodgkin–Huxley model of the right-eye gaze circuit with electrical and chemical coupling already
 reproduces motor-neuron spiking and the direction of optogenetically evoked eye movements. The
-Tier-1 model, extended by the MIO, already returns a stimulus on which two hypotheses about the MIO's
-pull direction predict retinal shifts 51° apart (B2, Fig. B1).
+model of both eyes, with the MIO as a median muscle, already returns a binocular stimulus predicted
+to move the retinae of males toward the midline and leave those of females at rest (B2, Fig. B1).
 The tomography atlas of male and female hoverflies is in hand [2], hoverflies can be reared
 year-round with a published protocol [19], and the hoverfly genome is public [44]. I have shipped TinyML pipelines
 on classroom robots and teach computer vision to the cohorts that will run WP5. Hypothesis-critical

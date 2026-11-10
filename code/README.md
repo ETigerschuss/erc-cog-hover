@@ -19,13 +19,15 @@ neurons → retinal-shift vector. Three circuits: *Drosophila* ♀ (ground truth
 | `adversarial.py` | `python -m hover.adversarial --out r.json --fig panel.png`: controversial stimulus for the MIO pull direction (ES on a rate surrogate, Tier-1 verification, female prediction) |
 | `frontend_ad.py` | autograd version of the front end for pixel-level gradient descent on the stimulus (ALIstim-style) |
 | `mio_ring.py` | `python -m hover.mio_ring --z0 hover/adversarial_pixel_result.z.npy --fig out.png`: MIO pull direction free on the circle (12 hypotheses), MIO-isolating stimulus, figure |
-| `tests/` | `python -m hover.tests.test_tier1`, `python -m hover.tests.test_pipeline` |
+| `binocular.py` | both eyes: head-centred stimuli, bilateral Tier-1 network, the MIO as one median muscle (or two independent limbs), version/vergence readout |
+| `binocular_search.py` | `python -m hover.binocular_search --out r.json --fig panel.png [--single-screen]`: controversial stimulus male vs female (Fig. B1g) |
+| `tests/` | `python -m hover.tests.test_tier1`, `python -m hover.tests.test_pipeline`, `python -m hover.tests.test_binocular` |
 
 ```bash
 pip install -r requirements.txt      # numpy, numba, scipy, matplotlib, autograd
 python -m hover.tests.test_pipeline
 python -m hover.validate_falt --wvs 2 --fig validation.png
-python -m hover.adversarial --gens 25 --out adv.json --fig fig_B1e_mio_controversial.png
+python -m hover.binocular_search --out bino.json --fig fig_B1e_mio_controversial.png   # Fig. B1g
 ```
 
 Parameters marked [verify] in the code (hoverfly Δφ, bright zone, HSNE field, hoverfly pull
