@@ -45,7 +45,7 @@ G_LPTC_MN, C_LPTC_MN = 0.1, 0.8    # LPTC <-> motor neuron gap junctions (tau = 
 
 def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params: str = "MOT",
                   g_lptc_mn: float = G_LPTC_MN, lptc_leak_scale: float = 1.0, w_vs_mos: float = 1.0,
-                  w_mio: float = 1.0, gj_tau_ms: float | None = None):
+                  w_mio: float = 1.0, gj_tau_ms: float | None = None, chain_scale: float = 1.0):
     """Return the right-eye circuit as arrays.
 
     species: 'drosophila' (VS1-4, HSN, HSE, HSS, MOT, MOS) or 'eristalis_male' (adds HSNE and the
@@ -61,6 +61,10 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
     w_vs_mos: relative conductance of the VS1-4 -> MOS junctions (per cell) versus HS -> MOS; Falt et
     al. assumed equal weights per cell; the model's fit to the MOS/MOT divergence predicts the ratio,
     to be tested against the junction areas measured in WP1.
+    chain_scale: strength of the HS–HS and VS–VS junctions relative to the MESH preset. The preset
+    conductance (0.05) is 0.9 of the preset LPTC leak, so neighbouring cells are coupled with a
+    coefficient near 0.5; the junctions are scaled together with lptc_leak_scale so that this ratio,
+    and with it the spread of activity along the chain (HSS -> HSE -> HSN), is preserved.
     gj_tau_ms: time constant of the low-pass filter of the LPTC<->motor-neuron junctions (C = G·τ). The
     MESH preset (C = 0.8) gives ~1.6 ms at G = 0.5, which lets the motor-neuron spikes through as 10 mV
     spikelets in the LPTCs; 15 ms represents the cable distance between the junction site and the
@@ -91,9 +95,9 @@ def build_circuit(species: str = "drosophila", mio_from: str = "HSN", mio_params
             P[i] = [p["Rin"], p["VL"], p["gVT"], p["gL"], p["gNa"], p["gK"], p["gNaP"], p["Ibias"]]
     gj = []  # (a, b, G, C)
     for a, b in (("VS1", "VS2"), ("VS2", "VS3"), ("VS3", "VS4"), ("HSN", "HSE"), ("HSE", "HSS")):
-        gj.append((idx[a], idx[b], G_CHAIN, C_CHAIN))
+        gj.append((idx[a], idx[b], G_CHAIN * lptc_leak_scale * chain_scale, C_CHAIN * lptc_leak_scale * chain_scale))
     if "HSNE" in idx:
-        gj.append((idx["HSN"], idx["HSNE"], G_CHAIN, C_CHAIN))
+        gj.append((idx["HSN"], idx["HSNE"], G_CHAIN * lptc_leak_scale * chain_scale, C_CHAIN * lptc_leak_scale * chain_scale))
     hs = [nm for nm in names if nm.startswith("HS")]
     c_of = (lambda g: g * gj_tau_ms) if gj_tau_ms else (lambda g: C_LPTC_MN * g / max(g_lptc_mn, 1e-9))
     for v in ("VS1", "VS2", "VS3", "VS4"):

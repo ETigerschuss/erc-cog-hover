@@ -35,6 +35,7 @@ class Model:
     w_vs_mos: float = 2.0                # VS1-4 -> MOS junction weight relative to HS -> MOS (fitted to Falt, see validate_falt)
     w_mio: float = 3.0                   # LPTC -> MIO junction weight (male Eristalis; see tier1_hh.build_circuit)
     gj_tau_ms: float = 15.0              # LPTC<->RMN junction low-pass (cable filtering of the spikes)
+    chain_scale: float = 1.0             # HS–HS / VS–VS junction strength relative to the MESH preset
     g_scale: float = 1.0                 # Ammer conductance units → multiples of the LPTC leak
     yaw_fraction: float = 0.4            # eye map: tilt of the +h axis field (Zhao 2025)
     circuit_params: CircuitParams = field(default_factory=CircuitParams)
@@ -52,7 +53,7 @@ class Model:
         specs = drosophila_lptcs() if self.species == "drosophila" else eristalis_lptcs(self.sex)
         self.front = FrontEnd(self.eye, specs, self.circuit_params)
         kind = "drosophila" if self.species == "drosophila" else f"eristalis_{self.sex}"
-        self.circuit = build_circuit(kind, self.mio_from, g_lptc_mn=self.g_lptc_mn, lptc_leak_scale=self.lptc_leak_scale, w_vs_mos=self.w_vs_mos, w_mio=self.w_mio, gj_tau_ms=self.gj_tau_ms)
+        self.circuit = build_circuit(kind, self.mio_from, g_lptc_mn=self.g_lptc_mn, lptc_leak_scale=self.lptc_leak_scale, w_vs_mos=self.w_vs_mos, w_mio=self.w_mio, gj_tau_ms=self.gj_tau_ms, chain_scale=self.chain_scale)
         self.names, _, self.P, _ = self.circuit
         self.pull = pull_model(self.mio_pull if "MIO" in self.names else None, self.arena_rotation)
         if self.target_hz > 0:
@@ -71,7 +72,7 @@ class Model:
         compensating the tonic gap-junction current from the LPTCs (which depends on g_lptc_mn).
         Cached on disk by circuit parameters."""
         key = hashlib.md5(json.dumps([self.species, self.sex, self.mio_from, self.g_lptc_mn, self.lptc_leak_scale, self.w_vs_mos, self.w_mio, self.gj_tau_ms,
-                                      self.target_hz, self.P.tolist()]).encode()).hexdigest()[:12]
+                                      self.target_hz, self.P.tolist(), self.circuit[3].tolist()]).encode()).hexdigest()[:12]
         cache = pathlib.Path(__file__).with_name("_bias_cache.json")
         store = json.loads(cache.read_text()) if cache.exists() else {}
         if key in store:
