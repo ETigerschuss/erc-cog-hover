@@ -19,17 +19,21 @@ BUILD.mkdir(exist_ok=True)
 
 CSS = """
 @page { size: A4; margin: 18mm 20mm 15mm 20mm; }
-body { font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; font-size: 11pt; line-height: 1.15; }
-h1 { font-size: 14pt; margin: 0 0 6pt 0; }
-h2 { font-size: 12pt; margin: 10pt 0 4pt 0; }
-h3 { font-size: 11pt; margin: 8pt 0 3pt 0; }
-p { margin: 0 0 5pt 0; text-align: justify; }
-ul, ol { margin: 0 0 5pt 0; padding-left: 18pt; }
-li { margin-bottom: 2pt; }
-table { border-collapse: collapse; font-size: 9.5pt; margin: 4pt 0 6pt 0; width: 100%; }
-th, td { border: 0.5pt solid #777; padding: 2pt 4pt; vertical-align: top; }
-img.fig { width: 100%; display: block; margin: 4pt 0 2pt 0; }
-.caption { font-size: 9.5pt; }
+html { hyphens: auto; }
+body { font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; font-size: 11pt; line-height: 1.15; color: #111; }
+h1 { font-size: 15pt; line-height: 1.15; margin: 0 0 4pt 0; color: #14315c; }
+h2 { font-size: 12pt; margin: 9pt 0 3.5pt 0; padding-bottom: 1pt; color: #14315c; border-bottom: 0.6pt solid #b9c4d6; break-after: avoid; }
+h3 { font-size: 11pt; margin: 7pt 0 2.5pt 0; color: #14315c; break-after: avoid; }
+p { margin: 0 0 4.5pt 0; text-align: justify; orphans: 2; widows: 2; }
+ul, ol { margin: 0 0 4.5pt 0; padding-left: 16pt; }
+li { margin-bottom: 1.5pt; text-align: justify; }
+.key { background: #eef2f8; border-left: 2.4pt solid #14315c; padding: 4.5pt 8pt 0.5pt 8pt; margin: 3pt 0 6pt 0; break-inside: avoid; }
+table { border-collapse: collapse; font-size: 9.5pt; line-height: 1.12; margin: 4pt 0 7pt 0; width: 100%; }
+th { background: #e8edf5; text-align: left; border-top: 0.8pt solid #14315c; border-bottom: 0.8pt solid #14315c; padding: 2pt 4pt; vertical-align: bottom; }
+td { border-bottom: 0.4pt solid #b5b5b5; padding: 2pt 4pt; vertical-align: top; }
+tr { break-inside: avoid; }
+img.fig { width: 100%; display: block; margin: 5pt 0 3pt 0; }
+.caption { font-size: 9.5pt; line-height: 1.12; margin-bottom: 7pt; break-before: avoid; }
 code { font-size: 9.5pt; }
 """
 
@@ -48,7 +52,7 @@ def md_to_html(md_text: str) -> str:
 
 
 def render(html_body: str, pdf_path: pathlib.Path, header: str) -> int:
-    html = f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{html_body}</body></html>"
+    html = f"<!doctype html><html lang='en'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{html_body}</body></html>"
     html_path = pdf_path.with_suffix(".html")
     html_path.write_text(html)
     js = f"""

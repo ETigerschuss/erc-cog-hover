@@ -43,14 +43,13 @@ def dphi_field(species: str, sex: str):
     centre, d0, d1 = (15.0, 5.0), 1.6, 3.0  # Eristalis [verify, Straw 2006]
 
     def f(az, el):
+        # The same sampling lattice in both sexes. The male's dorso-frontal region of enlarged facets
+        # is a "bright zone": more light per ommatidium, hence faster and more contrast-sensitive
+        # motion detection, "without substantially increased spatial resolution" (Straw, Warrant &
+        # O'Carroll 2006). It is therefore not modelled as a finer lattice; its higher contrast
+        # sensitivity and speed are a detector property to be added from measurements (WP2).
         r = np.hypot(az - centre[0], el - centre[1])
-        d = d0 + (d1 - d0) * np.clip(r / 100.0, 0.0, 1.0)
-        if sex == "male":
-            # bright zone: ellipse at azimuth −5°, elevation 30°, semi-axes 22° × 25°, Δφ ≈ 1.0° [verify]
-            e = ((np.asarray(az) + 5.0) / 22.0) ** 2 + ((np.asarray(el) - 30.0) / 25.0) ** 2
-            blend = 1.0 / (1.0 + np.exp((e - 1.0) * 4.0))
-            d = d * (1.0 - blend) + 1.0 * blend
-        return d
+        return d0 + (d1 - d0) * np.clip(r / 100.0, 0.0, 1.0)
     return f
 
 
