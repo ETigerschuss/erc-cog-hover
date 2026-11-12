@@ -306,6 +306,62 @@ def closed_loop(animal: BinocularModel, shared: BinocularModel, start: dict, ani
     return dict(history=hist, noise=noise, lam=lam, mu=mu, generations=generations, seed=seed, start=cl_clip(start))
 
 
+# ----------------------------------------------------------------------------- collected results
+MATCHED = ("bowl without love spot", 270.0)      # the grating everywhere but in the love spot, drifting downward
+LOVE = ("love spot only", 90.0)                  # the grating only in the love spot, drifting upward
+
+
+def _row(scan_res, cond, d):
+    return [x for x in scan_res[cond] if x["dir"] == d][0]
+
+
+def _summary(r):
+    return dict(amp_female=r["amp_female"], amp_male=r["amp_male"], amp_male_cut=r["amp_male_cut"], diff=r["diff"],
+                diff_cut=r["diff_cut"], rel_diff=r["diff"] / (0.5 * (r["amp_male"] + r["amp_female"])),
+                ratio=r["amp_male"] / r["amp_female"], ratio_cut=r["amp_male_cut"] / r["amp_female"],
+                muscle_share=1.0 - r["diff_cut"] / r["diff"],
+                mio_rate=[r["rate_male"].get("MIO_R", 0.0), r["rate_male"].get("MIO_L", 0.0)])
+
+
+def collect(raw=HERE / "results_raw", out=HERE / "bowl_result.json"):
+    """Merge the raw runs into the one file that figures, tests and the proposal read.
+
+    raw/bowl_main.json        python -m hover.bowl --scan --map --map-dir 90
+    raw/bowl_apertures.json   python -m hover.bowl --apertures
+    raw/bowl_alt_<X>.json     python -m hover.bowl --scan --mio-from <X>      (X = HSNE, HS, VS)
+    raw/cl_*.json             python -m hover.bowl --closed-loop <scenario> --noise <s> --seed <k>
+    """
+    raw = pathlib.Path(raw)
+    main_ = json.loads((raw / "bowl_main.json").read_text())
+    res = dict(settings=main_["settings"], scan=main_["scan"], map=main_["map"])
+    res["two_stimuli"] = {"matched": dict(condition=MATCHED[0], dir=MATCHED[1], **_summary(_row(main_["scan"], *MATCHED))),
+                          "love_spot": dict(condition=LOVE[0], dir=LOVE[1], **_summary(_row(main_["scan"], *LOVE)))}
+    apf = raw / "bowl_apertures.json"
+    if apf.exists():
+        ap = json.loads(apf.read_text())["apertures"]
+        res["apertures"] = {c: {f"{int(r['dir'])}": _summary(r) for r in rows} for c, rows in ap.items()}
+    alts = {"HSN": dict(matched=_summary(_row(main_["scan"], *MATCHED)), love_spot=_summary(_row(main_["scan"], *LOVE)),
+                        full_horizontal=_summary(_row(main_["scan"], "full bowl", 0.0)))}
+    for v in ("HSNE", "HS", "VS"):
+        f = raw / f"bowl_alt_{v}.json"
+        if f.exists():
+            sc = json.loads(f.read_text())["scan"]
+            alts[v] = dict(matched=_summary(_row(sc, *MATCHED)), love_spot=_summary(_row(sc, *LOVE)),
+                           full_horizontal=_summary(_row(sc, "full bowl", 0.0)))
+    # no visual drive: the male's muscle does not follow the stimulus, so the male moves as the male with the muscle cut
+    m, l = alts["HSN"]["matched"], alts["HSN"]["love_spot"]
+    alts["none"] = dict(matched=dict(ratio=m["ratio_cut"]), love_spot=dict(ratio=l["ratio_cut"]))
+    res["alternatives"] = alts
+    cl = {}
+    for f in sorted(raw.glob("cl_*.json")):
+        d = json.loads(f.read_text())
+        if isinstance(d, dict) and "closed_loop" in d:
+            cl.update(d["closed_loop"])
+    res["closed_loop"] = cl
+    pathlib.Path(out).write_text(json.dumps(res, indent=1))
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", action="store_true"); ap.add_argument("--map", action="store_true")
@@ -317,7 +373,14 @@ def main():
     ap.add_argument("--noise", type=float, default=0.02); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--generations", type=int, default=20)
     ap.add_argument("--out", default=str(HERE / "bowl_result.json"))
+    ap.add_argument("--collect", action="store_true", help="merge results_raw/ into bowl_result.json and stop")
     a = ap.parse_args()
+    if a.collect:
+        r = collect()
+        for k, v in r["two_stimuli"].items():
+            print(k, v["condition"], v["dir"], "male/female", round(v["ratio"], 2), "rel. diff", round(v["rel_diff"], 3), "muscle share", round(v["muscle_share"], 2))
+        print({k: (round(v["matched"]["ratio"], 2), round(v["love_spot"]["ratio"], 2)) for k, v in r["alternatives"].items()})
+        return
     out = pathlib.Path(a.out)
     res = json.loads(out.read_text()) if out.exists() else {}
     res["settings"] = dict(mio_from=a.mio_from, mio=a.mio, speed=a.speed, wavelength=a.wavelength,

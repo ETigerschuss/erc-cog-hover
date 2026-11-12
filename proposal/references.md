@@ -114,3 +114,6 @@ lists must appear exactly as published (IfA p. 28).
 [107] Bagheri ZM, Wiederman SD, Cazzolato BS, Grainger S, O'Carroll DC (2017). Performance of an insect-inspired target tracker in natural conditions. Bioinspir Biomim 12(2):025006 [verify].
 [108] Gehrig D, Scaramuzza D (2024). Low-latency automotive vision with event cameras. Nature 629:1034–1040.
 [109] Zhao A, Gruntman E, Nern A, Iyer N, Rogers EM, Koskela S, Siwanowicz I, Dreher M, Flynn MA, Laughland C, Ludwig H, Thomson A, Moran C, Gezahegn B, Bock DD, Reiser MB (2025). Eye structure shapes neuron function in *Drosophila* motion vision. Nature 646:135–144 [verify page range].
+[110] Ponce CR, Xiao W, Schade PF, Hartmann TS, Kreiman G, Livingstone MS (2019). Evolving images for visual neurons using a deep generative network reveals coding principles and neuronal preferences. Cell 177(4):999–1009.e10.
+[111] Walker EY, Sinz FH, Cobos E, Muhammad T, Froudarakis E, Fahey PG, Ecker AS, Reimer J, Pitkow X, Tolias AS (2019). Inception loops discover what excites neurons most using deep predictive models. Nat Neurosci 22(12):2060–2065.
+[112] Aloimonos J, Weiss I, Bandyopadhyay A (1988). Active vision. Int J Comput Vis 1(4):333–356.

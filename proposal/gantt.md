@@ -21,10 +21,10 @@ gantt
     T1.5 Motor readout, efference copy (M10-30)    :w15, 2029-06, 21M
     section WP2 Eristalis
     T2.1 Model families (M6-24)                    :w21, 2029-02, 19M
-    T2.2 Controversial stimuli in silico (M13-24)  :w22, 2029-09, 12M
+    T2.2 Two stimuli, closed loop in silico (M13-24):w22, 2029-09, 12M
     T2.3 Tethered physiology, PD2 (M19-42)         :w23, 2030-03, 24M
     T2.4 Free flight, high risk (M37-48)           :w24, 2031-09, 12M
-    T2.5 Origin of the MIO, LMU (M7-48)            :w25, 2029-03, 42M
+    T2.5 Origin of the third muscle, LMU (M7-48)   :w25, 2029-03, 42M
     section WP3 Theory
     T3.1 Embodied simulator (M12-27)               :w31, 2029-08, 16M
     T3.2 Task optimisation (M25-48)                :w32, 2030-09, 24M
@@ -33,7 +33,7 @@ gantt
     T4.1 Active event-camera head (M13-30)         :w41, 2029-09, 18M
     T4.2 Motif SNNs on hardware (M25-54)           :w42, 2030-09, 30M
     T4.3 Benchmarks incl. quadrotor (M25-58)       :w43, 2030-09, 34M
-    T4.4 Controversial stimuli for machines (M37-54) :w44, 2031-09, 18M
+    T4.4 Closed-loop tuning of sensor movements (M37-54) :w44, 2031-09, 18M
     section WP5 Validation at scale
     T5.1 Course modules (every semester)           :w51, 2028-09, 60M
     T5.2 Robot zoo (M19-60)                        :w52, 2030-03, 42M
