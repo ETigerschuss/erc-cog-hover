@@ -20,7 +20,7 @@ ERC reviewers value this when it is **integral, not decorative**. Each module be
 ## Formats
 - **Lab sessions** with the camera robots: each team gets a "male" and a "female" circuit and must
   find, by experiment, which one pursues a moving target better. This is H3 in miniature.
-- **Challenge week**: controversial stimuli. Students search for inputs that make two models disagree (`hover.controversial`).
+- **Challenge week**: controversial stimuli and closed-loop search. Students search for inputs that make two models disagree (`hover.controversial`) and tune the sensor movement of a simulated event camera for a task (`hover.eventcam`).
 - Online/remote students (IU is largely distance learning): browser simulation of the same
   circuits + optional robot kit by mail. This is a scaling argument for reach.
 

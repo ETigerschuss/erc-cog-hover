@@ -2,7 +2,7 @@
 
 - Abstract: <= 2000 characters (form field) and identical on the B1 cover page.
 - Acronym: <= 20 characters.
-- Rough page counts (~650 words/page at 11 pt; figures not counted; run tools/render_pdf.py for real counts):
+- Page counts of the rendered PDFs in build/ (run tools/render_pdf.py first):
   B1 Part I <= 5, CV <= 4, B2 Part II <= 7 (references and Funding ID excluded).
 - Resources text <= 8000 characters.
 - Budget: sums the budget-csv block per beneficiary; indirect = 25 % of (A + C); total <= EUR 2,000,000.
@@ -17,7 +17,6 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 P = ROOT / "proposal"
-WORDS_PER_PAGE = 650  # calibrated on tools/render_pdf.py output (11 pt Times, 2 cm margins); render_pdf.py is authoritative
 ok = True
 
 
@@ -39,17 +38,31 @@ check("Abstract identical on B1 cover page", block(cover, "ABSTRACT") == abstrac
 acr = re.search(r"\*\*Acronym:\*\*\s*(\S+)", cover)
 check("Acronym", bool(acr) and len(acr.group(1)) <= 20, f"{acr.group(1) if acr else '?'} (max 20 characters)")
 
-for fname, limit, cut in [
-    ("B1_PartI_synopsis.md", 5, r"\n## References"),
-    ("B1_CV_track_record.md", 4, None),
-    ("B2_PartII.md", 7, r"\n## Funding ID"),
+# Page limits: the rendered PDFs are authoritative (tools/render_pdf.py). A word count is printed
+# for orientation only, because figures and tables make words per page meaningless.
+try:
+    from pypdf import PdfReader
+except Exception:  # pragma: no cover
+    PdfReader = None
+for fname, limit, cut, pdf in [
+    ("B1_PartI_synopsis.md", 5, r"\n## References", "B1_PartI.pdf"),
+    ("B1_CV_track_record.md", 4, None, "B1_CV.pdf"),
+    ("B2_PartII.md", 7, r"\n## Funding ID", "B2_PartII.pdf"),
 ]:
-    t = (P / fname).read_text()
+    src = P / fname
+    t = src.read_text()
     body = re.split(cut, t)[0] if cut else t
     body = re.sub(r"<!--.*?-->", "", body, flags=re.S)
     words = len(body.split())
-    check(f"{fname} length", words / WORDS_PER_PAGE <= limit,
-          f"{words} words ~ {words / WORDS_PER_PAGE:.1f} pages (limit {limit}; figures not counted)")
+    f = ROOT / "build" / pdf
+    if PdfReader is None or not f.exists():
+        check(f"{fname} pages", False, f"no rendered PDF; run tools/render_pdf.py ({words} words)")
+        continue
+    pages = len(PdfReader(str(f)).pages)
+    stale = f.stat().st_mtime < src.stat().st_mtime
+    check(f"{fname} pages", pages <= limit and not stale,
+          f"{pages} / {limit} pages in build/{pdf}" + (" (PDF older than the text: re-run tools/render_pdf.py)" if stale else "")
+          + f"; {words} words")
 
 ptxt = (P / "PartA_budget_resources.md").read_text()
 res = block(ptxt, "RESOURCES")

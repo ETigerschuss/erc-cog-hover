@@ -217,7 +217,7 @@ def main(argv=None):
     print(f"models and surrogate ready ({time.time() - t0:.0f} s)", flush=True)
     reports, cands = {}, {}
     # the two pairwise-optimised stimuli of Fig. B1g / design doc §3b
-    prev = json.loads((HERE / "adversarial_result.json").read_text())
+    prev = json.loads((HERE / "results_archive" / "adversarial_result.json").read_text())
     mov = render(male, clip_params(prev["stimulus"]))
     r = male.run(mov, onset_s=ONSET)
     reports["pairwise, parametric"] = ring_report(r["d_rate"], r["baseline"], male)

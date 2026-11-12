@@ -1,26 +1,25 @@
-"""Both eyes: head-centred stimuli, a bilateral Tier-1 network and the MIO as a median muscle.
+"""Both eyes: head-centred stimuli and a bilateral Tier-1 network with the male's third muscle.
 
-Hypothesis H2 (sharpened): the male's M. interocularis lies in the median plane, attaches to the
-circumocular ridges of both eyes and pulls both retinae toward the midline (0° in each eye's own
-anatomical frame: 0° anterior/medial, 90° dorsal). With one command for both limbs it is a vergence
-actuator; with two commands the limbs can also act in push-pull. Both variants are built here:
+The male's M. interocularis (MIO) lies between the two eyes. How it is driven and where it pulls is
+the open question of WP2, so both are options here:
 
-    BinocularModel("eristalis", "male", mio="median")       one motor neuron, HSN of both sides
-    BinocularModel("eristalis", "male", mio="independent")  one motor neuron per side
+    BinocularModel("eristalis", "male", mio="independent")  one motor neuron per side (used by bowl.py)
+    BinocularModel("eristalis", "male", mio="median")       one motor neuron for both limbs
     BinocularModel("eristalis", "female")                   no MIO
     BinocularModel("drosophila", "female")
 
+`mio_from` chooses the cell that drives the muscle (HSN, HSNE, pooled HS, pooled VS) and `mio_pull`
+its pull direction in each eye's own anatomical frame (0° = anterior/medial, 90° = dorsal).
+
 Geometry. Stimuli are defined in head-centred coordinates (ψ: azimuth, positive to the animal's
 right; elevation). The right eye sees ψ ∈ [−20°, 165°] at its own azimuth az = ψ, the left eye sees
-ψ ∈ [−165°, 20°] at az = −ψ (mirror image), so one right-eye front end serves both eyes. Each eye
-may be given its own movie (dichoptic stimulation, e.g. a pattern that changes binocular disparity).
-The two sides share no neurons except the median MIO motor neuron; heterolateral LPTC input
-(H1, H2, Hu) and stimulus-dependent disparity geometry are not modelled in this version.
+ψ ∈ [−165°, 20°] at az = −ψ (mirror image), so one right-eye front end serves both eyes. With one
+display both eyes get the same head-centred movie (`split_eyes(movie)`). The two sides share no
+neurons except a median MIO motor neuron; heterolateral LPTC input (H1, H2, Hu) is not modelled.
 
 Readout, per eye in its own frame: a = anterior (medial) and d = dorsal component of the retinal
-shift. Medial shift of both retinae: (a_R + a_L)/2 ("vergence" component; the lines of sight then
-diverge, because photoreceptors sample inverted images). Conjugate horizontal shift toward the
-animal's left: (a_R − a_L)/2 ("version").
+shift; `vec4` = (a_R, d_R, a_L, d_L). `medial` = (a_R + a_L)/2 and `version` = (a_R − a_L)/2 are
+kept for the archived two-eye analyses (results_archive/).
 """
 from __future__ import annotations
 

@@ -13,9 +13,12 @@ def test_eye_maps():
     assert abs(np.median(ah[m])) < 5 and abs(np.median(av[m]) - 90) < 5   # lateral: rows horizontal
     m = e.inside((-10, 20), (20, 50))
     assert np.median(ah[m]) > 20                                          # dorso-frontal: +h tilted up
-    m2 = build_eye("eristalis", "male")
+    # the male bright zone gathers more light but is not sampled more finely (Straw et al. 2006):
+    # both sexes share one lattice
+    m2, f2 = build_eye("eristalis", "male"), build_eye("eristalis", "female")
+    assert m2.n == f2.n and np.allclose(m2.dphi, f2.dphi)
     bz = m2.inside((-25, 15), (5, 55))
-    assert np.median(m2.dphi[bz]) < 1.3                                   # bright zone sampled finely
+    assert 1.4 < np.median(m2.dphi[bz]) < 2.2
 
 
 def test_drosophila_front_end_and_motor_neurons():

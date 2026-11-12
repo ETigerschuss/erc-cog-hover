@@ -106,7 +106,7 @@ coupling that pools signals without synaptic delay [14,92], push-pull opponent c
 contrast normalisation [38,96]. Whether these transfer can only be decided with a model of a
 complete biological loop and a benchmark with matched baselines. HOVER provides both.
 
-## 4. Preliminary results: what the project is about, in three panels
+## 4. Preliminary results
 
 **A model from photoreceptor to eye muscle.** We have built the model that WP1–WP3 refine:
 compound-eye sampling [109], motion detectors with opponency [26], electrically coupled wide-field
@@ -167,8 +167,8 @@ task-dependent micro-movements of the sensor, outperform parameter- and energy-m
 baselines on small-target detection in clutter and on ego-motion estimation, and achieve closed-loop
 hovering and pursuit on an indoor quadrotor at a fraction of the energy.
 
-*The computer-vision question behind H4.* Six predictions are specific enough to fail (H4a–g in
-B2). (i) A sensor-movement policy tuned to the task beats a fixed one: the pursuit policy wins on
+*The computer-vision question behind H4.* Six of the seven predictions tested in WP4 (H4a–g in
+B2): (i) A sensor-movement policy tuned to the task beats a fixed one: the pursuit policy wins on
 small targets, the stabilising policy on ego-motion, and a fixed rotation [54] wins on neither.
 (ii) Feeding the motor command back into the motion units, the efference copy of [14], removes
 self-generated events better than software compensation. (iii) Linear electrical pooling cuts the

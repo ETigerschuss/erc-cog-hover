@@ -32,7 +32,7 @@ IU,A,PhD 2 event-based spiking vision and neuromorphic hardware (48 PM),190000
 IU,A,Research engineer neuromorphic robotics (50 %; 36 PM; M13-48),110000
 IU,A,Other personnel: student assistants (courses; robot zoo; proofreading),30000
 IU,C.1,Travel and subsistence,25000
-IU,C.2,Equipment (depreciation): active event-camera head (2 event cameras; piezo tip-tilt stage; gimbal; motion platform),40000
+IU,C.2,Equipment (depreciation): active event-camera head (wide-angle and telephoto event camera; 2 piezo tip-tilt stages; gimbal; motion platform),40000
 IU,C.2,Equipment (depreciation): indoor event-camera quadrotor with neuromorphic processor; netted motion-capture arena,30000
 IU,C.2,Equipment (depreciation): GPU server,25000
 IU,C.3,Two-wheeled camera robots for courses and the robot zoo (IU procurement; hardware-neutral spec),20000
@@ -60,14 +60,14 @@ HOVER requests EUR 1,997,500 for 60 months: EUR 1,598,000 direct costs and EUR 3
 
 A. Personnel (EUR 1,295,000). The PI devotes 50 % of working time to HOVER, above the 40 % minimum. The PI's salary is paid by IU and is not charged to the grant.
 At IU: Postdoc 1, computational neuroscience and spiking-network theory (48 person-months, EUR 330,000), leads the Tier 1-3 models (WP1) and the theory (WP3). PhD 1 (48 PM, EUR 190,000) scales MESH, builds the electrical-synapse classifier and the Tier-1/Tier-2 models (WP1). PhD 2 (48 PM, EUR 190,000) develops event-based spiking vision, the hardware deployment and the benchmarks (WP4). A research engineer in neuromorphic robotics (50 %, 36 PM, M13-48, EUR 110,000) builds and maintains the active event-camera head, the indoor quadrotor and the robot fleet (WP4, WP5). Student assistants (EUR 30,000) support EM proofreading, teaching kits and the robot-zoo experiment (WP5), which otherwise runs through the PI's computer-vision courses.
-At MPI for Biological Intelligence (Active Sensing group, L. Fenk): Postdoc 2 (36 PM, M7-42, EUR 255,000) performs the Eristalis experiments of WP2: retinal tracking, electromyography of the three retinal muscles, intracellular recordings and neurobiotin fills, and the controversial-stimulus experiments. A postdoc rather than a PhD student is requested because physiology in a non-genetic insect requires established electrophysiology skills. This group has the only established retinal-muscle physiology set-ups and protocols; building them at IU would cost more and take longer.
+At MPI for Biological Intelligence (Active Sensing group, L. Fenk): Postdoc 2 (36 PM, M7-42, EUR 255,000) performs the Eristalis experiments of WP2: retinal tracking, electromyography of the three retinal muscles, intracellular recordings and neurobiotin fills, with the two model-designed stimuli and the closed-loop stimulus search. A postdoc rather than a PhD student is requested because physiology in a non-genetic insect requires established electrophysiology skills. This group has the only established retinal-muscle physiology set-ups and protocols; building them at IU would cost more and take longer.
 At LMU Munich (R. Merrill): PhD 3 (48 PM, EUR 190,000) studies the developmental and genetic origin of the male-only third retinal muscle (T2.5). This group provides genomics and developmental-genetics expertise and infrastructure for non-model insects that IU does not have.
 All team members are selected and supervised by the PI. Partner-group leaders act as local co-supervisors. Costs follow each institution's personnel cost rates [confirm].
 
 C.1 Travel (EUR 38,000): exchange between the three sites (about monthly team meetings in Munich), conferences for team members (about two per year), and visits to neuromorphic-hardware and event-camera providers. The Step 2 interview is remote.
 
 C.2 Equipment (EUR 140,000, depreciation according to each beneficiary's accounting rules):
-the active event-camera head (two event cameras, a piezo tip-tilt stage, a gimbal and a motion platform; IU, EUR 40,000), used continuously from M13 for WP4;
+the active event-camera head (a wide-angle and a telephoto event camera, each on a piezo tip-tilt stage, a gimbal and a motion platform; IU, EUR 40,000), used continuously from M13 for WP4;
 an indoor event-camera quadrotor with an on-board neuromorphic processor and a netted motion-capture arena (IU, EUR 30,000) for the closed-loop benchmark of WP4;
 a GPU server (IU, EUR 25,000) for connectome-constrained network training and simulation (WP1, WP3, WP4), complemented by cloud and EBRAINS resources;
 infrared high-speed cameras and optics for retinal tracking and electromyography (MPG, EUR 45,000), used in WP2 about 70 % of the time.
